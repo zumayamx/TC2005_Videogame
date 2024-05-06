@@ -1,7 +1,7 @@
 
 ### Historias de usuario sobre el videojuego
 
-- **A.1** Historia de usuario para la creación de perfil
+**A.1** Historia de usuario para la creación de perfil
 Como jugador nuevo, quiero crear un perfil de usuario con un nombre único, para poder guardar mis cartas y progreso en el juego. (Prioridad: 5, Tiempo estimado: 4 días, Criterio de aceptación: El jugador debe poder registrarse con un nombre de usuario único y el sistema debe verificar que no se duplique.)
 
 **A.2** Historia de usuario para la obtención de cartas
@@ -34,10 +34,11 @@ Como jugador, quiero revisar las estadísticas y el historial de mis partidas, p
 **A.11** Historia de usuario para soporte multilingüe
 Como jugador, quiero jugar el juego en mi idioma nativo, para comprender mejor las reglas y disfrutar del juego. (Prioridad: 2, Tiempo estimado: 14 días, Criterio de aceptación: El juego debe ofrecer opciones para cambiar el idioma y adaptar todo el contenido textual al idioma seleccionado.)
 
-**A.12** Historia de Usuario para la Seguridad de la Cuenta
+**A.12** Historia de usuario para la seguridad de la cuenta
 Como jugador, quiero que mi cuenta tenga opciones de seguridad básicas, para proteger mi información de los accesos no autorizados. (Prioridad: 5, Tiempo estimado: 6 días, Criterio de aceptación: El sistema debe incluir encriptar las contraseñas)
 
-**A.13** Como jugador quiero un juego de cartas interactivo (Prioridad: 4, Tiempo estimado: 5 días, Criterio de aceptación: El juego debe permitir interacciones dinámicas entre las cartas y los jugadores durante el juego.)
+**A.13** Historia de usuario para la dínamica de juego
+Como jugador quiero un juego de cartas interactivo (Prioridad: 4, Tiempo estimado: 5 días, Criterio de aceptación: El juego debe permitir interacciones dinámicas entre las cartas y los jugadores durante el juego.)
 
 **A.14** Como jugador, quiero poder ver una página web donde esté el juego y que tenga información asociada a cómo se juega (tutorial). (Prioridad: 5, Tiempo estimado: 3 días, Criterio de aceptación: Debe existir una página web que contenga el juego, un acceso al tutorial.)
 
@@ -48,3 +49,5 @@ Como jugador, quiero que mi cuenta tenga opciones de seguridad básicas, para pr
 **A.18** Como jugador, quiero un diseño visual atractivo único. (Prioridad: 3, Tiempo estimado: 6 días, Criterio de aceptación: El diseño del juego debe ser visualmente atractivo y único.)
 
 **A.19** Como jugador, quiero jugar el juego en la página web. (Prioridad: 5, Tiempo estimado: 2 días, Criterio de aceptación: El juego debe ser completamente funcional y accesible desde la página web sin necesidad de descargas adicionales.)
+
+**A.20** Como jugador quiero un juego que me permita mover y colocar cartas en un lugar especifico del tablero de juego.
