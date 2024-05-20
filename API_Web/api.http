@@ -1,41 +1,29 @@
-### OBTENER TODAS LAS CARTAS
-GET http://localhost:3000/
+### OBTENER TODAS LAS CARTAS DE LA BASE DE DATOS
+GET http://localhost:3000/api/cards
 
-### OBTENER UNA CARTA POR ID
-GET http://localhost:3000/56
-
-### CREAR UNA NUEVA CARTA
-POST http://localhost:3000/
-Content-Type: application/json
-
-[
-    {
-        "id" : 56,
-        "name" : "bootcamp",
-        "type" : 2,
-        "energyCost" : 3,
-        "description" : "atack by cable",
-        "value" : 2
-    },
-    {
-        "id" : 34,
-        "name" : "ciber",
-        "type" : 3,
-        "energyCost" : 2,
-        "description" : "attack by radio",
-        "value" : 6
-    }
-]
-
-### ELMINAR UNA CARTA
-DELETE http://localhost:3000/34
-
-### ACTUALIZAR UNA CARTA
-PUT http://localhost:3000/56
+### CREAR UN NUEVO JUGADOR
+POST http://localhost:3000/api/jugador
 Content-Type: application/json
 
 {
-    "name" : "storm",
-    "value": 10,
-    "type" : 1
+    "nombre" : "JugadorAvanzado",
+    "clave" : "JugadorAvanzado123"
+}
+
+### INICIAR UNA PARTIDA CON DOS JUGADORES
+POST http://localhost:3000/api/partida
+Content-Type: application/json
+
+{
+    "jugadorRojo" : "Bob",
+    "jugadorAzul" : "Eve"
+}
+
+### REGISTRAR EL GANADOR DE UNA PARTIDA
+POST http://localhost:3000/api/partida/ganador
+Content-Type: application/json
+
+{
+    "id_partida" : 7,
+    "id_jugador_ganador" : 5
 }
