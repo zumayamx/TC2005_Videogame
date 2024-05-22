@@ -6,8 +6,8 @@ POST http://localhost:3000/api/jugador
 Content-Type: application/json
 
 {
-    "nombre" : "JugadorAvanzado",
-    "clave" : "JugadorAvanzado123"
+    "nombre" : "JugadorNovato",
+    "clave" : "JugadorNovato123"
 }
 
 ### INICIAR UNA PARTIDA CON DOS JUGADORES
@@ -15,8 +15,8 @@ POST http://localhost:3000/api/partida
 Content-Type: application/json
 
 {
-    "jugadorRojo" : "Bob",
-    "jugadorAzul" : "Eve"
+    "jugadorRojo" : "JugadorAvanzado",
+    "jugadorAzul" : "JugadorNovato"
 }
 
 ### REGISTRAR EL GANADOR DE UNA PARTIDA
@@ -27,3 +27,9 @@ Content-Type: application/json
     "id_partida" : 7,
     "id_jugador_ganador" : 5
 }
+
+###OBTENER A UN JUGADOR POR ID
+GET http://localhost:3000/api/jugador/2
+
+### OBTENER TODOS LOS JUGADORES
+GET http://localhost:3000/api/jugadores

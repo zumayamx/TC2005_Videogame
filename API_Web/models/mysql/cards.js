@@ -9,10 +9,10 @@ app.use(express.json());
 
 async function connectToDB() {
     return await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
+        host: 'database-1.c3coace2uz12.us-east-2.rds.amazonaws.com',
+        user: 'admin',
         port: 3306,
-        password: 'r922006',
+        password: 'B1tD3str0y3r..',
         database: 'cards_db'
     });
 }
@@ -35,7 +35,7 @@ app.get('/api/cards', async (req, res) => {
 
         console.log(`${cards.length} rows returned`);
         console.log(cards);
-        const result = [{"cards" : cards}]
+        const result = {"cards":cards}
         res.status(200).json(result);
 
     } catch (error) {
@@ -86,6 +86,50 @@ app.post('/api/jugador', async (req, res) => { /* Realmente es async ?*/
         }
     }
 });
+
+app.get('/api/jugador/:id', async (req, res) => {
+
+    const {id} = req.params;
+
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+
+        const query = 'SELECT id, nombre, juegos_jugados, juegos_ganados, clave FROM Jugador WHERE id = ?';
+        const [jugador] = await connection.query(query, [id]);
+        res.status(200).json(jugador);
+    } catch  (error) {
+        console.log(error);
+        res.status(500);
+    } finally {
+        if (connection !== null) {
+            connection.end();
+            console.log('Conexión cerrada exitosamente');
+        }
+    }
+
+});
+
+app.get('/api/jugadores', async (req, res) => {
+    let connection = null;
+    try {
+    
+        connection = await connectToDB();
+        const query = 'SELECT * FROM Jugador';
+        const [jugadores] = await connection.query(query);
+        res.status(200).json(jugadores);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500);
+    } finally {
+        if (connection !== null) {
+            connection.end();
+            console.log('Conexión cerrada exitosamente');
+        }
+    }
+});
 /* CON UNA SOLA PETICION A PARTIR DEL NOMBRE DE USUARIO UNICO ? , PREGUNAR DEL WARNING SLQ, QUE VALE LA PENA QUE SEA VAR -> PROC*/
 app.post('/api/partida', async (req, res) => {
     const {jugadorRojo, jugadorAzul} = req.body;
@@ -107,12 +151,9 @@ app.post('/api/partida', async (req, res) => {
 
         //const idAzul = -1;
 
-        const [resultsRojo] = await connection.query(queryRojo, [jugadorRojo], (err, results) => {
-            if (err instanceof Error) {
-                res.status(500).send('Error al obtener credenciales jugador rojo');
-                return;
-            }
-        })
+        const [resultsRojo] = await connection.query(queryRojo, [jugadorRojo]);
+
+        console.log(resultsRojo);
 
         const idRojo = resultsRojo[0].id;
 
