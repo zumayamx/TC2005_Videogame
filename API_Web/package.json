@@ -5,14 +5,15 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node app.js",
-    "dev1": "nodemon app.js",
+    "dev": "node models/mysql/cards.js",
+    "dev1": "nodemon models/mysql/cards.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.19.2",
     "mysql2": "^3.9.7",
     "nodemon": "^3.1.0",
