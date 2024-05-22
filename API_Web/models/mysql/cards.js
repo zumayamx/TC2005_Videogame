@@ -35,7 +35,8 @@ app.get('/api/cards', async (req, res) => {
 
         console.log(`${cards.length} rows returned`);
         console.log(cards);
-        res.status(200).json(cards);
+        const result = [{"cards" : cards}]
+        res.status(200).json(result);
 
     } catch (error) {
 
