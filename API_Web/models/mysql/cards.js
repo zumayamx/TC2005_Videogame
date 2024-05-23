@@ -6,6 +6,7 @@ import  bcrypt from 'bcrypt';
 const saltRounds = 10;
 const app = express();
 app.use(express.json());
+app.use(express.static('public'))
 
 async function connectToDB() {
     return await mysql.createConnection({
@@ -19,7 +20,7 @@ async function connectToDB() {
 
 
 app.get('/api/web', (req, res) => {
-    const file = fs.readFileSync("index.html", "utf-8"); 
+    const file = fs.readFileSync("/Users/leonblanga/Desktop/github/TC2005_Videojuego/API_Web/web/public/html/pagina.html", "utf-8"); 
     res.status(200).send(file);
 }) 
 
