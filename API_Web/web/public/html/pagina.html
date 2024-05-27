@@ -6,20 +6,28 @@
     <title>Videojuego de Unity</title>
     <link rel="stylesheet" href="../css/pagina.css">
 </head>
+
     <header>
         <h3>BIT-DESTROYER</h3>
         <nav>
             <a href= "#contenido">Contenido</a>
-            <a href= "#mecanica">¿Cómo jugar?</a>
+            <a id="nav2" href= "#mecanica">¿Cómo jugar?</a>
             <a href= "#estadisticas">Estadísticas</a>
         </nav>
     </header>
+
     <body>
+        <section id="jugar">
+            <div class="espacio-vg">
+                <h1>Espacio para videojuego Unity</h1>
+            </div>
+        </section>
+
         <section id="contenido">
-            <h2>CONTENIDO</h2>
+            <h1>CONTENIDO</h1>
             <div class="tablero">
-                <h3>TABLERO</h3>
-                <img src="../imagenes/Azul Activo.png" width="100%"><br>
+                <h2>TABLERO</h2><br>
+                <img src="../imagenes/Azul Activo.png" width="100%"><br><br>
                 <ul>
                     <li>Cada jugador cuenta con <b>3 canales</b> donde podrá <span class="color_rojo">atacar</span> el servidor del contrincante y mismos en los que deberá <span class="color_verde">defender</span> el suyo.</li>
                     <li>Cada canal podrá acumular un máximo de <span class="color_verde">3 cartas de Ciberseguridad</span> </li>
@@ -28,88 +36,83 @@
             </div>
             <div class="cartas_completo">
                 <div id="cartas">
-                    <h3>CARTAS</h3>
-                    <div id="ciberataque">
-                        <img src="../imagenes/Back Ciberataque.png" width="30%">
-                        <h5><span class="color_rojo">CIBERATAQUE</span></h5>
-                    </div>
-                    <div id="bootcamp">
-                        <img src="../imagenes/Back Bootcamp.png" width="30%">
-                        <h5><span class="color_morado">BOOTCAMP</span></h5>
-                    </div>
-                    <div id="ciberseguridad">
-                        <img src="../imagenes/Back Ciberseguridad.png" width="30%">
-                        <h5><span class="color_verde">CIBERSEGURIDAD</span></h5>
+                    <h2>CARTAS</h2>
+                    <div class="flex_contenido">
+                        <div id="ciberataque">
+                            <img src="../imagenes/Back Ciberataque.png" width="100%">
+                            <h5><span class="color_rojo">CIBERATAQUE</span></h5>
+                        </div>
+                        <div id="bootcamp">
+                            <img src="../imagenes/Back Bootcamp.png" width="100%">
+                            <h5><span class="color_morado">BOOTCAMP</span></h5>
+                        </div>
+                        <div id="ciberseguridad">
+                            <img src="../imagenes/Back Ciberseguridad.png" width="100%">
+                            <h5><span class="color_verde">CIBERSEGURIDAD</span></h5>
+                        </div>
                     </div>
                 </div>
                 <div id="canales">
-                    <h3>CANALES</h3>
-                    <div id="hardware">
-                        <img src="../img/hardware.png">
-                        <h5><span class="color_naranja">HARDWARE</span></h5>
+                    <h2>CANALES</h2>
+                    <div class="flex_contenido">
+                        <div id="hardware">
+                            <img src="../imagenes/iconoHardware.png" width="100%">
+                            <h5><span class="color_naranja">HARDWARE</span></h5>
+                        </div>
+                        <div id="redes">
+                            <img src="../imagenes/iconoRedes.png" width="100%">
+                            <h5><span class="color_azul">REDES</span></h5>
+                        </div>
+                        <div id="radio">
+                            <img src="../imagenes/iconoRadio.png" width="100%">
+                            <h5><span class="color_verde_claro">SOFTWARE</span></h5>
+                        </div>
                     </div>
-                    <div id="redes">
-                        <img src="../img/software.png">
-                        <h5><span class="color_azul">REDES</span></h5>
-                    </div>
-                    <div id="radio">
-                        <img src="../img/redes.png">
-                        <h5><span class="color_verde_claro">SOFTWARE</span></h5>
-                    </div>
-
                 </div>
             </div>
-
         </section>
+
         <section id="mecanica">
-            <h2>MECÁNICA DE JUEGO</h2>
-            <div id="objetivo_completo">
-                 <div id="objetivo">
-                    <h3>OBJETIVO</h3>
-                    <p>El objetivo del juego es destruir los canales de defensa del contrincante, para ello deberás atacar con cartas de Ciberataque y Bootcamp.</p>
+            <h1>MECÁNICA DE JUEGO</h1>
+            <div class="objetivo_completo">
+                <div id="objetivo">
+                    <h2>OBJETIVO</h2>
+                    <p>El objetivo del juego es destruir la defensa del otro hacker utilizando cartas de Ciberataque, para finalmente llegar a su servidor y destruir sus 20 puntos de salud.</p>
+                </div>
                 <div id="inicio">
-                    <h3>INICIO</h3>
-                    <p>Cada jugador inicia con 10 puntos de defensa sobre cada canal, podrá aumentarlos jugando cartas de Ciberseguridad.</p>
+                    <h2>INICIO</h2>
+                    <p>Cada jugador inicia con <b>10 puntos de defensa</b> sobre cada canal, podrá aumentarlos jugando cartas de Ciberseguridad sobre uno de los 3 espacios disponibles por canal.</p>
                 </div>
             </div>
-            <div id="turno">
+            <div class="turno">
                 <h2>TURNO</h2>
-                <h5>1. Jalar cartas del centro</h5>
-                <p>Cada tipo de carta tiene un costo de energías específico:</p>
+                <p>En cada turno podrás hacer solamente <b>una</b> de las siguientes <b>2 acciones posibles:</b></p><br>
+                <h4>1. Jalar cartas del centro</h4>
                 <ul>
-                    <li>Ciberataque 3 energías</li>
-                    <li>Bootcamp 2 energías</li>
-                    <li>Ciberseguridad 1 energía</li>
+                    <li>Cada tipo de carta tiene un costo de energía específico:</li>
+                    <ul>
+                        <li><b><span class="color_rojo">Ciberataque:</span> 3 energías</b></li>
+                        <li><b><span class="color_morado">Bootcamp:</span> 2 energías</b></li>
+                        <li><b><span class="color_verde">Ciberataque:</span> 1 energía</b></li>
+                    </ul>
+                    <li>Cuando eligas el tipo de carta a jalar te aparecerán 3 opciones y podrás elegir una de ellas.</li>
                 </ul>
-                <p>Solamente podrás jalar un total de 3 energías por turno. *La energía no es acumulable.</p>
-                <h5>2. Jugar cartas</h5>
-                <p>Solamente podrás jugar 2 de las cartas que ya tienes en tu mano; existen algunas (bootcamp) que se pueden jugar en conjunto potenciando el efecto logrado en el turno.</p>
+                
+                <p>Solamente podrás jalar un total de 3 energías por turno.</p>
+                <p><small><span class="color_azul">*La energía no es acumulable.</span></small></p><br>
+                <h4>2. Jugar cartas</h4>
+                <p>Solamente podrás jugar <b>2 de las cartas</b> que ya tienes en tu mano; existen algunas (<span class="color_morado">bootcamp</span>) que se pueden jugar en conjunto potenciando el efecto logrado en el turno.</p>
                 <p>En caso de jugar una carta en un canal que no corresponde al que pertenece, su efecto disminuirá a la mitad. </p>
-                <p><small>*Cartas con valor 3 se disminuyen a 1.</small></p>
+                <p><small><span class="color_rosa">*Cartas con valor 3 se disminuyen a 1.</span></small></p>
             </div>
-            
-        </section>
-        <section id="turno">
-            <h2>Turno</h2>
-            <h3>1. Jalar cartas del centro</h3>
-            <p>Cada tipo de carta tiene un costo de energías específico:</p>
-            <ul>
-                <li>Ciberataque 3 energías</li>
-                <li>Bootcamp 2 energías</li>
-                <li>Ciberseguridad 1 energía</li>
-            </ul>
-            <p>Solamente podrás jalar un total de 3 energías por turno. *La energía no es acumulable.</p>
-            <h3>2. Jugar cartas</h3>
-            <p>Solamente podrás jugar 2 de las cartas que ya tienes en tu mano; existen algunas (bootcamp) que se pueden jugar en conjunto potenciando el efecto logrado en el turno.</p>
-            <p>En caso de jugar una carta en un canal que no corresponde al que pertenece, su efecto disminuirá a la mitad. *Cartas con valor 3 se disminuyen a 1.</p>
-            <p>En cada turno podrás hacer solamente una de las siguientes 2 acciones posibles:</p>
         </section>
     
         <section id="estadisticas">
             <h2>Estadísticas</h2>
-            <p>Cada jugador cuenta con 3 canales donde podrá atacar el servidor del contrincante y mismos en los que deberá defender el suyo.</p>
-            <p>En cada canal podrá acumular un máximo de 3 cartas de Ciberseguridad.</p>
-            <p>En la parte superior centro del tablero se colocan bocabajo los 3 mazos de tipos de cartas que el jugador podrá “jalar”.</p>
+            <p>Espacio para estadisticas.</p>
         </section>
     </body>
+    <footer>
+        <p><b>Desarrollado por:</b> Leon Blanga, Jose Manuel Zumaya y Omar Sanchez <br><span class="color_azul">Bit-destroyer® 2024</span></p>
+    </footer>
 </html>
