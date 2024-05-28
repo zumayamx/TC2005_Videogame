@@ -53,7 +53,7 @@ app.get('/api/cards', async (req, res) => {
     }
 });
 
-app.post('/api/jugador', async (req, res) => { /* Realmente es async ?*/
+app.post('/api/jugador/registro', async (req, res) => { /* Realmente es async ?*/
     const { nombre, clave } = req.body; /* Validar el body correcto */
 
     let connection = null;
@@ -64,19 +64,18 @@ app.post('/api/jugador', async (req, res) => { /* Realmente es async ?*/
         const clave_encriptada = bcrypt.hashSync(clave, saltRounds);
 
         const query = 'INSERT INTO Jugador (nombre, juegos_jugados, juegos_ganados, clave) VALUES (?, 0, 0, ?)';
-        connection.query(query, [nombre, clave_encriptada], (err, result, fields) => {
-            if (err instanceof Error) {
-                console.log('Erro al registrar el jugador');
-                return;
-            }
-        });
+        await connection.query(query, [nombre, clave_encriptada]);
 
-        res.status(200).send('Jugador registrado exitosamente');
+        res.status(200).json({code: 'SUCCESS', message: 'Jugador registrado exitosamente'});
 
     } catch (error) {
-
-        console.log('Error intentar registrar el jugador');
-        res.status(500).send('Error al registrar jugador, intenta de nuevo');
+         
+        if (error.code === 'ER_DUP_ENTRY') {
+            res.status(409).json({code: 'ERROR', message: 'El nombre de usuario del jugador ya existe'});
+        } else {
+            console.log('Error intentar registrar el jugador:', error);
+            res.status(500).json({code: 'ERROR', message: 'Error al registrar jugador, intenta de nuevo'});
+        }
 
     } finally {
 
@@ -87,18 +86,19 @@ app.post('/api/jugador', async (req, res) => { /* Realmente es async ?*/
     }
 });
 
-app.get('/api/jugador/:id', async (req, res) => {
+app.get('/api/jugador/inicio_sesion/:username', async (req, res) => {
 
-    const {id} = req.params;
+    const { username } = req.params;
 
     let connection = null;
 
     try {
         connection = await connectToDB();
 
-        const query = 'SELECT id, nombre, juegos_jugados, juegos_ganados, clave FROM Jugador WHERE id = ?';
-        const [jugador] = await connection.query(query, [id]);
+        const query = 'SELECT id, nombre, juegos_jugados, juegos_ganados, clave FROM Jugador WHERE nombre = ?';
+        const [jugador] = await connection.query(query, [username]);
         res.status(200).json(jugador);
+        
     } catch  (error) {
         console.log(error);
         res.status(500);
@@ -226,6 +226,8 @@ app.post('/api/partida/ganador', async (req, res) => {
         }
     }
 });
+
+
 
 const PORT = process.env.port ?? 3000;
 app.listen(PORT, () => {
