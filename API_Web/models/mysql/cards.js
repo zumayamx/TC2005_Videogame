@@ -54,6 +54,66 @@ app.get('/api/cards', async (req, res) => {
     }
 });
 
+app.get('/api/estadisticas_jugadores', async (req, res) => {
+
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+
+        const query = 'SELECT J.id AS "ID jugador", J.nombre AS Nombre, J.juegos_jugados AS "Juegos jugados", J.juegos_ganados AS "Juegos ganados", (J.juegos_ganados / J.juegos_jugados) * 100 AS "Porcentaje de victorias" FROM Jugador J;';
+        const [stats] = await connection.query(query);
+
+        console.log(`${stats.length} rows returned`);
+        console.log(stats);
+        const result = {"Estadisticas jugadores":stats}
+        res.status(200).json(result);
+
+    } catch (error) {
+
+        res.status(500);
+        res.json(error);
+        console.log(error);
+        /* throw new Error ('Error al obtener las cartas') */
+    } finally {
+
+        if (connection !== null) {
+            connection.end();
+            console.log('Conexión cerrada exitosamente');
+        }
+    }
+});
+
+app.get('/api/info_cartas', async (req, res) => {
+
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+
+        const query = 'SELECT C.id AS "ID Carta", C.nombre AS "Nombre", C.descripcion AS "Descripción", TC.tipo AS "Tipo de carta", C.costoEnergia AS "Costo de energía", C.valor AS "Valor" FROM Carta C JOIN  TipoCarta TC ON C.tipoCarta = TC.id JOIN  Efecto E ON C.efecto = E.id;';
+        const [stats] = await connection.query(query);
+
+        console.log(`${stats.length} rows returned`);
+        console.log(stats);
+        const result = {"Estadisticas jugadores":stats}
+        res.status(200).json(result);
+
+    } catch (error) {
+
+        res.status(500);
+        res.json(error);
+        console.log(error);
+        /* throw new Error ('Error al obtener las cartas') */
+    } finally {
+
+        if (connection !== null) {
+            connection.end();
+            console.log('Conexión cerrada exitosamente');
+        }
+    }
+});
+
 app.post('/api/jugador', async (req, res) => { /* Realmente es async ?*/
     const { nombre, clave } = req.body; /* Validar el body correcto */
 
@@ -67,7 +127,7 @@ app.post('/api/jugador', async (req, res) => { /* Realmente es async ?*/
         const query = 'INSERT INTO Jugador (nombre, juegos_jugados, juegos_ganados, clave) VALUES (?, 0, 0, ?)';
         connection.query(query, [nombre, clave_encriptada], (err, result, fields) => {
             if (err instanceof Error) {
-                console.log('Erro al registrar el jugador');
+                console.log('Error al registrar el jugador');
                 return;
             }
         });
