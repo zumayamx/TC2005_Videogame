@@ -1,6 +1,6 @@
-*{
+* {
     box-sizing: border-box;
-    font-family:'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, monospace;
     margin: 0;
     padding: 0;
 }
@@ -13,7 +13,7 @@ h1, h2, h3 {
 }
 
 ul {
-    list-style-type:disc;
+    list-style-type: disc;
     line-height: 1;
     text-align: justify;
     padding: 0.5em 1em;
@@ -82,7 +82,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-    
 
 .espacio-vg {
     background-color: white;
@@ -101,7 +100,7 @@ body {
 
 #contenido h1 {
     grid-column: 1 / 3;
-    font-size:xx-large;
+    font-size: xx-large;
 }
 
 .tablero {
@@ -109,6 +108,8 @@ body {
     justify-content: center;
     text-align: center;
     padding: 1em 2em;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .cartas_completo {
@@ -120,6 +121,8 @@ body {
     text-align: center;
     border-left: 3px solid #5CE1E6;
     padding: 0 1em;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 #cartas {
@@ -139,14 +142,25 @@ body {
 
 .flex_contenido {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     padding-top: 1em;
     gap: 0.5em;
+    width: 100%;
+    max-width: 1200px; /* Tamaño máximo del contenedor */
+    box-sizing: border-box;
+}
+
+.flex_contenido img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .flex_contenido h5 {
     padding-top: 0.5em;
     font-size: medium;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 #mecanica {
@@ -161,22 +175,24 @@ body {
 #mecanica h1 {
     grid-column: 1 / 3;
     grid-row: 1/2;
-    font-size:xx-large;
+    font-size: xx-large;
 }
 
 #mecanica h2 {
     padding-bottom: 0.5em;
 }
 
-.objetivo_completo{
+.objetivo_completo {
     grid-column: 1 / 2;
-    display:grid;
+    display: grid;
     grid-template-rows: 50% 50%;
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: justify;
     border-right: 3px solid #5CE1E6;
     padding: 0 1em;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 #objetivo {
@@ -200,17 +216,19 @@ body {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     justify-items: center;
-    text-align:justify;
+    text-align: justify;
     padding-left: 2em;
     padding-top: 1em;
     padding-right: 1em;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
-.turno h2{
+.turno h2 {
     text-align: left;
 }
 
-#estadisticas{
+#estadisticas {
     background-color: #002232;
     color: white;
 }
