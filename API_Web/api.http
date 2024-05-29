@@ -6,8 +6,8 @@ POST http://localhost:3000/api/jugador/registro
 Content-Type: application/json
 
 {
-    "nombre" : "JugadorN",
-    "clave" : "Jugador123"
+    "nombre" : "zumaya90",
+    "clave" : "zum1234"
 }
 
 ### INICIAR UNA PARTIDA CON DOS JUGADORES
@@ -28,8 +28,8 @@ Content-Type: application/json
     "id_jugador_ganador" : 5
 }
 
-###OBTENER A UN JUGADOR POR ID
-GET http://localhost:3000/api/jugador/inicio_sesion/zumaya01
+###OBTENER A UN JUGADOR POR USERNAME Y PASSWORD (LOGIN)
+GET http://localhost:3000/api/jugador/inicio_sesion/zumaya90/zum1234
 
 ### OBTENER TODOS LOS JUGADORES
 GET http://localhost:3000/api/jugadores

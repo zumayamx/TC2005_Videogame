@@ -86,9 +86,9 @@ app.post('/api/jugador/registro', async (req, res) => { /* Realmente es async ?*
     }
 });
 
-app.get('/api/jugador/inicio_sesion/:username', async (req, res) => {
+app.get('/api/jugador/inicio_sesion/:nombre_usuario/:clave', async (req, res) => {
 
-    const { username } = req.params;
+    const { nombre_usuario, clave } = req.params;
 
     let connection = null;
 
@@ -96,13 +96,29 @@ app.get('/api/jugador/inicio_sesion/:username', async (req, res) => {
         connection = await connectToDB();
 
         const query = 'SELECT id, nombre, juegos_jugados, juegos_ganados, clave FROM Jugador WHERE nombre = ?';
-        const [jugador] = await connection.query(query, [username]);
-        res.status(200).json(jugador);
+        const [jugador] = await connection.query(query, [nombre_usuario]);
+
+        if (jugador.length === 0) {
+            res.status(404).json({code: 'ERROR', message: 'Jugador no encontrado'});
+            return;
+        }
+
+        if (await bcrypt.compare(clave, jugador[0].clave)) {
+            
+            res.status(200).json({ code: 'SUCCESS', "jugadores" : jugador });
         
+        } else {
+
+            res.status(401).json({code: 'ERROR', message: 'Credenciales incorrectas'});
+        }
+
     } catch  (error) {
+
         console.log(error);
-        res.status(500);
+        res.status(500);    
+
     } finally {
+
         if (connection !== null) {
             connection.end();
             console.log('Conexión cerrada exitosamente');
