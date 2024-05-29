@@ -244,7 +244,7 @@ footer {
 
 .color_rojo {
     font-weight: bold;
-    color: #FF3131;
+    color: rgb(255, 49, 49);
 }
 
 .color_verde {
@@ -269,10 +269,29 @@ footer {
 
 .color_verde_claro {
     font-weight: bold;
-    color: #7ED957;
+    color: rgb(127, 217, 89);
 }
 
 .color_rosa {
     font-weight: bold;
-    color: #FF03FF;
+    color: rgb(255, 3, 255);
+}
+
+.contenedor_graficas{
+    border: 0;
+    justify-items: center;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.contenedor_graficas canvas{
+    flex-grow: 1;
+    max-width: 30%; 
+    max-height: 600px;
+    border: 2px solid white;
+    background-color: #003C59;
+    
 }

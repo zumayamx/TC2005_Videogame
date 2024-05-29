@@ -6,7 +6,7 @@ import  bcrypt from 'bcrypt';
 const saltRounds = 10;
 const app = express();
 app.use(express.json());
-app.use(express.static('public'))
+app.use(express.static('web/public'))
 
 async function connectToDB() {
     return await mysql.createConnection({
@@ -20,7 +20,7 @@ async function connectToDB() {
 
 
 app.get('/api/web', (req, res) => {
-    const file = fs.readFileSync("/Users/leonblanga/Desktop/github/TC2005_Videojuego/API_Web/web/public/html/pagina.html", "utf-8"); 
+    const file = fs.readFileSync("/Users/leonblanga/Desktop/github/TC2005_Videojuego/API_Web/web/public/html/index.html", "utf-8"); 
     res.status(200).send(file);
 }) 
 
@@ -61,7 +61,7 @@ app.get('/api/estadisticas_jugadores', async (req, res) => {
     try {
         connection = await connectToDB();
 
-        const query = 'SELECT J.id AS "ID jugador", J.nombre AS Nombre, J.juegos_jugados AS "Juegos jugados", J.juegos_ganados AS "Juegos ganados", (J.juegos_ganados / J.juegos_jugados) * 100 AS "Porcentaje de victorias" FROM Jugador J;';
+        const query = 'SELECT * FROM EstadisticasJugadores';
         const [stats] = await connection.query(query);
 
         console.log(`${stats.length} rows returned`);
@@ -91,12 +91,12 @@ app.get('/api/info_cartas', async (req, res) => {
     try {
         connection = await connectToDB();
 
-        const query = 'SELECT C.id AS "ID Carta", C.nombre AS "Nombre", C.descripcion AS "Descripción", TC.tipo AS "Tipo de carta", C.costoEnergia AS "Costo de energía", C.valor AS "Valor" FROM Carta C JOIN  TipoCarta TC ON C.tipoCarta = TC.id JOIN  Efecto E ON C.efecto = E.id;';
+        const query = 'SELECT C.id AS "ID Carta", C.nombre AS "Nombre", C.descripcion AS "Descripción", TC.tipo AS "Tipo de carta", C.costoEnergia AS "Costo de energía", C.valor AS "Valor" FROM Carta C JOIN  TipoCarta TC ON C.tipoCarta = TC.id JOIN  Efecto E ON C.efecto = E.id ORDER BY C.id;';
         const [stats] = await connection.query(query);
 
         console.log(`${stats.length} rows returned`);
         console.log(stats);
-        const result = {"Estadisticas jugadores":stats}
+        const result = {"Descripción cartas":stats}
         res.status(200).json(result);
 
     } catch (error) {
