@@ -33,3 +33,6 @@ GET http://localhost:3000/api/jugador/inicio_sesion/zumaya90/zum1234
 
 ### OBTENER TODOS LOS JUGADORES
 GET http://localhost:3000/api/jugadores
+
+###MOSTRAR LA PÀGINA
+GET http://localhost:3000/api/web
