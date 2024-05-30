@@ -120,3 +120,55 @@ catch(error)
 {
     console.log(error)
 }
+
+async function fetchAndRenderPieChart() {
+    try {
+        const response = await fetch('http://localhost:3000/api/cartas_info', { method: 'GET' });
+
+        if (response.ok) {
+            const data = await response.json();
+            const cartas = data.cartas;
+
+            // Preparar los datos para el pie chart
+            const nombres = cartas.map(carta => carta.Nombre);
+            const vecesJugadas = cartas.map(carta => carta['Veces jugada']);
+
+            // Crear el pie chart usando Chart.js
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: nombres,
+                    datasets: [{
+                        data: vecesJugadas,
+                        backgroundColor: nombres.map(() => random_color(0.8)),
+                        borderColor: nombres.map(() => 'rgba(255, 255, 255, 1)'),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: 'white' // Color de las etiquetas de la leyenda
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.label}: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+fetchAndRenderPieChart();
