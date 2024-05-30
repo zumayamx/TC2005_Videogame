@@ -114,7 +114,67 @@ app.get('/api/info_cartas', async (req, res) => {
     }
 });
 
-app.post('/api/jugador', async (req, res) => { /* Realmente es async ?*/
+app.get('/api/estadisticas_jugadores', async (req, res) => {
+
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+
+        const query = 'SELECT * FROM EstadisticasJugadores';
+        const [stats] = await connection.query(query);
+
+        console.log(`${stats.length} rows returned`);
+        console.log(stats);
+        const result = {"Estadisticas jugadores":stats}
+        res.status(200).json(result);
+
+    } catch (error) {
+
+        res.status(500);
+        res.json(error);
+        console.log(error);
+        /* throw new Error ('Error al obtener las cartas') */
+    } finally {
+
+        if (connection !== null) {
+            connection.end();
+            console.log('Conexión cerrada exitosamente');
+        }
+    }
+});
+
+app.get('/api/info_cartas', async (req, res) => {
+
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+
+        const query = 'SELECT C.id AS "ID Carta", C.nombre AS "Nombre", C.descripcion AS "Descripción", TC.tipo AS "Tipo de carta", C.costoEnergia AS "Costo de energía", C.valor AS "Valor" FROM Carta C JOIN  TipoCarta TC ON C.tipoCarta = TC.id JOIN  Efecto E ON C.efecto = E.id ORDER BY C.id;';
+        const [stats] = await connection.query(query);
+
+        console.log(`${stats.length} rows returned`);
+        console.log(stats);
+        const result = {"Descripción cartas":stats}
+        res.status(200).json(result);
+
+    } catch (error) {
+
+        res.status(500);
+        res.json(error);
+        console.log(error);
+        /* throw new Error ('Error al obtener las cartas') */
+    } finally {
+
+        if (connection !== null) {
+            connection.end();
+            console.log('Conexión cerrada exitosamente');
+        }
+    }
+});
+
+app.post('/api/jugador/registro', async (req, res) => { /* Realmente es async ?*/
     const { nombre, clave } = req.body; /* Validar el body correcto */
 
     let connection = null;
@@ -125,19 +185,18 @@ app.post('/api/jugador', async (req, res) => { /* Realmente es async ?*/
         const clave_encriptada = bcrypt.hashSync(clave, saltRounds);
 
         const query = 'INSERT INTO Jugador (nombre, juegos_jugados, juegos_ganados, clave) VALUES (?, 0, 0, ?)';
-        connection.query(query, [nombre, clave_encriptada], (err, result, fields) => {
-            if (err instanceof Error) {
-                console.log('Error al registrar el jugador');
-                return;
-            }
-        });
+        await connection.query(query, [nombre, clave_encriptada]);
 
-        res.status(200).send('Jugador registrado exitosamente');
+        res.status(200).json({code: 'SUCCESS', message: 'Jugador registrado exitosamente'});
 
     } catch (error) {
-
-        console.log('Error intentar registrar el jugador');
-        res.status(500).send('Error al registrar jugador, intenta de nuevo');
+         
+        if (error.code === 'ER_DUP_ENTRY') {
+            res.status(409).json({code: 'ERROR', message: 'El nombre de usuario del jugador ya existe'});
+        } else {
+            console.log('Error intentar registrar el jugador:', error);
+            res.status(500).json({code: 'ERROR', message: 'Error al registrar jugador, intenta de nuevo'});
+        }
 
     } finally {
 
@@ -148,22 +207,39 @@ app.post('/api/jugador', async (req, res) => { /* Realmente es async ?*/
     }
 });
 
-app.get('/api/jugador/:id', async (req, res) => {
+app.get('/api/jugador/inicio_sesion/:nombre_usuario/:clave', async (req, res) => {
 
-    const {id} = req.params;
+    const { nombre_usuario, clave } = req.params;
 
     let connection = null;
 
     try {
         connection = await connectToDB();
 
-        const query = 'SELECT id, nombre, juegos_jugados, juegos_ganados, clave FROM Jugador WHERE id = ?';
-        const [jugador] = await connection.query(query, [id]);
-        res.status(200).json(jugador);
+        const query = 'SELECT id, nombre, juegos_jugados, juegos_ganados, clave FROM Jugador WHERE nombre = ?';
+        const [jugador] = await connection.query(query, [nombre_usuario]);
+
+        if (jugador.length === 0) {
+            res.status(404).json({code: 'ERROR', message: 'Jugador no encontrado'});
+            return;
+        }
+
+        if (await bcrypt.compare(clave, jugador[0].clave)) {
+            
+            res.status(200).json({ code: 'SUCCESS', "jugadores" : jugador });
+        
+        } else {
+
+            res.status(401).json({code: 'ERROR', message: 'Credenciales incorrectas'});
+        }
+
     } catch  (error) {
+
         console.log(error);
-        res.status(500);
+        res.status(500);    
+
     } finally {
+
         if (connection !== null) {
             connection.end();
             console.log('Conexión cerrada exitosamente');
@@ -287,6 +363,8 @@ app.post('/api/partida/ganador', async (req, res) => {
         }
     }
 });
+
+
 
 const PORT = process.env.port ?? 3000;
 app.listen(PORT, () => {
