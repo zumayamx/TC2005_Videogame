@@ -19,12 +19,25 @@ try
         console.log(results)
         console.log('Data converted correctly. Plotting chart.')
 
-        // In this case, we just separate the data into different arrays using the map method of the values array. This creates new arrays that hold only the data that we need.
-        const jugador_id = results["Estadisticas jugadores"].map(e => e['ID jugador'])
-        const jugador_nombre = results["Estadisticas jugadores"].map(e => e['Nombre'])
-        const jugador_jugados = results["Estadisticas jugadores"].map(e => e['Juegos jugados'])
-        const jugador_ganados = results["Estadisticas jugadores"].map(e => e['Juegos ganados'])
-        const jugador_porcentaje = results["Estadisticas jugadores"].map(e => e['Porcentaje de victorias'])
+        let stats = results["Estadisticas jugadores"];
+        // Ordenar y limitar los datos para cada gráfico
+        let topJugados = [...stats].sort((a, b) => b['Juegos jugados'] - a['Juegos jugados']).slice(0, 5);
+        let topGanados = [...stats].sort((a, b) => b['Juegos ganados'] - a['Juegos ganados']).slice(0, 5);
+        let topPorcentaje = [...stats].sort((a, b) => b['Porcentaje de victorias'] - a['Porcentaje de victorias']).slice(0, 5);
+
+        // Preparar datos para el gráfico de partidas jugadas
+        const nombre_jugados = topJugados.map(e => e['Nombre']);
+        const jugador_jugados = topJugados.map(e => e['Juegos jugados']);
+
+        // Preparar datos para el gráfico de partidas ganadas
+        const nombre_ganados = topGanados.map(e => e['Nombre']);
+        const jugador_ganados = topGanados.map(e => e['Juegos ganados']);
+
+        // Preparar datos para el gráfico de porcentaje de victorias
+        const nombre_porcentaje = topPorcentaje.map(e => e['Nombre']);
+        const jugador_porcentaje = topPorcentaje.map(e => e['Porcentaje de victorias']);
+
+        // Establecer colores y bordes para los gráficos
         const colors = results["Estadisticas jugadores"].map(e => random_color(0.8))
         const borders = results["Estadisticas jugadores"].map(e => 'rgba(0, 0, 0, 1.0)')
 
@@ -33,7 +46,7 @@ try
             {
                 type: 'bar',
                 data: {
-                    labels: jugador_nombre,
+                    labels: nombre_jugados,
                     datasets: [
                         {
                             label: 'Partidas jugadas',
@@ -71,7 +84,7 @@ try
             {
                 type: 'bar',
                 data: {
-                    labels: jugador_nombre,
+                    labels: nombre_ganados,
                     datasets: [
                         {
                             label: 'Partidas ganadas',
@@ -89,7 +102,7 @@ try
             {
                 type: 'bar',
                 data: {
-                    labels: jugador_nombre,
+                    labels: nombre_porcentaje,
                     datasets: [
                         {
                             label: 'Porcentaje de Victorias',
