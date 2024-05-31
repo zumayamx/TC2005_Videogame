@@ -2,12 +2,12 @@
 GET http://localhost:3000/api/cards
 
 ### CREAR UN NUEVO JUGADOR
-POST http://localhost:3000/api/jugador
+POST http://localhost:3000/api/jugador/registro
 Content-Type: application/json
 
 {
-    "nombre" : "JugadorNovato",
-    "clave" : "JugadorNovato123"
+    "nombre" : "zumaya90",
+    "clave" : "zum1234"
 }
 
 ### INICIAR UNA PARTIDA CON DOS JUGADORES
@@ -28,8 +28,11 @@ Content-Type: application/json
     "id_jugador_ganador" : 5
 }
 
-###OBTENER A UN JUGADOR POR ID
-GET http://localhost:3000/api/jugador/2
+###OBTENER A UN JUGADOR POR USERNAME Y PASSWORD (LOGIN)
+GET http://localhost:3000/api/jugador/inicio_sesion/zumaya90/zum1234
 
 ### OBTENER TODOS LOS JUGADORES
 GET http://localhost:3000/api/jugadores
+
+###MOSTRAR LA PÀGINA
+GET http://localhost:3000/api/web
