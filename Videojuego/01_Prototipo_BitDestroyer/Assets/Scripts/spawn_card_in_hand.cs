@@ -2,9 +2,21 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
 public class CardSpawner : MonoBehaviour
 {
+
+    /* Update de image of energy */
+    public Image energyImage;
+
+    public Sprite energyImage_3;
+
+    public Sprite energyImage_2;
+
+    public Sprite energyImage_1;
+
+    public Sprite energyImage_0;
     [SerializeField] private GameObject cardPrefab; // The same prefab for all decks
     [SerializeField] private Transform handPosition;
 
@@ -215,6 +227,23 @@ public class CardSpawner : MonoBehaviour
     {
         if (energyText != null)
         {
+            /* Change the image by the energy value */
+            if (energy == 3 ) {
+                energyImage.sprite = energyImage_3;
+            }
+
+            if (energy == 2 ) {
+                 energyImage.sprite = energyImage_2;
+            }
+
+            if (energy == 1 ) {
+                 energyImage.sprite = energyImage_1;
+            }
+
+            if (energy == 0 ) {
+                 energyImage.sprite = energyImage_0;
+            }
+
             energyText.text = $"Energy: {energy}";
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
+    public Image healthBar; // Image to display the health bar
     public int playerHealth = 20; // Starting health of the player
     public TMP_Text healthText; // TMP Text element to display health
     public TMP_Text gameOverText; // TMP Text element to display game over message
@@ -25,6 +26,7 @@ public class HealthManager : MonoBehaviour
     public void TakeDamage(int damage)
     {
         playerHealth -= damage;
+        UpdateHealthBar();
         UpdateHealthText();
 
         // Check if the player is out of health
@@ -34,7 +36,12 @@ public class HealthManager : MonoBehaviour
             DisplayGameOverMessage();
         }
     }
-
+    
+    /* Method to update the heath bar in game */
+    void UpdateHealthBar()
+    {
+        healthBar.fillAmount = (float)playerHealth / 20f;
+    }
     // Method to update the health display
     void UpdateHealthText()
     {
