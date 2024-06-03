@@ -26,6 +26,11 @@ Una partida consta de dos jugadores, uno del equipo rojo y otro del equipo azul,
 3. Asegúrate de que la escena inicial esté configurada como la escena predeterminada:
     - Antes de iniciar, ve a `File` > `Build Settings` > `Player Settings` y marca la opción `Allow downloads over HTTP` como `Always allowed` en la sección de configuraciones para permitir conexión con nuestra API.
     - **Escena Inicial:** [EleccionModo]
+    - **Credenciales por defecto**: 
+        - Jugador_1: zumaya90
+        - Clave_1: zum1234
+        - Jugador_2: zumaya80
+        - Clave_2: zum123
     - Corre el videojuego con el botón play.
 
 ### Controles del Juego
