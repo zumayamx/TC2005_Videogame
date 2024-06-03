@@ -14,8 +14,8 @@ public class SceneChanger : MonoBehaviour
 
     void Start()
     {
-        button_one_player.onClick.AddListener(() => ChangeSceneByName("InicioSesion", 1));
-        button_multiplayers.onClick.AddListener(() => ChangeSceneByName("InicioSesion", 2));
+        button_one_player.onClick.AddListener(() => ChangeSceneByName("Login", 1));
+        button_multiplayers.onClick.AddListener(() => ChangeSceneByName("Login", 2));
     }
 
     private void ChangeSceneByName(string sceneName, int modoJuego)

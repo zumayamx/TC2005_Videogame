@@ -544,7 +544,7 @@ GameObject:
   - component: {fileID: 585597918}
   - component: {fileID: 585597917}
   m_Layer: 5
-  m_Name: Un jugador
+  m_Name: OnePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -844,7 +844,7 @@ GameObject:
   - component: {fileID: 1742748492}
   - component: {fileID: 1742748491}
   m_Layer: 5
-  m_Name: Multijugador
+  m_Name: Multiplayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

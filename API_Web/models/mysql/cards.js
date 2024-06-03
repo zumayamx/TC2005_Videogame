@@ -226,7 +226,7 @@ app.get('/api/jugador/inicio_sesion/:nombre_usuario/:clave', async (req, res) =>
 
         if (await bcrypt.compare(clave, jugador[0].clave)) {
             
-            res.status(200).json({ code: 'SUCCESS', "jugadores" : jugador });
+            res.status(200).json({ code: 'SUCCESS', "players" : jugador });
         
         } else {
 

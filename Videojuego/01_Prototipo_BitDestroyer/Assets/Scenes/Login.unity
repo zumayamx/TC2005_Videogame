@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 102625197}
   - component: {fileID: 102625196}
   m_Layer: 5
-  m_Name: Clave
+  m_Name: Password
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -965,7 +965,7 @@ GameObject:
   - component: {fileID: 529802373}
   - component: {fileID: 529802372}
   m_Layer: 0
-  m_Name: jugadoresManager
+  m_Name: playersManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -983,9 +983,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f04e7c91d47a64ce9b581e8e40fcf432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jugadoresList:
+  playersList:
     code: 
-    jugadores: []
+    players: []
 --- !u!4 &529802373
 Transform:
   m_ObjectHideFlags: 0
@@ -1486,7 +1486,7 @@ GameObject:
   - component: {fileID: 1035793998}
   - component: {fileID: 1035793997}
   m_Layer: 5
-  m_Name: Siguiente
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2040,7 +2040,7 @@ GameObject:
   - component: {fileID: 1571965046}
   - component: {fileID: 1571965045}
   m_Layer: 5
-  m_Name: Registrar
+  m_Name: Register
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2161,7 +2161,7 @@ GameObject:
   - component: {fileID: 1717730291}
   - component: {fileID: 1717730290}
   m_Layer: 5
-  m_Name: Nombre
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2336,7 +2336,7 @@ GameObject:
   - component: {fileID: 1799114008}
   - component: {fileID: 1799114007}
   m_Layer: 5
-  m_Name: Regresar
+  m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2457,7 +2457,7 @@ GameObject:
   - component: {fileID: 1839815675}
   - component: {fileID: 1839815674}
   m_Layer: 5
-  m_Name: IniciarS
+  m_Name: Login
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2575,7 +2575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2142047890}
   - component: {fileID: 2142047892}
-  - component: {fileID: 2142047891}
+  - component: {fileID: 2142047893}
   m_Layer: 0
   m_Name: Scripter
   m_TagString: Untagged
@@ -2598,30 +2598,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2142047891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142047889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97849a2ce91a7433b9f764cfb59bcced, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name_player: {fileID: 1717730290}
-  password_player: {fileID: 102625196}
-  button_player_login: {fileID: 1839815674}
-  button_player_register: {fileID: 1571965045}
-  apiURL: http://ec2-3-101-36-23.us-west-1.compute.amazonaws.com:3000
-  result:
-    code: 
-    message: 
-  jugadores:
-    code: 
-    jugadores: []
-  jugadoresManager: {fileID: 529802372}
 --- !u!114 &2142047892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2637,13 +2613,37 @@ MonoBehaviour:
   loginButton: {fileID: 1839815674}
   back: {fileID: 1799114007}
   registerButton: {fileID: 1571965045}
-  GameButton: {fileID: 1035793997}
+  gameButton: {fileID: 1035793997}
   name_player: {fileID: 1717730290}
   password_player: {fileID: 102625196}
   name_player_red: {fileID: 21300000, guid: bd4d99be60ade40d0be14f7b8d120855, type: 3}
   password_player_red: {fileID: 21300000, guid: 7c65d7c98a33549d0bf2cc2d9ccdef26, type: 3}
   loginButton_red: {fileID: 21300000, guid: 839a695f17a16459187646b61124b3b1, type: 3}
   registerButton_red: {fileID: 21300000, guid: 3173c224e1f504146a21b7db2cd49a23, type: 3}
+--- !u!114 &2142047893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142047889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97849a2ce91a7433b9f764cfb59bcced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name_player: {fileID: 1717730290}
+  password_player: {fileID: 102625196}
+  button_player_login: {fileID: 1839815674}
+  button_player_register: {fileID: 1571965045}
+  apiURL: http://localhost:3000
+  result:
+    code: 
+    message: 
+  players:
+    code: 
+    players: []
+  playersManager: {fileID: 529802372}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

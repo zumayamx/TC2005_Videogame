@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Networking;
 
-public class VerificarJugador : MonoBehaviour
+public class LoginManager : MonoBehaviour
 {
     public TMP_InputField name_player;
     public TMP_InputField password_player;
@@ -18,9 +18,9 @@ public class VerificarJugador : MonoBehaviour
 
     public Result result;
 
-    public Jugadores jugadores;
+    public Players players;
 
-    public JugadoresManager jugadoresManager;    
+    public PlayersManager playersManager;    
 
     void Start()
     {
@@ -77,8 +77,8 @@ public class VerificarJugador : MonoBehaviour
 
         if (result.code == "SUCCESS")
         {
-            jugadores = JsonUtility.FromJson<Jugadores>(data);
-            return jugadoresManager.AddPlayer(jugadores.jugadores[0]);
+            players = JsonUtility.FromJson<Players>(data);
+            return playersManager.AddPlayer(players.players[0]);
         }
         else
         {

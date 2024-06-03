@@ -4,15 +4,15 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class Jugadores
+public class Players
 {
     public string code;
-    public List<Jugador> jugadores;
+    public List<Player> players;
 
 }
 
 [System.Serializable]
-public class Jugador
+public class Player
 {
     public int id;
     public string nombre;

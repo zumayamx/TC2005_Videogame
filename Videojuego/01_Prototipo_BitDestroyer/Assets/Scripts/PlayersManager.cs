@@ -4,31 +4,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JugadoresManager : MonoBehaviour
+public class PlayersManager : MonoBehaviour
 {
-    public static JugadoresManager jugadoresManager;
-    public Jugadores jugadoresList;
+    public static PlayersManager playersManager;
+    public Players playersList;
 
     private void Start() {
-         if (jugadoresManager == null) {
-            jugadoresManager = this;
+         if (playersManager == null) {
+            playersManager = this;
             DontDestroyOnLoad(this.gameObject);
          } else {
             Destroy(this.gameObject);
          }
     }
 
-    public bool AddPlayer(Jugador jugador) {
+    public bool AddPlayer(Player player) {
 
-        if (jugadoresList.jugadores.Count == 0) {
+        if (playersList.players.Count == 0) {
             PlayerPrefs.SetInt("loginOne", 1);
-            jugadoresList.jugadores.Add(jugador);
+            playersList.players.Add(player);
             return true;
         } 
 
-        if (jugador.id != jugadoresList.jugadores[0].id) {
+        if (player.id != playersList.players[0].id) {
             PlayerPrefs.SetInt("loginTwo", 1);
-            jugadoresList.jugadores.Add(jugador);
+            playersList.players.Add(player);
             return true;
         } 
         

@@ -13,7 +13,7 @@ public class SceneChangerLogin : MonoBehaviour
 
     public Button registerButton;
 
-    public Button GameButton;
+    public Button gameButton;
 
     public TMP_InputField name_player;
 
@@ -31,21 +31,21 @@ public class SceneChangerLogin : MonoBehaviour
     {
         loginButton.onClick.AddListener(() => ToNextLogin());
         back.onClick.AddListener(() => ToModeElection());
-        GameButton.onClick.AddListener(() => ToGame());
+        gameButton.onClick.AddListener(() => ToGame());
 
         if (PlayerPrefs.GetInt("modoJuego") == 1 || PlayerPrefs.GetInt("modoJuego") == 0)
         {
-            GameButton.gameObject.SetActive(false);
+            gameButton.gameObject.SetActive(false);
         } 
 
     }
 
     private void ToNextLogin()
     {
-        if (PlayerPrefs.GetInt("modoJuego") == 0 && PlayerPrefs.GetInt("loginTwo") == 1) {
+        if (PlayerPrefs.GetInt("modoJuego") == 0) {
             Debug.Log(PlayerPrefs.GetInt("loginTwo"));
             loginButton.gameObject.SetActive(false);
-            GameButton.gameObject.SetActive(true);
+            gameButton.gameObject.SetActive(true);
         }
 
         if (PlayerPrefs.GetInt("modoJuego") == 1)
@@ -58,12 +58,12 @@ public class SceneChangerLogin : MonoBehaviour
 
     private void ToModeElection()
     {
-        SceneManager.LoadScene("EleccionModo");
+        SceneManager.LoadScene("ModeElection");
     }
 
     private void ToGame()
     {
-        SceneManager.LoadScene("Juego");
+        SceneManager.LoadScene("Game");
     }
 
     public void ChangeButtonImagesRed() {
