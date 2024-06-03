@@ -7,7 +7,7 @@
     This script is used to manage the players through the game, it uses the Players object (PlayersList) to store the players
     and the PlayersManager object to manage the players through the game.
  */
-*/
+ 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
