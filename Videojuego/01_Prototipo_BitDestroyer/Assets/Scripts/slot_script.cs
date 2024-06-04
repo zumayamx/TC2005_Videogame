@@ -113,6 +113,6 @@ public class CardSlotManager : MonoBehaviour
         float distance = Vector3.Distance(cardPosition, slotPosition);
 
         // Check if the distance is less than a threshold value (adjust as needed)
-        return distance < 3f;
+        return distance < 1f;
     }
 }

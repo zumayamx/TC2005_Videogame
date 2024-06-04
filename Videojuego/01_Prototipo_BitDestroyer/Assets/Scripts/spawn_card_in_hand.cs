@@ -2,9 +2,30 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
 public class CardSpawner : MonoBehaviour
 {
+
+    public GameObject panelElectionCards;
+
+    /* Card buttons to choose one from any group */
+    public Button cardOneElection;
+
+    public Button cardTwoElection;
+
+    public Button cardThreeElection;
+
+    /* Update de image of energy */
+    public Image energyImage;
+
+    public Sprite energyImage_3;
+
+    public Sprite energyImage_2;
+
+    public Sprite energyImage_1;
+
+    public Sprite energyImage_0;
     [SerializeField] private GameObject cardPrefab; // The same prefab for all decks
     [SerializeField] private Transform handPosition;
 
@@ -28,6 +49,13 @@ public class CardSpawner : MonoBehaviour
 
     private void Start()
     {
+        /* Hide the panel at tne beggining of scene */
+        panelElectionCards.SetActive(false);
+
+        /* Add listener to the buttons to select one card */
+        // cardOneElection.onClick.AddListener(() => {
+        //     //function logic
+        // });
         UpdateEnergyText();
     }
 
@@ -46,22 +74,26 @@ public class CardSpawner : MonoBehaviour
                 // Spawn a card based on the object hit
                 if (hit.collider.gameObject == object1)
                 {
-                    TrySpawnCard("cibersecurity", cibersecurityIds, "defense", 1); // Defense card
+                    ShowPanelElectionCards("cibersecurity", cibersecurityIds, "defense", 1);
+
+                    //TrySpawnCard("cibersecurity", cibersecurityIds, "defense", 1); // Defense card
                 }
                 else if (hit.collider.gameObject == object2)
                 {
-                    TrySpawnCard("bootcamp", bootcampIds, "none", 2); // Bootcamp card
+                    //TrySpawnCard("bootcamp", bootcampIds, "none", 2); // Bootcamp card
                 }
                 else if (hit.collider.gameObject == object3)
                 {
-                    TrySpawnCard("ciberattack", ciberattackIds, "attack", 3); // Attack card
+                    //TrySpawnCard("ciberattack", ciberattackIds, "attack", 3); // Attack card
                 }
             }
         }
     }
 
-    private void TrySpawnCard(string category, List<int> ids, string cardType, int energyCost)
-    {
+    private void ShowPanelElectionCards(string category, List<int> ids, string cardType, int energyCost)
+    {   
+        panelElectionCards.SetActive(true);
+
         if (energy < energyCost)
         {
             Debug.Log("Not enough energy to spawn card.");
@@ -69,11 +101,58 @@ public class CardSpawner : MonoBehaviour
         }
 
         // Generate a random card ID from the list
-        int randomIndex = Random.Range(0, ids.Count);
-        int randomId = ids[randomIndex];
-        string imagePath = $"Assets/Sprites/cartas/{category}/{randomId}.png";
+        int randomIndexOne = Random.Range(0, ids.Count);
+        int randomIndexTwo = Random.Range(0, ids.Count);
+        int randomIndexThree = Random.Range(0, ids.Count);
 
-        // Check if hand position is occupied
+        int randomIdOne = ids[randomIndexOne];
+        int randomIdTwo = ids[randomIndexTwo];
+        int randomIdThree = ids[randomIndexThree];
+
+        string imagePathOne = $"Assets/Sprites/cartas/{category}/{randomIdOne}.png";
+        string imagePathTwo = $"Assets/Sprites/cartas/{category}/{randomIdTwo}.png";
+        string imagePathThree = $"Assets/Sprites/cartas/{category}/{randomIdThree}.png";
+
+        // Apply the image to the buttons
+        cardOneElection.GetComponent<Image>().sprite = LoadNewSprite(imagePathOne);
+        cardTwoElection.GetComponent<Image>().sprite = LoadNewSprite(imagePathTwo);
+        cardThreeElection.GetComponent<Image>().sprite = LoadNewSprite(imagePathThree);
+
+        // Add listeners to the buttons
+        cardOneElection.onClick.AddListener(() => TrySpawnCard(imagePathOne, randomIdOne, cardType, energyCost));
+        cardTwoElection.onClick.AddListener(() => TrySpawnCard(imagePathTwo, randomIdTwo, cardType, energyCost));
+        cardThreeElection.onClick.AddListener(() => TrySpawnCard(imagePathThree, randomIdThree, cardType, energyCost));
+
+        // // Check if hand position is occupied /*-------------------*/
+        // if (handPosition.childCount == 0)
+        // {
+        //     SpawnCard(cardPrefab, handPosition, imagePath, randomId, cardType);
+        //     energy -= energyCost; // Deduct energy
+        //     UpdateEnergyText();
+        // }
+        // else if (cardCount < spawnPositions.Length)
+        // {
+        //     int emptySpawnIndex = FindEmptySpawnIndex();
+        //     if (emptySpawnIndex != -1)
+        //     {
+        //         SpawnCard(cardPrefab, spawnPositions[emptySpawnIndex], imagePath, randomId, cardType);
+        //         energy -= energyCost; // Deduct energy
+        //         UpdateEnergyText();
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("All spawn positions are occupied. Cannot spawn more cards.");
+        //     }
+        // }
+        // else
+        // {
+        //     Debug.Log("Hand position is occupied and max cards are spawned. Cannot spawn card.");
+        // } /* -------------------*/
+    }
+
+    private void TrySpawnCard(string imagePath, int randomId, string cardType, int energyCost) {
+
+        // Check if hand position is occupied /*-------------------*/
         if (handPosition.childCount == 0)
         {
             SpawnCard(cardPrefab, handPosition, imagePath, randomId, cardType);
@@ -97,7 +176,7 @@ public class CardSpawner : MonoBehaviour
         else
         {
             Debug.Log("Hand position is occupied and max cards are spawned. Cannot spawn card.");
-        }
+        } /* -------------------*/
     }
 
     private int FindEmptySpawnIndex()
@@ -215,6 +294,23 @@ public class CardSpawner : MonoBehaviour
     {
         if (energyText != null)
         {
+            /* Change the image by the energy value */
+            if (energy == 3 ) {
+                energyImage.sprite = energyImage_3;
+            }
+
+            if (energy == 2 ) {
+                 energyImage.sprite = energyImage_2;
+            }
+
+            if (energy == 1 ) {
+                 energyImage.sprite = energyImage_1;
+            }
+
+            if (energy == 0 ) {
+                 energyImage.sprite = energyImage_0;
+            }
+
             energyText.text = $"Energy: {energy}";
         }
     }
