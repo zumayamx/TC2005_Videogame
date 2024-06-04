@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CardSpawner : MonoBehaviour
 {
 
+    /* Panel to show the cards to choose */
     public GameObject panelElectionCards;
 
     /* Card buttons to choose one from any group */
@@ -80,16 +81,30 @@ public class CardSpawner : MonoBehaviour
                 }
                 else if (hit.collider.gameObject == object2)
                 {
+                    ShowPanelElectionCards("bootcamp", bootcampIds, "none", 2);
                     //TrySpawnCard("bootcamp", bootcampIds, "none", 2); // Bootcamp card
                 }
                 else if (hit.collider.gameObject == object3)
                 {
+                    ShowPanelElectionCards("ciberattack", ciberattackIds, "attack", 3);
                     //TrySpawnCard("ciberattack", ciberattackIds, "attack", 3); // Attack card
                 }
             }
         }
     }
 
+        // Método para cargar una nueva imagen como sprite
+    private Sprite LoadNewSprite(string filePath)
+    {
+        if (File.Exists(filePath))
+        {
+            byte[] fileData = File.ReadAllBytes(filePath);
+            Texture2D texture = new Texture2D(2, 2);
+            texture.LoadImage(fileData);
+            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        }
+        return null;
+    }
     private void ShowPanelElectionCards(string category, List<int> ids, string cardType, int energyCost)
     {   
         panelElectionCards.SetActive(true);
@@ -118,36 +133,16 @@ public class CardSpawner : MonoBehaviour
         cardTwoElection.GetComponent<Image>().sprite = LoadNewSprite(imagePathTwo);
         cardThreeElection.GetComponent<Image>().sprite = LoadNewSprite(imagePathThree);
 
+        // Remove old listeners
+        cardOneElection.onClick.RemoveAllListeners();
+        cardTwoElection.onClick.RemoveAllListeners();
+        cardThreeElection.onClick.RemoveAllListeners();
+
         // Add listeners to the buttons
         cardOneElection.onClick.AddListener(() => TrySpawnCard(imagePathOne, randomIdOne, cardType, energyCost));
         cardTwoElection.onClick.AddListener(() => TrySpawnCard(imagePathTwo, randomIdTwo, cardType, energyCost));
         cardThreeElection.onClick.AddListener(() => TrySpawnCard(imagePathThree, randomIdThree, cardType, energyCost));
 
-        // // Check if hand position is occupied /*-------------------*/
-        // if (handPosition.childCount == 0)
-        // {
-        //     SpawnCard(cardPrefab, handPosition, imagePath, randomId, cardType);
-        //     energy -= energyCost; // Deduct energy
-        //     UpdateEnergyText();
-        // }
-        // else if (cardCount < spawnPositions.Length)
-        // {
-        //     int emptySpawnIndex = FindEmptySpawnIndex();
-        //     if (emptySpawnIndex != -1)
-        //     {
-        //         SpawnCard(cardPrefab, spawnPositions[emptySpawnIndex], imagePath, randomId, cardType);
-        //         energy -= energyCost; // Deduct energy
-        //         UpdateEnergyText();
-        //     }
-        //     else
-        //     {
-        //         Debug.Log("All spawn positions are occupied. Cannot spawn more cards.");
-        //     }
-        // }
-        // else
-        // {
-        //     Debug.Log("Hand position is occupied and max cards are spawned. Cannot spawn card.");
-        // } /* -------------------*/
     }
 
     private void TrySpawnCard(string imagePath, int randomId, string cardType, int energyCost) {
@@ -177,6 +172,8 @@ public class CardSpawner : MonoBehaviour
         {
             Debug.Log("Hand position is occupied and max cards are spawned. Cannot spawn card.");
         } /* -------------------*/
+
+        panelElectionCards.SetActive(false);
     }
 
     private int FindEmptySpawnIndex()
