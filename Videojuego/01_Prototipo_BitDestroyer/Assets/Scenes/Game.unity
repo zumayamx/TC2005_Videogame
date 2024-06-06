@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelElectionCards: {fileID: 1814070969}
+  panelRoulette: {fileID: 650761598}
   cardOneElection: {fileID: 1832770425}
   cardTwoElection: {fileID: 419583017}
   cardThreeElection: {fileID: 254439088}
@@ -1167,10 +1168,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Girar
+  m_text: Girar!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6b96193dba48d43e095d43ccc4e2989d, type: 2}
+  m_sharedMaterial: {fileID: 586329066251910675, guid: 6b96193dba48d43e095d43ccc4e2989d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2437,6 +2438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f8ef232811b0ab2ad3084c3b55f776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelRoulette: {fileID: 650761598}
   cardSlots:
   - {fileID: 2105591138}
   - {fileID: 374216471}
@@ -2746,7 +2748,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b8cbf9b00bb49d998d543fbb2c8913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1000
+  roulettePanel: {fileID: 650761598}
+  activePanelRoulette: 0
+  initialRotationSpeed: 1000
 --- !u!1 &834575600
 GameObject:
   m_ObjectHideFlags: 0
@@ -3066,6 +3070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f8ef232811b0ab2ad3084c3b55f776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelRoulette: {fileID: 650761598}
   cardSlots:
   - {fileID: 776675708}
   - {fileID: 775046239}
@@ -3872,6 +3877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelElectionCards: {fileID: 1814070969}
+  panelRoulette: {fileID: 650761598}
   cardOneElection: {fileID: 1832770425}
   cardTwoElection: {fileID: 419583017}
   cardThreeElection: {fileID: 254439088}

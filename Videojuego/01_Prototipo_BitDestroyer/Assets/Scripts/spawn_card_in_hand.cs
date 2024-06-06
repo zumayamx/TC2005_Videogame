@@ -10,6 +10,9 @@ public class CardSpawner : MonoBehaviour
     /* Panel to show the cards to choose */
     public GameObject panelElectionCards;
 
+    /* Panel to show the roulette */
+    public GameObject panelRoulette;
+
     /* Card buttons to choose one from any group */
     public Button cardOneElection;
 
@@ -52,6 +55,7 @@ public class CardSpawner : MonoBehaviour
     {
         /* Hide the panel at tne beggining of scene */
         panelElectionCards.SetActive(false);
+        //panelRoulette.SetActive(false);
 
         /* Add listener to the buttons to select one card */
         // cardOneElection.onClick.AddListener(() => {
@@ -245,8 +249,14 @@ public class CardSpawner : MonoBehaviour
                     Debug.LogError("AttackCard script could not be added to the card.");
                 }
                 break;
+
+                /* Case for bootcamp cards */
             case "none":
-                // Do nothing for Bootcamp cards
+                switch (cardData.id) {
+                    case 25:
+                        var bootcampScript = newCard.AddComponent<BootcampCard_25>();
+                        break;
+                }
                 break;
         }
 

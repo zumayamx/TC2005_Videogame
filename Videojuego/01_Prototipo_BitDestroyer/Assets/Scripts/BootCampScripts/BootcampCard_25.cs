@@ -11,15 +11,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BootcampCard_03 : MonoBehaviour
+public class BootcampCard_25 : MonoBehaviour
 {
+    /* Panel to show the roulette, initially active false in the spawn_card_in_hand script */
+    public GameObject roulettePanel;
+
+    public bool activePanelRoulette = false; 
     public float initialRotationSpeed = 1000f; // Velocidad de rotación inicial
     private float currentRotationSpeed; // Velocidad de rotación actual
-    private bool isSpinning = false;    // Estado de la ruleta
+    private bool isSpinning = false;    // State of the roulette
     private float spinDuration = 3.0f;  // Duración del giro
 
+    void Start()
+    {
+        Debug.Log("BootcampCard_25.cs STARTED!");
+        roulettePanel = GameObject.Find("RoulettePanel");
+    }
     void Update()
     {
+        if (activePanelRoulette && roulettePanel != null) {
+             roulettePanel.SetActive(true);
+        } 
+        // else {
+        //     Debug.Log("Roulette Panel is null");
+        // }
+
         if (isSpinning)
         {
             this.transform.Rotate(Vector3.forward, -currentRotationSpeed * Time.deltaTime);
@@ -66,5 +82,7 @@ public class BootcampCard_03 : MonoBehaviour
             result = "Azul";
 
         Debug.Log("Resultado: " + result);
+
+        roulettePanel.SetActive(false);
     }
 }

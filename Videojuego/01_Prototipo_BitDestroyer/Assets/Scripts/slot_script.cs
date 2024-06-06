@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class CardSlotManager : MonoBehaviour
 {
+    public GameObject panelRoulette;
     [SerializeField] private Transform[] cardSlots; // List of transforms indicating the positions of card slots
     [SerializeField] private float xOffset = 1.0f; // Offset for the projectile's x position
 
     private GameObject selectedCard; // Reference to the selected card
     private Vector3 originalPosition; // Original position of the selected card
     private bool isDragging = false; // Flag to indicate if a card is being dragged
+
+    private void Start() {
+        panelRoulette.SetActive(false);
+    }
 
     void Update()
     {
@@ -68,23 +73,52 @@ public class CardSlotManager : MonoBehaviour
                     snapped = true;
                     Debug.Log("Card Snapped to Slot: " + slot.name);
 
+
+
                     // Check for the DefenseCard script
+                    // DefenseCard defenseCard = selectedCard.GetComponent<DefenseCard>();
+                    // if (defenseCard != null)
+                    // {
+                    //     // If it's a defense card, do nothing
+                    //     Debug.Log("Defense Card - No Action Taken");
+                    // }
+                    // else 
+                    // {
+                    //     // Check for the AttackCard script
+                    //     AttackCard attackCard = selectedCard.GetComponent<AttackCard>();
+                    //     if (attackCard != null)
+                    //     {
+                    //         // If it's an attack card, set onOff to true
+                    //         attackCard.startShooting = true;
+                    //         Debug.Log("Attack Card onOff set to true");
+                    //     }
+                    // }
+                    // Obtener el script de DefenseCard y AttackCard de la carta seleccionada
                     DefenseCard defenseCard = selectedCard.GetComponent<DefenseCard>();
-                    if (defenseCard != null)
+                    AttackCard attackCard = selectedCard.GetComponent<AttackCard>();
+                    BootcampCard_25 bootcampCard = selectedCard.GetComponent<BootcampCard_25>();
+
+                    switch (defenseCard, attackCard, bootcampCard)
                     {
-                        // If it's a defense card, do nothing
-                        Debug.Log("Defense Card - No Action Taken");
-                    }
-                    else
-                    {
-                        // Check for the AttackCard script
-                        AttackCard attackCard = selectedCard.GetComponent<AttackCard>();
-                        if (attackCard != null)
-                        {
-                            // If it's an attack card, set onOff to true
-                            attackCard.startShooting = true;
+                        case (DefenseCard _, null, null):
+                            // Si es una carta de defensa, no hacer nada
+                            Debug.Log("Defense Card - No Action Taken");
+                            break;
+                        case (null, AttackCard ac, null):
+                            // Si es una carta de ataque, activar el disparo
+                            ac.startShooting = true;
                             Debug.Log("Attack Card onOff set to true");
-                        }
+                            break;
+                        case (null, null, BootcampCard_25 _):
+                            // Si es la carta bootcamp tipo 25 activa su panel en el cual esta la ruleta
+                            Debug.Log("Bootcamp Card - ACTIVE PANEL ROULETTE");
+                            panelRoulette.SetActive(true);
+                            //bc.activePanelRoulette = true;
+                            break;
+                        default:
+                            // Este caso no debería ocurrir, pero puedes manejarlo si es necesario
+                            Debug.Log("Error: No se encontró un script válido en la carta seleccionada.");
+                            break;
                     }
 
                     break; // Exit the loop if a slot is found
