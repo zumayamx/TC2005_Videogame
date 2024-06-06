@@ -84,95 +84,6 @@ app.get('/api/estadisticas_jugadores', async (req, res) => {
     }
 });
 
-app.get('/api/info_cartas', async (req, res) => {
-
-    let connection = null;
-
-    try {
-        connection = await connectToDB();
-
-        const query = 'SELECT C.id AS "ID Carta", C.nombre AS "Nombre", C.descripcion AS "Descripción", TC.tipo AS "Tipo de carta", C.costoEnergia AS "Costo de energía", C.valor AS "Valor" FROM Carta C JOIN  TipoCarta TC ON C.tipoCarta = TC.id JOIN  Efecto E ON C.efecto = E.id ORDER BY C.id;';
-        const [stats] = await connection.query(query);
-
-        console.log(`${stats.length} rows returned`);
-        console.log(stats);
-        const result = {"Descripción cartas":stats}
-        res.status(200).json(result);
-
-    } catch (error) {
-
-        res.status(500);
-        res.json(error);
-        console.log(error);
-        /* throw new Error ('Error al obtener las cartas') */
-    } finally {
-
-        if (connection !== null) {
-            connection.end();
-            console.log('Conexión cerrada exitosamente');
-        }
-    }
-});
-
-app.get('/api/estadisticas_jugadores', async (req, res) => {
-
-    let connection = null;
-
-    try {
-        connection = await connectToDB();
-
-        const query = 'SELECT * FROM EstadisticasJugadores';
-        const [stats] = await connection.query(query);
-
-        console.log(`${stats.length} rows returned`);
-        console.log(stats);
-        const result = {"Estadisticas jugadores":stats}
-        res.status(200).json(result);
-
-    } catch (error) {
-
-        res.status(500);
-        res.json(error);
-        console.log(error);
-        /* throw new Error ('Error al obtener las cartas') */
-    } finally {
-
-        if (connection !== null) {
-            connection.end();
-            console.log('Conexión cerrada exitosamente');
-        }
-    }
-});
-
-app.get('/api/info_cartas', async (req, res) => {
-
-    let connection = null;
-
-    try {
-        connection = await connectToDB();
-
-        const query = 'SELECT C.id AS "ID Carta", C.nombre AS "Nombre", C.descripcion AS "Descripción", TC.tipo AS "Tipo de carta", C.costoEnergia AS "Costo de energía", C.valor AS "Valor" FROM Carta C JOIN  TipoCarta TC ON C.tipoCarta = TC.id JOIN  Efecto E ON C.efecto = E.id ORDER BY C.id;';
-        const [stats] = await connection.query(query);
-
-        console.log(`${stats.length} rows returned`);
-        console.log(stats);
-        const result = {"Descripción cartas":stats}
-        res.status(200).json(result);
-
-    } catch (error) {
-
-        res.status(500);
-        res.json(error);
-        console.log(error);
-        /* throw new Error ('Error al obtener las cartas') */
-    } finally {
-
-        if (connection !== null) {
-            connection.end();
-            console.log('Conexión cerrada exitosamente');
-        }
-    }
-});
 
 app.post('/api/jugador/registro', async (req, res) => { /* Realmente es async ?*/
     const { nombre, clave } = req.body; /* Validar el body correcto */
@@ -364,6 +275,27 @@ app.post('/api/partida/ganador', async (req, res) => {
     }
 });
 
+
+app.get('/api/cartas_info', async (req, res) => {
+    let connection = null;
+    try {
+        connection = await connectToDB();
+
+        const query = 'SELECT * FROM CartasInfo';
+        const [cartasInfo] = await connection.query(query);
+
+        res.status(200).json({ cartas: cartasInfo });
+
+    } catch (error) {
+        res.status(500).json(error);
+        console.log(error);
+    } finally {
+        if (connection !== null) {
+            connection.end();
+            console.log('Conexión cerrada exitosamente');
+        }
+    }
+});
 
 
 const PORT = process.env.port ?? 3000;

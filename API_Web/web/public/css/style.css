@@ -54,7 +54,7 @@ header nav a#nav2:hover {
 }
 
 header nav a:hover {
-    text-decoration: underline 2px #5CE1E6;
+    text-decoration: underline 2px rgb(92, 225, 230);
     font-weight: bold;
 }
 
@@ -285,6 +285,7 @@ footer {
     width: 100%;
     flex-direction: row;
     align-items: center;
+    padding-bottom: 2;
 }
 
 .contenedor_graficas canvas{
@@ -293,5 +294,12 @@ footer {
     max-height: 600px;
     border: 2px solid white;
     background-color: #003C59;
-    
+}
+
+#pieChart{
+    max-width: 100%;
+    max-height: auto;
+    border: 2px solid white;
+    background-color: #003C59;
+    margin: 2em 2em;
 }
