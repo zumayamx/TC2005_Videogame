@@ -14,24 +14,41 @@ using UnityEngine;
 public class BootcampCard_25 : MonoBehaviour
 {
     /* Panel to show the roulette, initially active false in the spawn_card_in_hand script */
-    public GameObject roulettePanel;
-
+    private GameObject roulettePanel;
     public bool activePanelRoulette = false; 
     public float initialRotationSpeed = 1000f; // Velocidad de rotación inicial
     private float currentRotationSpeed; // Velocidad de rotación actual
     private bool isSpinning = false;    // State of the roulette
     private float spinDuration = 3.0f;  // Duración del giro
 
+    private GameObject cardObject; // Objeto de la tarjeta
+
     void Start()
     {
         Debug.Log("BootcampCard_25.cs STARTED!");
         roulettePanel = GameObject.Find("RoulettePanel");
+
+        // Listar todos los objetos a los que se ha asignado este script
+        BootcampCard_25[] allInstances = FindObjectsOfType<BootcampCard_25>();
+        Debug.Log("Total objects with BootcampCard_25 script: " + allInstances.Length);
+
+        foreach (var instance in allInstances)
+        {
+            Debug.Log("Object name: " + instance.gameObject.name + ", Tag: " + instance.gameObject.tag);
+
+            // Guardar el objeto con la etiqueta "Card"
+            if (instance.gameObject.CompareTag("Card"))
+            {
+                cardObject = instance.gameObject;
+                Debug.Log("Card object found: " + cardObject.name);
+            }
+        }
     }
     void Update()
     {
-        if (activePanelRoulette && roulettePanel != null) {
-             roulettePanel.SetActive(true);
-        } 
+        // if (activePanelRoulette && roulettePanel != null) {
+        //      roulettePanel.SetActive(true);
+        // } 
         // else {
         //     Debug.Log("Roulette Panel is null");
         // }
@@ -84,5 +101,16 @@ public class BootcampCard_25 : MonoBehaviour
         Debug.Log("Resultado: " + result);
 
         roulettePanel.SetActive(false);
+
+        if (cardObject != null)
+        {
+            Debug.Log("Destroying card object: " + cardObject.name);
+            Destroy(cardObject);
+            Debug.Log("BootcampCard_25.cs DESTROYED!");
+        }
+        else
+        {
+            Debug.Log("Card object not found.");
+        }
     }
 }
