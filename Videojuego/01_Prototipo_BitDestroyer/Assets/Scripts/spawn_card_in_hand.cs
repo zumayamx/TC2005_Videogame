@@ -254,8 +254,11 @@ public class CardSpawner : MonoBehaviour
             case "none":
                 switch (cardData.id) {
                     case 25:
-                        var bootcampScript = newCard.AddComponent<BootcampCard_25>();
-                        bootcampScript.roulettePanel = panelRoulette;
+                        var bootcampScript25 = newCard.AddComponent<BootcampCard_25>();
+                        bootcampScript25.roulettePanel = panelRoulette;
+                        break;
+                    case 6:
+                        var bootcampScript6 = newCard.AddComponent<BootcampCard_06>();
                         break;
                 }
                 break;

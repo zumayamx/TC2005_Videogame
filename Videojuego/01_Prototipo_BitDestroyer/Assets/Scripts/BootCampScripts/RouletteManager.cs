@@ -3,7 +3,7 @@
 - 05/06/2024
 
 - Description:
-    This script is used if the specific card is selected,
+    This script is used if the specific card is selected (puerta abierta),
     it will show a roulette that will deal damage to either player.
 */
 using System.Collections;
