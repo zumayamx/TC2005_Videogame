@@ -9,11 +9,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class RouletteManager : MonoBehaviour
 {
     /* Panel to show the roulette, initially active false in the spawn_card_in_hand script */
     private GameObject roulettePanel;
+    public Image healthBarRed; // Image to display the health bar
+    public int playerHealthBoth = 20; // Starting health of the player
+    public TMP_Text healthTextRed; // TMP Text element to display health
+    public Image healthBarBlue; // Image to display the health bar
+    public TMP_Text healthTextBlue; // TMP Text element to display health
     public bool activePanelRoulette = false; 
     public float initialRotationSpeed = 1000f; // Velocidad de rotación inicial
     private float currentRotationSpeed; // Velocidad de rotación actual
@@ -24,6 +31,7 @@ public class RouletteManager : MonoBehaviour
     {
         Debug.Log("Roulette Manager START!");
         roulettePanel = GameObject.Find("RoulettePanel");
+
     }
     void Update()
     {
@@ -62,19 +70,54 @@ public class RouletteManager : MonoBehaviour
     {
         float zRotation = transform.eulerAngles.z % 360;
         string result;
-
-        if (zRotation < 90)
+        playerHealthBoth -= 1;
+        
+        if (zRotation < 90) {
+            UpdateHealthBarRed();
+            UpdateHealthTextRed();
             result = "Rojo";
-        else if (zRotation < 180)
+        }
+        else if (zRotation < 180) {
+            UpdateHealthBarBlue();
+            UpdateHealthTextBlue();
             result = "Azul";
-        else if (zRotation < 270)
+        }
+        else if (zRotation < 270) {
+            UpdateHealthBarRed();
+            UpdateHealthTextRed();
             result = "Rojo";
-        else
+        }
+        else {
+            UpdateHealthBarBlue();
+            UpdateHealthTextBlue();
             result = "Azul";
+        }
 
         Debug.Log("Resultado: " + result);
 
         roulettePanel.SetActive(false);
 
+    }
+
+    /* Method to update the heath bar to player red in game */
+    void UpdateHealthBarRed()
+    {
+        healthBarRed.fillAmount = (float)playerHealthBoth / 20f;
+    }
+
+    /* Method to update the heath bar to player blue in game */
+    void UpdateHealthBarBlue()
+    {
+        healthBarBlue.fillAmount = (float)playerHealthBoth / 20f;
+    }
+    // Method to update the health display player red
+    void UpdateHealthTextRed()
+    {
+        healthTextRed.text = "HP: " + playerHealthBoth;
+    }
+    // Method to update the health display player blue
+    void UpdateHealthTextBlue()
+    {
+        healthTextBlue.text = "HP: " + playerHealthBoth;
     }
 }
