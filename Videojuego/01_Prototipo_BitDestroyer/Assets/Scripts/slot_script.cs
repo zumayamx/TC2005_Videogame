@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CardSlotManager : MonoBehaviour
 {
-    public GameObject panelRoulette;
+    //public GameObject panelRoulette;
     [SerializeField] private Transform[] cardSlots; // List of transforms indicating the positions of card slots
     [SerializeField] private float xOffset = 1.0f; // Offset for the projectile's x position
 
@@ -14,7 +14,7 @@ public class CardSlotManager : MonoBehaviour
     private bool isDragging = false; // Flag to indicate if a card is being dragged
 
     private void Start() {
-        panelRoulette.SetActive(false);
+        //panelRoulette.SetActive(false);
     }
 
     void Update()
@@ -109,11 +109,10 @@ public class CardSlotManager : MonoBehaviour
                             ac.startShooting = true;
                             Debug.Log("Attack Card onOff set to true");
                             break;
-                        case (null, null, BootcampCard_25 _):
+                        case (null, null, BootcampCard_25 bc):
                             // Si es la carta bootcamp tipo 25 activa su panel en el cual esta la ruleta
                             Debug.Log("Bootcamp Card - ACTIVE PANEL ROULETTE");
-                            panelRoulette.SetActive(true);
-                            //bc.activePanelRoulette = true;
+                            bc.activePanelRoulette = true;
                             break;
                         default:
                             // Este caso no debería ocurrir, pero puedes manejarlo si es necesario

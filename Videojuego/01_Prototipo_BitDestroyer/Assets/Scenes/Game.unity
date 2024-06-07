@@ -894,7 +894,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 797781480}
-        m_TargetAssemblyTypeName: BootcampCard_03, Assembly-CSharp
+        m_TargetAssemblyTypeName: RouletteManager, Assembly-CSharp
         m_MethodName: StartSpin
         m_Mode: 1
         m_Arguments:
@@ -2438,7 +2438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f8ef232811b0ab2ad3084c3b55f776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelRoulette: {fileID: 650761598}
   cardSlots:
   - {fileID: 2105591138}
   - {fileID: 374216471}
@@ -2745,7 +2744,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 797781476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2b8cbf9b00bb49d998d543fbb2c8913, type: 3}
+  m_Script: {fileID: 11500000, guid: de5ffb957ba3d480c9d6aacdf7104115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   activePanelRoulette: 0
@@ -3069,7 +3068,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f8ef232811b0ab2ad3084c3b55f776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelRoulette: {fileID: 650761598}
   cardSlots:
   - {fileID: 776675708}
   - {fileID: 775046239}
