@@ -13,6 +13,18 @@ public class HealthManager : MonoBehaviour
 
     void Start()
     {
+        if (playerType == "b")
+        {
+            PlayerPrefs.SetInt("playerBlueHealth", playerHealth);
+        }
+        else if (playerType == "r")
+        {
+            PlayerPrefs.SetInt("playerRedHealth", playerHealth);
+        }
+        else
+        {
+            Debug.Log("Unknown player type");
+        }
         // Initialize the health display
         UpdateHealthText();
         // Ensure the game over image is initially off
@@ -25,16 +37,35 @@ public class HealthManager : MonoBehaviour
     // Method to reduce health and update the text
     public void TakeDamage(int damage)
     {
-        playerHealth -= damage;
+
+        if (playerType == "b")
+        {
+            playerHealth = PlayerPrefs.GetInt("playerBlueHealth");
+            playerHealth -= damage;
+            PlayerPrefs.SetInt("playerBlueHealth", playerHealth);
+            //playerHealth = PlayerPrefs.GetInt("playerRedHealth");
+        }
+        else if (playerType == "r")
+        {
+            playerHealth = PlayerPrefs.GetInt("playerRedHealth");
+            playerHealth -= damage;
+            PlayerPrefs.SetInt("playerRedHealth", playerHealth);
+            //playerHealth = PlayerPrefs.GetInt("playerBlueHealth");
+        }
+        else
+        {
+            Debug.Log("Unknown player type");
+        }
+        //playerHealth -= damage;
         UpdateHealthBar();
         UpdateHealthText();
 
         // Check if the player is out of health
-        if (playerHealth <= 0)
-        {
-            Debug.Log("Player is dead!");
-            DisplayGameOverMessage();
-        }
+        // if ( <= 0)
+        // {
+        //     Debug.Log("Player is dead!");
+        //     DisplayGameOverMessage();
+        // }
     }
     
     /* Method to update the heath bar in game */

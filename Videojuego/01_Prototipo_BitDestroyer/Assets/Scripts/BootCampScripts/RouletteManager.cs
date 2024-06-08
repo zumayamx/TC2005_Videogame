@@ -17,7 +17,7 @@ public class RouletteManager : MonoBehaviour
     /* Panel to show the roulette, initially active false in the spawn_card_in_hand script */
     private GameObject roulettePanel;
     public Image healthBarRed; // Image to display the health bar
-    public int playerHealthBoth = 20; // Starting health of the player
+    private int playerHealthBoth; // Starting health of the player
     public TMP_Text healthTextRed; // TMP Text element to display health
     public Image healthBarBlue; // Image to display the health bar
     public TMP_Text healthTextBlue; // TMP Text element to display health
@@ -41,6 +41,7 @@ public class RouletteManager : MonoBehaviour
         }
     }
 
+    /* Function to start the spin of the roulette */
     public void StartSpin()
     {
         if (!isSpinning)
@@ -51,6 +52,7 @@ public class RouletteManager : MonoBehaviour
         }
     }
 
+    /* Function to manage the rotation of roulette */
     private IEnumerator StopSpin()
     {
         float elapsedTime = 0f;
@@ -66,28 +68,42 @@ public class RouletteManager : MonoBehaviour
         DetermineResult();
     }
 
+    /* Function to determine the result of the roulette */
     private void DetermineResult()
     {
+        /* Get the z rotation of the roulette */
         float zRotation = transform.eulerAngles.z % 360;
         string result;
-        playerHealthBoth -= 1;
+        //playerHealthBoth -= 1;
         
         if (zRotation < 90) {
+            playerHealthBoth = PlayerPrefs.GetInt("playerRedHealth") - 1;
+            Debug.Log("Player Red Health: " + playerHealthBoth);
+            PlayerPrefs.SetInt("playerRedHealth", playerHealthBoth);
             UpdateHealthBarRed();
             UpdateHealthTextRed();
             result = "Rojo";
         }
         else if (zRotation < 180) {
+            playerHealthBoth = PlayerPrefs.GetInt("playerBlueHealth") - 1;
+            Debug.Log("Player Blue Health: " + playerHealthBoth);
+            PlayerPrefs.SetInt("playerBlueHealth", playerHealthBoth);
             UpdateHealthBarBlue();
             UpdateHealthTextBlue();
             result = "Azul";
         }
         else if (zRotation < 270) {
+            playerHealthBoth = PlayerPrefs.GetInt("playerRedHealth") - 1;
+            Debug.Log("Player Red Health: " + playerHealthBoth);
+            PlayerPrefs.SetInt("playerRedHealth", playerHealthBoth);
             UpdateHealthBarRed();
             UpdateHealthTextRed();
             result = "Rojo";
         }
         else {
+            playerHealthBoth = PlayerPrefs.GetInt("playerBlueHealth") - 1;
+            Debug.Log("Player Blue Health: " + playerHealthBoth);
+            PlayerPrefs.SetInt("playerBlueHealth", playerHealthBoth);
             UpdateHealthBarBlue();
             UpdateHealthTextBlue();
             result = "Azul";

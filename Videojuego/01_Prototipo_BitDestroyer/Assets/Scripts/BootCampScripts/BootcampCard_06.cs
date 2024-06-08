@@ -43,15 +43,13 @@ public class BootcampCard_06 : MonoBehaviour
     {
         if (activateHealth && isBlueTurn)
         {
-            hitPlayerBlue = GameObject.Find("b_hit");
-            int currentHealthB = hitPlayerBlue.GetComponent<HealthManager>().playerHealth;
+            int currentHealthB = PlayerPrefs.GetInt("playerBlueHealth");
             healthToPlayerBlue(currentHealthB);
             ToDestroy();
         }
         else if (activateHealth && !isBlueTurn)
         {
-            hitPlayerRed = GameObject.Find("r_hit");
-            int currentHealthR = hitPlayerRed.GetComponent<HealthManager>().playerHealth;
+            int currentHealthR = PlayerPrefs.GetInt("playerRedHealth");
             healthToPlayerRed(currentHealthR);
             ToDestroy();
         }
@@ -60,12 +58,14 @@ public class BootcampCard_06 : MonoBehaviour
 
     private void healthToPlayerRed(int currentHealthRed) {
         currentHealthRed += 3;
+        PlayerPrefs.SetInt("playerRedHealth", currentHealthRed);
         healthTextRed.text = "HP: " + currentHealthRed.ToString();
         healthBarRed.fillAmount = (float)currentHealthRed / 20;
     }
 
     private void healthToPlayerBlue(int currentHealthBlue) {
         currentHealthBlue += 3;
+        PlayerPrefs.SetInt("playerBlueHealth", currentHealthBlue);
         healthTextBlue.text = "HP: " + currentHealthBlue.ToString();
         healthBarBlue.fillAmount = (float)currentHealthBlue / 20;
     }
