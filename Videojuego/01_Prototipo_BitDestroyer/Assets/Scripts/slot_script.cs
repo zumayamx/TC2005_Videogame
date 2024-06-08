@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CardSlotManager : MonoBehaviour
 {
-    public GameObject panelRoulette;
+    //public GameObject panelRoulette;
     [SerializeField] private Transform[] cardSlots; // List of transforms indicating the positions of card slots
     [SerializeField] private float xOffset = 1.0f; // Offset for the projectile's x position
 
@@ -14,7 +14,7 @@ public class CardSlotManager : MonoBehaviour
     private bool isDragging = false; // Flag to indicate if a card is being dragged
 
     private void Start() {
-        panelRoulette.SetActive(false);
+        //panelRoulette.SetActive(false);
     }
 
     void Update()
@@ -96,24 +96,29 @@ public class CardSlotManager : MonoBehaviour
                     // Obtener el script de DefenseCard y AttackCard de la carta seleccionada
                     DefenseCard defenseCard = selectedCard.GetComponent<DefenseCard>();
                     AttackCard attackCard = selectedCard.GetComponent<AttackCard>();
-                    BootcampCard_25 bootcampCard = selectedCard.GetComponent<BootcampCard_25>();
+                    BootcampCard_25 bootcampCard_25 = selectedCard.GetComponent<BootcampCard_25>();
+                    BootcampCard_06 bootcampCard_06 = selectedCard.GetComponent<BootcampCard_06>();
 
-                    switch (defenseCard, attackCard, bootcampCard)
+                    switch (defenseCard, attackCard, bootcampCard_25, bootcampCard_06)
                     {
-                        case (DefenseCard _, null, null):
+                        case (DefenseCard _, null, null, null):
                             // Si es una carta de defensa, no hacer nada
                             Debug.Log("Defense Card - No Action Taken");
                             break;
-                        case (null, AttackCard ac, null):
+                        case (null, AttackCard ac, null, null):
                             // Si es una carta de ataque, activar el disparo
                             ac.startShooting = true;
                             Debug.Log("Attack Card onOff set to true");
                             break;
-                        case (null, null, BootcampCard_25 _):
+                        case (null, null, BootcampCard_25 bc, null):
                             // Si es la carta bootcamp tipo 25 activa su panel en el cual esta la ruleta
                             Debug.Log("Bootcamp Card - ACTIVE PANEL ROULETTE");
-                            panelRoulette.SetActive(true);
-                            //bc.activePanelRoulette = true;
+                            bc.activePanelRoulette = true;
+                            break;
+                        case (null, null, null, BootcampCard_06 bc):
+                            // Si es la carta bootcamp tipo 06 activa el script para dar 3 puntos de vida
+                            Debug.Log("Bootcamp Card - ACTIVE HEALTH");
+                            bc.activateHealth = true;
                             break;
                         default:
                             // Este caso no debería ocurrir, pero puedes manejarlo si es necesario

@@ -55,7 +55,7 @@ public class CardSpawner : MonoBehaviour
     {
         /* Hide the panel at tne beggining of scene */
         panelElectionCards.SetActive(false);
-        //panelRoulette.SetActive(false);
+        panelRoulette.SetActive(false);
 
         /* Add listener to the buttons to select one card */
         // cardOneElection.onClick.AddListener(() => {
@@ -254,7 +254,11 @@ public class CardSpawner : MonoBehaviour
             case "none":
                 switch (cardData.id) {
                     case 25:
-                        var bootcampScript = newCard.AddComponent<BootcampCard_25>();
+                        var bootcampScript25 = newCard.AddComponent<BootcampCard_25>();
+                        bootcampScript25.roulettePanel = panelRoulette;
+                        break;
+                    case 6:
+                        var bootcampScript6 = newCard.AddComponent<BootcampCard_06>();
                         break;
                 }
                 break;
