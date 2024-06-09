@@ -90,25 +90,4 @@ public class HideCardsBlue : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
-
-    // public void DisplayDefenseCardsInTurn () {
-    //     Debug.Log("DisplayDefenseCardsInTurn");
-    //     foreach (GameObject handPosition in blue_positions) {
-
-    //         DefenseCard[] defenseCards = handPosition.GetComponentsInChildren<DefenseCard>();
-
-    //         if (defenseCards != null && defenseCards.Length > 0) {
-    //             foreach (DefenseCard defenseCard in defenseCards) {
-    //                 defenseCard.isHide = false;
-    //                 GameObject defenseCardObject = defenseCard.gameObject;
-    //                 defenseCardObject.GetComponent<MeshRenderer>().enabled = true; 
-    //             }
-    //         }
-    //     }
-    //     GameObject[] hidePrefabs = GameObject.FindGameObjectsWithTag("defensePrefBlue");
-
-    //     foreach (GameObject hidePrefab in hidePrefabs) {
-    //         Destroy(hidePrefab);
-    //     }
-    // }
 }

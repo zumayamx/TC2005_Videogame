@@ -44,25 +44,29 @@ public class BootcampCard_22 : MonoBehaviour
 
     // Function to show the defense cards of the blue player
     private void showCardsBlue() {
-        // Find the object to show the defense cards
+        // Find the object to show the defense and hand cards
         GameObject hideCardsBlue = GameObject.Find("HideCardsBlue");
-
-        if (hideCardsBlue != null) {
+        GameObject showHandRed = GameObject.Find("turn_manager");
+        if (hideCardsBlue != null && showHandRed != null) {
             Debug.Log("HideCardsBlue: " + hideCardsBlue);
             // Call the function to show the defense cards and desactivate the object
             hideCardsBlue.GetComponent<HideCardsBlue>().ShowDefenseCards(true);
+            // Call the function to show the hand cards red player
+            showHandRed.GetComponent<turn_manager>().ShowCardsDependsPlayerTurn(isBlueTurn);
         }
     }
     // Function to show the defense cards of the red player
     private void showCardsRed() {
-        // Find the object to show the defense cards
+        // Find the object to show the defense and hand cards
         GameObject hideCardsRed = GameObject.Find("HideCardsRed");
+        GameObject showHandBlue = GameObject.Find("turn_manager");
 
         if (hideCardsRed != null) {
             Debug.Log("HideCardsRed: " + hideCardsRed);
             // Call the function to show the defense cards and desactivate the object
              hideCardsRed.GetComponent<HideCardsRed>().ShowDefenseCards(true);
-        }
+             // Call the function to show the hand cards blue player
+             showHandBlue.GetComponent<turn_manager>().ShowCardsDependsPlayerTurn(isBlueTurn);}
     }
 
     private void ToDestroy()

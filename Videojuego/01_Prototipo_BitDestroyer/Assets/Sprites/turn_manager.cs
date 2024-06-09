@@ -124,4 +124,37 @@ public class turn_manager : MonoBehaviour
             }
         }
     }
+
+    public void ShowCardsDependsPlayerTurn(bool isBlueTurn) {
+        // If is blue turn, show me red cards
+        if (isBlueTurn) {
+            foreach (GameObject card in red_cards) {
+                SpriteRenderer sr = card.GetComponent<SpriteRenderer>();
+                Collider collider = card.GetComponent<Collider>();
+                
+                if (sr != null) {
+                    sr.enabled = !blue_turn;
+                    }
+                if (collider != null) {
+                    // This is a collider of hide card prefab, not card behind it
+                    collider.enabled = !blue_turn;
+                    }
+            }
+        }
+        // If is red turn, show me blue cards
+        else {
+            foreach (GameObject card in blue_cards) {
+                SpriteRenderer sr = card.GetComponent<SpriteRenderer>();
+                Collider collider = card.GetComponent<Collider>();
+                
+                if (sr != null) {
+                    sr.enabled = blue_turn;
+                    }
+                if (collider != null) {
+                    // This is a collider of hide card prefab, not card behind it
+                    collider.enabled = blue_turn;
+                    }
+            }
+        }
+    }
 }
