@@ -128,14 +128,12 @@ public class CardSpawner : MonoBehaviour
             return;
         }
 
-        // Generate a random card ID from the list
-        int randomIndexOne = Random.Range(0, ids.Count);
-        int randomIndexTwo = Random.Range(0, ids.Count);
-        int randomIndexThree = Random.Range(0, ids.Count);
+        // Generate a random card index from the list
+        int[] randomIndexes = GetRandomIndices(ids.Count);
 
-        int randomIdOne = ids[randomIndexOne];
-        int randomIdTwo = ids[randomIndexTwo];
-        int randomIdThree = ids[randomIndexThree];
+        int randomIdOne = ids[randomIndexes[0]];
+        int randomIdTwo = ids[randomIndexes[1]];
+        int randomIdThree = ids[randomIndexes[2]];
 
         string imagePathOne = $"Assets/Sprites/cartas/{category}/{randomIdOne}.png";
         string imagePathTwo = $"Assets/Sprites/cartas/{category}/{randomIdTwo}.png";
@@ -338,6 +336,22 @@ public class CardSpawner : MonoBehaviour
 
             energyText.text = $"Energy: {energy}";
         }
+    }
+
+     private int[] GetRandomIndices(int upperRange)
+    {
+        List<int> indices = new List<int>();
+
+        while (indices.Count < 4)
+        {
+            int randomIndex = Random.Range(0, upperRange);
+            if (!indices.Contains(randomIndex))
+            {
+                indices.Add(randomIndex);
+            }
+        }
+
+        return indices.ToArray();
     }
 }
 

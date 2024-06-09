@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5463328523543915611}
   m_Layer: 0
   m_Name: HideDefenseCardPref
-  m_TagString: red
+  m_TagString: hideDefensePrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

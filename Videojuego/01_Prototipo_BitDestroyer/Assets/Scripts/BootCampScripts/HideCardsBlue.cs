@@ -35,6 +35,10 @@ public class HideCardsBlue : MonoBehaviour
         // Check if the turn count is different from the previous update
         isBlueTurn = GameObject.Find("turn_manager").GetComponent<turn_manager>().blue_turn;
 
+        if (isBlueTurn) {
+            DisplayDefenseCardsInTurn();
+        }
+
         if (!isBlueTurn) {
             // Hide the defense cards.
             //If it is not the blue turn to hide the defense cards played in a turn past
@@ -44,7 +48,7 @@ public class HideCardsBlue : MonoBehaviour
          // Obtain the turn count from the turn_manager script
         turnsUpdate = GameObject.Find("turn_manager").GetComponent<turn_manager>().turnCount;
         Debug.Log("Turns Update: " + turnsUpdate);
-        Debug.Log("Turn Begin: " + turnBegin);
+        Debug.Log("Turn TO Show: " + (turnBegin + 4));
         // Check if it has been 2 turns since the defense cards were hide
         if (turnsUpdate == turnBegin + 4) {
             // Show the defense cards
@@ -83,6 +87,32 @@ public class HideCardsBlue : MonoBehaviour
                 }
             }
         }
+        GameObject[] hidePrefabs = GameObject.FindGameObjectsWithTag("hideDefensePrefab");
+
+        foreach (GameObject hidePrefab in hidePrefabs) {
+            Destroy(hidePrefab);
+        }
+
         this.gameObject.SetActive(false);
+    }
+
+    public void DisplayDefenseCardsInTurn () {
+        foreach (GameObject handPosition in blue_positions) {
+
+            DefenseCard[] defenseCards = handPosition.GetComponentsInChildren<DefenseCard>();
+
+            if (defenseCards != null && defenseCards.Length > 0) {
+                foreach (DefenseCard defenseCard in defenseCards) {
+                    defenseCard.isHide = false;
+                    GameObject defenseCardObject = defenseCard.gameObject;
+                    defenseCardObject.GetComponent<MeshRenderer>().enabled = true; 
+                }
+            }
+        }
+        GameObject[] hidePrefabs = GameObject.FindGameObjectsWithTag("hideDefensePrefab");
+
+        foreach (GameObject hidePrefab in hidePrefabs) {
+            Destroy(hidePrefab);
+        }
     }
 }
