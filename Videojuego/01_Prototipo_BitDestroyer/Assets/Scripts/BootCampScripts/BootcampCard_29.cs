@@ -33,10 +33,12 @@ public class BootcampCard_29 : MonoBehaviour
             if (isBlueTurn)
             {
                 HideCardsBlue.SetActive(true);
+                HideCardsBlue.GetComponent<HideCardsBlue>().turnBegin = GameObject.Find("turn_manager").GetComponent<turn_manager>().turnCount;
             }
             else
             {
                 HideCardsRed.SetActive(true);
+                //HideCardsRed.GetComponent<HideCardsRed>().turnBegin = GameObject.Find("turn_manager").GetComponent<turn_manager>().turnCount;
             }
 
             ToDestroy();

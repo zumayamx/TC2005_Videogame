@@ -11,12 +11,13 @@ using UnityEngine;
 
 public class HideCardsBlue : MonoBehaviour
 {
-    public Sprite hideCard; // Sprite to hide the card
-    public List<GameObject> blue_cards; // List of blue cards
+    [SerializeField] private GameObject hideCardPrefab; // Sprite to hide the card
 
-    private int turnsCount;
+    public List<GameObject> blue_positions; // List of blue cards
 
-    private int turnUpdate;
+    public int turnBegin;
+
+    private int turnsUpdate;
 
     private bool isBlueTurn;
 
@@ -24,8 +25,8 @@ public class HideCardsBlue : MonoBehaviour
     void Start()
     {
         // Get the turn count from the turn_manager script
-        turnsCount = GameObject.Find("turn_manager").GetComponent<turn_manager>().turnCount;
-        Debug.Log("Turns Count: " + turnsCount);
+        // turnsCount = GameObject.Find("turn_manager").GetComponent<turn_manager>().turnCount;
+        // Debug.Log("Turns Count: " + turnsCount);
     }
 
     // Update is called once per frame
@@ -37,31 +38,51 @@ public class HideCardsBlue : MonoBehaviour
         if (!isBlueTurn) {
             // Hide the defense cards.
             //If it is not the blue turn to hide the defense cards played in a turn past
-            HideDefenseCards();
+            HideDefenseCards(); //Verificar si se repite demasiadas veces
         }
 
+         // Obtain the turn count from the turn_manager script
+        turnsUpdate = GameObject.Find("turn_manager").GetComponent<turn_manager>().turnCount;
+        Debug.Log("Turns Update: " + turnsUpdate);
+        Debug.Log("Turn Begin: " + turnBegin);
         // Check if it has been 2 turns since the defense cards were hide
-        turnsCount = GameObject.Find("turn_manager").GetComponent<turn_manager>().turnCount;
-        if (turnsCount == turnsCount + 4) {
+        if (turnsUpdate == turnBegin + 4) {
             // Show the defense cards
             ShowDefenseCards();
         }
     }
 
-    private void HideDefenseCards()
-    {
-        foreach (GameObject handPosition in blue_cards) {
-           
+    private void HideDefenseCards() {
+        foreach (GameObject handPosition in blue_positions) {
+
+            DefenseCard[] defenseCards = handPosition.GetComponentsInChildren<DefenseCard>();
+            
+            if (defenseCards != null && defenseCards.Length > 0) {
+                foreach (DefenseCard defenseCard in defenseCards) {
+                    if (defenseCard.isHide != true) {
+                        defenseCard.isHide = true;
+                        GameObject defenseCardObject = defenseCard.gameObject;
+                        defenseCardObject.GetComponent<MeshRenderer>().enabled = false;
+                        GameObject hideCard = Instantiate(hideCardPrefab, defenseCardObject.transform.position, defenseCardObject.transform.rotation);
+                    }
+                }
+            }
         }
-    }
+    }   
 
-    private void ShowDefenseCards()
-    {
-        // foreach (GameObject card in blue_cards)
-        // {
-        //     card.GetComponent<SpriteRenderer>().sprite = card.GetComponent<Card>().cardSprite;
-        // }
+    private void ShowDefenseCards() {
+        foreach (GameObject handPosition in blue_positions) {
 
-        // this.GameObject.SetActive(false);
+            DefenseCard[] defenseCards = handPosition.GetComponentsInChildren<DefenseCard>();
+
+            if (defenseCards != null && defenseCards.Length > 0) {
+                foreach (DefenseCard defenseCard in defenseCards) {
+                    defenseCard.isHide = false;
+                    GameObject defenseCardObject = defenseCard.gameObject;
+                    defenseCardObject.GetComponent<MeshRenderer>().enabled = true; 
+                }
+            }
+        }
+        this.gameObject.SetActive(false);
     }
 }
