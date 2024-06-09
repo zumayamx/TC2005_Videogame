@@ -21,14 +21,6 @@ public class HideCardsBlue : MonoBehaviour
 
     private bool isBlueTurn;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Get the turn count from the turn_manager script
-        // turnsCount = GameObject.Find("turn_manager").GetComponent<turn_manager>().turnCount;
-        // Debug.Log("Turns Count: " + turnsCount);
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -87,7 +79,7 @@ public class HideCardsBlue : MonoBehaviour
                 }
             }
         }
-        GameObject[] hidePrefabs = GameObject.FindGameObjectsWithTag("hideDefensePrefab");
+        GameObject[] hidePrefabs = GameObject.FindGameObjectsWithTag("defensePrefBlue");
 
         foreach (GameObject hidePrefab in hidePrefabs) {
             Destroy(hidePrefab);
@@ -109,7 +101,7 @@ public class HideCardsBlue : MonoBehaviour
                 }
             }
         }
-        GameObject[] hidePrefabs = GameObject.FindGameObjectsWithTag("hideDefensePrefab");
+        GameObject[] hidePrefabs = GameObject.FindGameObjectsWithTag("defensePrefBlue");
 
         foreach (GameObject hidePrefab in hidePrefabs) {
             Destroy(hidePrefab);

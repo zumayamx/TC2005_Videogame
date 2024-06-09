@@ -2343,6 +2343,7 @@ MonoBehaviour:
   - {fileID: 441113456}
   - {fileID: 879645510}
   - {fileID: 1900270478}
+  turnBegin: 0
 --- !u!1 &753024850
 GameObject:
   m_ObjectHideFlags: 0
@@ -5809,6 +5810,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1831256388}
+  - component: {fileID: 1831256389}
   m_Layer: 0
   m_Name: HideCardsRed
   m_TagString: Untagged
@@ -5831,6 +5833,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831256389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831256387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a145c5dc8cc1d45c4a51a5e9485453b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideCardPrefab: {fileID: 1091389307467332481, guid: e7af58a45f4084285a3026d1ff9fa48c, type: 3}
+  red_positions:
+  - {fileID: 753024850}
+  - {fileID: 1692880176}
+  - {fileID: 1414705795}
+  - {fileID: 5603707}
+  - {fileID: 1444137949}
+  turnBegin: 0
 --- !u!1 &1832770423
 GameObject:
   m_ObjectHideFlags: 0
