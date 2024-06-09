@@ -17,7 +17,7 @@ public class turn_manager : MonoBehaviour
     public SpriteRenderer sprite_rojo;
 
     public bool blue_turn;
-    private int turnCount;
+    public int turnCount;
 
     // Lists of cards for each side
     public List<GameObject> blue_cards;

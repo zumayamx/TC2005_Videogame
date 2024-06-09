@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class CardSpawner : MonoBehaviour
 {
+    /* Hide defense cards objects that contains the script */
+    public GameObject hideCardsBlue;
+    public GameObject hideCardsRed;
 
     /* Panel to show the cards to choose */
     public GameObject panelElectionCards;
@@ -53,9 +56,15 @@ public class CardSpawner : MonoBehaviour
 
     private void Start()
     {
-        /* Hide the panel at tne beggining of scene */
+        /* Desactivate the panel at the beggining of scene */
         panelElectionCards.SetActive(false);
         panelRoulette.SetActive(false);
+
+        /* Desactivate the hide defense cards objects */
+        hideCardsBlue.SetActive(false);
+        hideCardsRed.SetActive(false);
+
+
 
         /* Add listener to the buttons to select one card */
         // cardOneElection.onClick.AddListener(() => {
@@ -259,6 +268,11 @@ public class CardSpawner : MonoBehaviour
                         break;
                     case 6:
                         var bootcampScript6 = newCard.AddComponent<BootcampCard_06>();
+                        break;
+                    case 29:
+                        var bootcampScript29 = newCard.AddComponent<BootcampCard_29>();
+                        bootcampScript29.HideCardsBlue = hideCardsBlue;
+                        bootcampScript29.HideCardsRed = hideCardsRed;
                         break;
                 }
                 break;

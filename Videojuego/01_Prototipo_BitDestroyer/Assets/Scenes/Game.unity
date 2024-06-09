@@ -183,6 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a76c291cec5d67b49a3dc88d8b30857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideCardsBlue: {fileID: 738334811}
+  hideCardsRed: {fileID: 1831256387}
   panelElectionCards: {fileID: 1814070969}
   panelRoulette: {fileID: 650761598}
   cardOneElection: {fileID: 1832770425}
@@ -2289,6 +2291,37 @@ RectTransform:
   m_AnchoredPosition: {x: 220.99998, y: 199.99998}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &738334811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 738334812}
+  m_Layer: 0
+  m_Name: HideCardsBlue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &738334812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738334811}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.454908, y: 1.2099358, z: 1.0034027}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &753024850
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,7 +2782,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarRed: {fileID: 2047841303}
-  playerHealthBoth: 20
   healthTextRed: {fileID: 540107670}
   healthBarBlue: {fileID: 344882711}
   healthTextBlue: {fileID: 1957625364}
@@ -3879,6 +3911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a76c291cec5d67b49a3dc88d8b30857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideCardsBlue: {fileID: 738334811}
+  hideCardsRed: {fileID: 1831256387}
   panelElectionCards: {fileID: 1814070969}
   panelRoulette: {fileID: 650761598}
   cardOneElection: {fileID: 1832770425}
@@ -5745,6 +5779,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 28.28125, y: 39.999996, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1831256387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1831256388}
+  m_Layer: 0
+  m_Name: HideCardsRed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1831256388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831256387}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.454908, y: 1.2099358, z: 1.0034027}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1832770423
 GameObject:
   m_ObjectHideFlags: 0
@@ -7228,3 +7293,5 @@ SceneRoots:
   - {fileID: 617289717}
   - {fileID: 556729797}
   - {fileID: 1995968019}
+  - {fileID: 1831256388}
+  - {fileID: 738334812}

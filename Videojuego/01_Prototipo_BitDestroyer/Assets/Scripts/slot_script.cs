@@ -98,27 +98,33 @@ public class CardSlotManager : MonoBehaviour
                     AttackCard attackCard = selectedCard.GetComponent<AttackCard>();
                     BootcampCard_25 bootcampCard_25 = selectedCard.GetComponent<BootcampCard_25>();
                     BootcampCard_06 bootcampCard_06 = selectedCard.GetComponent<BootcampCard_06>();
+                    BootcampCard_29 botcampCard_29 = selectedCard.GetComponent<BootcampCard_29>();
 
-                    switch (defenseCard, attackCard, bootcampCard_25, bootcampCard_06)
+                    switch (defenseCard, attackCard, bootcampCard_25, bootcampCard_06, botcampCard_29)
                     {
-                        case (DefenseCard _, null, null, null):
+                        case (DefenseCard _, null, null, null, null):
                             // Si es una carta de defensa, no hacer nada
                             Debug.Log("Defense Card - No Action Taken");
                             break;
-                        case (null, AttackCard ac, null, null):
+                        case (null, AttackCard ac, null, null, null):
                             // Si es una carta de ataque, activar el disparo
                             ac.startShooting = true;
                             Debug.Log("Attack Card onOff set to true");
                             break;
-                        case (null, null, BootcampCard_25 bc, null):
+                        case (null, null, BootcampCard_25 bc, null, null):
                             // Si es la carta bootcamp tipo 25 activa su panel en el cual esta la ruleta
                             Debug.Log("Bootcamp Card - ACTIVE PANEL ROULETTE");
                             bc.activePanelRoulette = true;
                             break;
-                        case (null, null, null, BootcampCard_06 bc):
+                        case (null, null, null, BootcampCard_06 bc, null):
                             // Si es la carta bootcamp tipo 06 activa el script para dar 3 puntos de vida
                             Debug.Log("Bootcamp Card - ACTIVE HEALTH");
                             bc.activateHealth = true;
+                            break;
+                        case (null, null, null, null, BootcampCard_29 bc):
+                            // Si es la carta bootcamp tipo 29 activa el script para ocultar las cartas de defensa
+                            Debug.Log("Bootcamp Card - ACTIVE HIDE DEFENSE");
+                            bc.activateHide = true;
                             break;
                         default:
                             // Este caso no debería ocurrir, pero puedes manejarlo si es necesario
