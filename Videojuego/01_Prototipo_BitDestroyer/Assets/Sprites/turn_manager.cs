@@ -94,7 +94,7 @@ public class turn_manager : MonoBehaviour
         red_slot.SetActive(!blue_turn);
     }
 
-    void UpdateCardsVisibility()
+    public void UpdateCardsVisibility()
     {
         foreach (GameObject card in blue_cards)
         {

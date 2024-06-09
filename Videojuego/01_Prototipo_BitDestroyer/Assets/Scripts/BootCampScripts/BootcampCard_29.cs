@@ -22,7 +22,8 @@ public class BootcampCard_29 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isBlueTurn = GameObject.Find("turn_manager").GetComponent<turn_manager>().blue_turn; //VERIFICAR QUE ESTO NO DE ERROR AL CAAMBIAR DE TURNOS
+        // Check wich player turn is to activate the corresponden object
+        isBlueTurn = GameObject.Find("turn_manager").GetComponent<turn_manager>().blue_turn;
     }
 
     // Update is called once per frame

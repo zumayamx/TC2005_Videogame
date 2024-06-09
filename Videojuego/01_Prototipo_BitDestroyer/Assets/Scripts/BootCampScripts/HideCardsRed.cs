@@ -28,7 +28,7 @@ public class HideCardsRed : MonoBehaviour
         isBlueTurn = GameObject.Find("turn_manager").GetComponent<turn_manager>().blue_turn;
 
         if (!isBlueTurn) {
-            DisplayDefenseCardsInTurn();
+            ShowDefenseCards(false);
         }
 
         if (isBlueTurn) {
@@ -44,7 +44,7 @@ public class HideCardsRed : MonoBehaviour
         // Check if it has been 2 turns since the defense cards were hide
         if (turnsUpdate == turnBegin + 4) {
             // Show the defense cards
-            ShowDefenseCards();
+            ShowDefenseCards(true);
         }
     }
 
@@ -66,7 +66,7 @@ public class HideCardsRed : MonoBehaviour
         }
     }   
 
-    private void ShowDefenseCards() {
+    public void ShowDefenseCards(bool desactivateObject) {
         foreach (GameObject handPosition in red_positions) {
 
             DefenseCard[] defenseCards = handPosition.GetComponentsInChildren<DefenseCard>();
@@ -85,26 +85,29 @@ public class HideCardsRed : MonoBehaviour
             Destroy(hidePrefab);
         }
 
-        this.gameObject.SetActive(false);
-    }
-
-    public void DisplayDefenseCardsInTurn () {
-        foreach (GameObject handPosition in red_positions) {
-
-            DefenseCard[] defenseCards = handPosition.GetComponentsInChildren<DefenseCard>();
-
-            if (defenseCards != null && defenseCards.Length > 0) {
-                foreach (DefenseCard defenseCard in defenseCards) {
-                    defenseCard.isHide = false;
-                    GameObject defenseCardObject = defenseCard.gameObject;
-                    defenseCardObject.GetComponent<MeshRenderer>().enabled = true; 
-                }
-            }
-        }
-        GameObject[] hidePrefabs = GameObject.FindGameObjectsWithTag("defensePrefRed");
-
-        foreach (GameObject hidePrefab in hidePrefabs) {
-            Destroy(hidePrefab);
+        if (desactivateObject) {
+            this.gameObject.SetActive(false);
         }
     }
+
+    // public void DisplayDefenseCardsInTurn () {
+    //     Debug.Log("DisplayDefenseCardsInTurn");
+    //     foreach (GameObject handPosition in red_positions) {
+
+    //         DefenseCard[] defenseCards = handPosition.GetComponentsInChildren<DefenseCard>();
+
+    //         if (defenseCards != null && defenseCards.Length > 0) {
+    //             foreach (DefenseCard defenseCard in defenseCards) {
+    //                 defenseCard.isHide = false;
+    //                 GameObject defenseCardObject = defenseCard.gameObject;
+    //                 defenseCardObject.GetComponent<MeshRenderer>().enabled = true; 
+    //             }
+    //         }
+    //     }
+    //     GameObject[] hidePrefabs = GameObject.FindGameObjectsWithTag("defensePrefRed");
+
+    //     foreach (GameObject hidePrefab in hidePrefabs) {
+    //         Destroy(hidePrefab);
+    //     }
+    // }
 }

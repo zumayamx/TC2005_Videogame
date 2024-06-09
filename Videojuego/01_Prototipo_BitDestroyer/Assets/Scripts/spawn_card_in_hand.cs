@@ -260,6 +260,9 @@ public class CardSpawner : MonoBehaviour
                 /* Case for bootcamp cards */
             case "none":
                 switch (cardData.id) {
+                    /* The variables passed in this block of code are GameObjects that script needs to work,
+                    don't pass variables to activate or desactivate something of this scripts, the charge script for that is
+                    slot_script.cs */
                     case 25:
                         var bootcampScript25 = newCard.AddComponent<BootcampCard_25>();
                         bootcampScript25.roulettePanel = panelRoulette;
@@ -271,6 +274,9 @@ public class CardSpawner : MonoBehaviour
                         var bootcampScript29 = newCard.AddComponent<BootcampCard_29>();
                         bootcampScript29.HideCardsBlue = hideCardsBlue;
                         bootcampScript29.HideCardsRed = hideCardsRed;
+                        break;
+                    case 22:
+                        var bootcampScript22 = newCard.AddComponent<BootcampCard_22>();
                         break;
                 }
                 break;
