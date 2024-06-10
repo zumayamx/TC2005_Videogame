@@ -13,7 +13,8 @@ public class HideCardsRed : MonoBehaviour
 {
     [SerializeField] private GameObject hideCardPrefab; // Sprite to hide the card
 
-    public List<GameObject> red_positions; // List of blue cards
+     // List of the hand cards of the player red, (the position have a child card), for that reason is a list of GameObject
+    public List<GameObject> red_positions;
 
     public int turnBegin;
 

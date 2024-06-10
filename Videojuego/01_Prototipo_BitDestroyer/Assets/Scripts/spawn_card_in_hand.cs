@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class CardSpawner : MonoBehaviour
 {
+
+    /* Objects that contains the script to boost a card */
+    public GameObject boostManagerRed;
+    public GameObject boostManagerBlue;
+
     /* Hide defense cards objects that contains the script */
     public GameObject hideCardsBlue;
     public GameObject hideCardsRed;
@@ -64,12 +69,10 @@ public class CardSpawner : MonoBehaviour
         hideCardsBlue.SetActive(false);
         hideCardsRed.SetActive(false);
 
+        /* Desactivate the boost cards objects */
+        boostManagerRed.SetActive(false);
+        boostManagerBlue.SetActive(false);
 
-
-        /* Add listener to the buttons to select one card */
-        // cardOneElection.onClick.AddListener(() => {
-        //     //function logic
-        // });
         UpdateEnergyText();
     }
 
@@ -277,6 +280,11 @@ public class CardSpawner : MonoBehaviour
                         break;
                     case 22:
                         var bootcampScript22 = newCard.AddComponent<BootcampCard_22>();
+                        break;
+                    case 3:
+                        var bootcampScript3 = newCard.AddComponent<BootcampCard_03>();
+                        bootcampScript3.boostManagerRed = boostManagerRed;
+                        bootcampScript3.boostManagerBlue = boostManagerBlue;
                         break;
                 }
                 break;
