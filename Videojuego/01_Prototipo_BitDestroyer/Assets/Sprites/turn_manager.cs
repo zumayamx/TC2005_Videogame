@@ -17,7 +17,7 @@ public class turn_manager : MonoBehaviour
     public SpriteRenderer sprite_rojo;
 
     public bool blue_turn;
-    private int turnCount;
+    public int turnCount;
 
     // Lists of cards for each side
     public List<GameObject> blue_cards;
@@ -94,7 +94,7 @@ public class turn_manager : MonoBehaviour
         red_slot.SetActive(!blue_turn);
     }
 
-    void UpdateCardsVisibility()
+    public void UpdateCardsVisibility()
     {
         foreach (GameObject card in blue_cards)
         {
@@ -121,6 +121,39 @@ public class turn_manager : MonoBehaviour
             if (collider != null)
             {
                 collider.enabled = blue_turn;
+            }
+        }
+    }
+
+    public void ShowCardsDependsPlayerTurn(bool isBlueTurn) {
+        // If is blue turn, show me red cards
+        if (isBlueTurn) {
+            foreach (GameObject card in red_cards) {
+                SpriteRenderer sr = card.GetComponent<SpriteRenderer>();
+                Collider collider = card.GetComponent<Collider>();
+                
+                if (sr != null) {
+                    sr.enabled = !blue_turn;
+                    }
+                if (collider != null) {
+                    // This is a collider of hide card prefab, not card behind it
+                    collider.enabled = !blue_turn;
+                    }
+            }
+        }
+        // If is red turn, show me blue cards
+        else {
+            foreach (GameObject card in blue_cards) {
+                SpriteRenderer sr = card.GetComponent<SpriteRenderer>();
+                Collider collider = card.GetComponent<Collider>();
+                
+                if (sr != null) {
+                    sr.enabled = blue_turn;
+                    }
+                if (collider != null) {
+                    // This is a collider of hide card prefab, not card behind it
+                    collider.enabled = blue_turn;
+                    }
             }
         }
     }

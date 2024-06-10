@@ -7,6 +7,14 @@ using UnityEngine.UI;
 public class CardSpawner : MonoBehaviour
 {
 
+    /* Objects that contains the script to boost a card */
+    public GameObject boostManagerRed;
+    public GameObject boostManagerBlue;
+
+    /* Hide defense cards objects that contains the script */
+    public GameObject hideCardsBlue;
+    public GameObject hideCardsRed;
+
     /* Panel to show the cards to choose */
     public GameObject panelElectionCards;
 
@@ -53,14 +61,18 @@ public class CardSpawner : MonoBehaviour
 
     private void Start()
     {
-        /* Hide the panel at tne beggining of scene */
+        /* Desactivate the panel at the beggining of scene */
         panelElectionCards.SetActive(false);
         panelRoulette.SetActive(false);
 
-        /* Add listener to the buttons to select one card */
-        // cardOneElection.onClick.AddListener(() => {
-        //     //function logic
-        // });
+        /* Desactivate the hide defense cards objects */
+        hideCardsBlue.SetActive(false);
+        hideCardsRed.SetActive(false);
+
+        /* Desactivate the boost cards objects */
+        boostManagerRed.SetActive(false);
+        boostManagerBlue.SetActive(false);
+
         UpdateEnergyText();
     }
 
@@ -119,14 +131,12 @@ public class CardSpawner : MonoBehaviour
             return;
         }
 
-        // Generate a random card ID from the list
-        int randomIndexOne = Random.Range(0, ids.Count);
-        int randomIndexTwo = Random.Range(0, ids.Count);
-        int randomIndexThree = Random.Range(0, ids.Count);
+        // Generate a random card index from the list
+        int[] randomIndexes = GetRandomIndices(ids.Count);
 
-        int randomIdOne = ids[randomIndexOne];
-        int randomIdTwo = ids[randomIndexTwo];
-        int randomIdThree = ids[randomIndexThree];
+        int randomIdOne = ids[randomIndexes[0]];
+        int randomIdTwo = ids[randomIndexes[1]];
+        int randomIdThree = ids[randomIndexes[2]];
 
         string imagePathOne = $"Assets/Sprites/cartas/{category}/{randomIdOne}.png";
         string imagePathTwo = $"Assets/Sprites/cartas/{category}/{randomIdTwo}.png";
@@ -253,12 +263,28 @@ public class CardSpawner : MonoBehaviour
                 /* Case for bootcamp cards */
             case "none":
                 switch (cardData.id) {
+                    /* The variables passed in this block of code are GameObjects that script needs to work,
+                    don't pass variables to activate or desactivate something of this scripts, the charge script for that is
+                    slot_script.cs */
                     case 25:
                         var bootcampScript25 = newCard.AddComponent<BootcampCard_25>();
                         bootcampScript25.roulettePanel = panelRoulette;
                         break;
                     case 6:
                         var bootcampScript6 = newCard.AddComponent<BootcampCard_06>();
+                        break;
+                    case 29:
+                        var bootcampScript29 = newCard.AddComponent<BootcampCard_29>();
+                        bootcampScript29.HideCardsBlue = hideCardsBlue;
+                        bootcampScript29.HideCardsRed = hideCardsRed;
+                        break;
+                    case 22:
+                        var bootcampScript22 = newCard.AddComponent<BootcampCard_22>();
+                        break;
+                    case 3:
+                        var bootcampScript3 = newCard.AddComponent<BootcampCard_03>();
+                        bootcampScript3.boostManagerRed = boostManagerRed;
+                        bootcampScript3.boostManagerBlue = boostManagerBlue;
                         break;
                 }
                 break;
@@ -324,6 +350,22 @@ public class CardSpawner : MonoBehaviour
 
             energyText.text = $"Energy: {energy}";
         }
+    }
+
+     private int[] GetRandomIndices(int upperRange)
+    {
+        List<int> indices = new List<int>();
+
+        while (indices.Count < 4)
+        {
+            int randomIndex = Random.Range(0, upperRange);
+            if (!indices.Contains(randomIndex))
+            {
+                indices.Add(randomIndex);
+            }
+        }
+
+        return indices.ToArray();
     }
 }
 

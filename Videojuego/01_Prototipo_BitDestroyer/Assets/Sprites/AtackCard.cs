@@ -71,4 +71,10 @@ public class AttackCard : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void BoostAttack(int boostAmount)
+    {
+        // Increase the number of shots
+        numberOfShots += boostAmount;
+    }
 }

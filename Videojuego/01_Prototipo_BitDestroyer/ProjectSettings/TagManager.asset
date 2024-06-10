@@ -9,6 +9,8 @@ TagManager:
   - Projectile
   - Card
   - Roulette
+  - defensePrefBlue
+  - defensePrefRed
   layers:
   - Default
   - TransparentFX
