@@ -4844,6 +4844,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1506728307}
+  - component: {fileID: 1506728308}
   m_Layer: 0
   m_Name: BoostManagerBlue
   m_TagString: Untagged
@@ -4866,6 +4867,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1506728308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506728306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b990de327721e4bff813d25f31af3653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostPanelBlue: {fileID: 1144993340}
+  boostButtonPrefab: {fileID: 6887522418701062552, guid: 66bc7fcd8e9df430a924cc32882e612b, type: 3}
+  blue_positions:
+  - {fileID: 326953227}
+  - {fileID: 192092381}
+  - {fileID: 441113456}
+  - {fileID: 879645510}
+  - {fileID: 1900270478}
 --- !u!1 &1517474382
 GameObject:
   m_ObjectHideFlags: 0
