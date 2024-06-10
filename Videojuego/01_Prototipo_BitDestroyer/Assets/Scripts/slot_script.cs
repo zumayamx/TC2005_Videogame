@@ -101,42 +101,48 @@ public class CardSlotManager : MonoBehaviour
                     BootcampCard_29 botcampCard_29 = selectedCard.GetComponent<BootcampCard_29>();
                     BootcampCard_22 bootcampCard_22 = selectedCard.GetComponent<BootcampCard_22>();
                     BootcampCard_03 bootcampCard_03 = selectedCard.GetComponent<BootcampCard_03>();
+                    BootcampCard_31 bootcampCard_31 = selectedCard.GetComponent<BootcampCard_31>();
 
-                    switch (defenseCard, attackCard, bootcampCard_25, bootcampCard_06, botcampCard_29, bootcampCard_22, bootcampCard_03)
+                    switch (defenseCard, attackCard, bootcampCard_25, bootcampCard_06, botcampCard_29, bootcampCard_22, bootcampCard_03, bootcampCard_31)
                     {
-                        case (DefenseCard _, null, null, null, null, null, null):
+                        case (DefenseCard _, null, null, null, null, null, null, null):
                             // Si es una carta de defensa, no hacer nada
                             Debug.Log("Defense Card - No Action Taken");
                             break;
-                        case (null, AttackCard ac, null, null, null, null, null):
+                        case (null, AttackCard ac, null, null, null, null, null, null):
                             // Si es una carta de ataque, activar el disparo
                             ac.startShooting = true;
                             Debug.Log("Attack Card onOff set to true");
                             break;
-                        case (null, null, BootcampCard_25 bc, null, null, null, null):
+                        case (null, null, BootcampCard_25 bc, null, null, null, null, null):
                             // Si es la carta bootcamp tipo 25 activa su panel en el cual esta la ruleta
                             Debug.Log("Bootcamp Card - ACTIVE PANEL ROULETTE");
                             bc.activePanelRoulette = true;
                             break;
-                        case (null, null, null, BootcampCard_06 bc, null, null, null):
+                        case (null, null, null, BootcampCard_06 bc, null, null, null, null):
                             // Si es la carta bootcamp tipo 06 activa el script para dar 3 puntos de vida
                             Debug.Log("Bootcamp Card - ACTIVE HEALTH");
                             bc.activateHealth = true;
                             break;
-                        case (null, null, null, null, BootcampCard_29 bc, null, null):
+                        case (null, null, null, null, BootcampCard_29 bc, null, null, null):
                             // Si es la carta bootcamp tipo 29 activa el script para ocultar las cartas de defensa
                             Debug.Log("Bootcamp Card - ACTIVE HIDE DEFENSE");
                             bc.activateHide = true;
                             break;
-                        case (null, null, null, null, null, BootcampCard_22 bc, null):
+                        case (null, null, null, null, null, BootcampCard_22 bc, null, null):
                             // Si es la carta bootcamp tipo 22 activa el script para mostrar las cartas del oponente
                             Debug.Log("Bootcamp Card - ACTIVE SHOW CARDS");
                             bc.desactivateHide = true;
                             break;
-                        case (null, null, null, null, null, null, BootcampCard_03 bc):
+                        case (null, null, null, null, null, null, BootcampCard_03 bc, null):
                             // Si es la carta bootcamp tipo 03 activa el script para activar el panel de boost
                             Debug.Log("Bootcamp Card - ACTIVE BOOST");
                             bc.activateBoost = true;
+                            break;
+                        case (null, null, null, null, null, null, null, BootcampCard_31 bc):
+                            // Si es la carta bootcamp tipo 31 activa el script para dar un nuevo turno
+                            Debug.Log("Bootcamp Card - ACTIVE NEW TURN");
+                            bc.newTurn = true;
                             break;
                         default:
                             // Este caso no debería ocurrir, pero puedes manejarlo si es necesario

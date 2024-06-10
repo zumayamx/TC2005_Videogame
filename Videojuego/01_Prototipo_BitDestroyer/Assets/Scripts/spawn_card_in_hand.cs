@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class CardSpawner : MonoBehaviour
 {
+    /* Image to display the energy bar */
+    public Image EnergyBar;
+    
+    /* Energy value */
+    public int energy = 10;
 
     /* Objects that contains the script to boost a card */
     public GameObject boostManagerRed;
@@ -29,15 +34,15 @@ public class CardSpawner : MonoBehaviour
     public Button cardThreeElection;
 
     /* Update de image of energy */
-    public Image energyImage;
+   // public Image energyImage;
 
-    public Sprite energyImage_3;
+    //public Sprite energyImage_3;
 
-    public Sprite energyImage_2;
+    //public Sprite energyImage_2;
 
-    public Sprite energyImage_1;
+    //public Sprite energyImage_1;
 
-    public Sprite energyImage_0;
+    //public Sprite energyImage_0;
     [SerializeField] private GameObject cardPrefab; // The same prefab for all decks
     [SerializeField] private Transform handPosition;
 
@@ -50,7 +55,7 @@ public class CardSpawner : MonoBehaviour
     public string direction; // 'b' for right, 'r' for left
 
     private int cardCount = 0; // Tracks the number of spawned cards
-    public int energy = 3; // Default energy
+    //public int energy = 3; // Default energy
     public TMP_Text energyText; // TMP_Text to display the energy value
 
     private List<int> cibersecurityIds = new List<int> { 1, 4, 9, 10, 12, 15, 23, 26, 28 };
@@ -73,7 +78,7 @@ public class CardSpawner : MonoBehaviour
         boostManagerRed.SetActive(false);
         boostManagerBlue.SetActive(false);
 
-        UpdateEnergyText();
+        UpdateEnergyBar();
     }
 
     private void Update()
@@ -166,7 +171,7 @@ public class CardSpawner : MonoBehaviour
         {
             SpawnCard(cardPrefab, handPosition, imagePath, randomId, cardType);
             energy -= energyCost; // Deduct energy
-            UpdateEnergyText();
+            UpdateEnergyBar();
         }
         else if (cardCount < spawnPositions.Length)
         {
@@ -175,7 +180,7 @@ public class CardSpawner : MonoBehaviour
             {
                 SpawnCard(cardPrefab, spawnPositions[emptySpawnIndex], imagePath, randomId, cardType);
                 energy -= energyCost; // Deduct energy
-                UpdateEnergyText();
+                UpdateEnergyBar();
             }
             else
             {
@@ -286,6 +291,9 @@ public class CardSpawner : MonoBehaviour
                         bootcampScript3.boostManagerRed = boostManagerRed;
                         bootcampScript3.boostManagerBlue = boostManagerBlue;
                         break;
+                    case 31:
+                        var bootcampScript31 = newCard.AddComponent<BootcampCard_31>();
+                        break;
                 }
                 break;
         }
@@ -327,28 +335,12 @@ public class CardSpawner : MonoBehaviour
         }
     }
 
-    public void UpdateEnergyText()
+    public void UpdateEnergyBar()
     {
-        if (energyText != null)
+        if (EnergyBar != null)
         {
-            /* Change the image by the energy value */
-            if (energy == 3 ) {
-                energyImage.sprite = energyImage_3;
-            }
-
-            if (energy == 2 ) {
-                 energyImage.sprite = energyImage_2;
-            }
-
-            if (energy == 1 ) {
-                 energyImage.sprite = energyImage_1;
-            }
-
-            if (energy == 0 ) {
-                 energyImage.sprite = energyImage_0;
-            }
-
-            energyText.text = $"Energy: {energy}";
+            EnergyBar.fillAmount = (float)energy / 10;
+            energyText.text = "Energy" + energy.ToString();
         }
     }
 

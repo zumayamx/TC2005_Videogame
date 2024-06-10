@@ -54,7 +54,7 @@ public class turn_manager : MonoBehaviour
         }
     }
 
-    void SetTurnActive(bool isBlueTurn)
+    public void SetTurnActive(bool isBlueTurn)
     {
         sprite_azul.enabled = isBlueTurn;
         sprite_rojo.enabled = !isBlueTurn;
@@ -79,8 +79,8 @@ public class turn_manager : MonoBehaviour
         CardSpawner spawner = controller.GetComponent<CardSpawner>();
         if (spawner != null)
         {
-            spawner.energy = 3;
-            spawner.UpdateEnergyText();
+            spawner.energy = 10;
+            spawner.UpdateEnergyBar();
         }
     }
 
