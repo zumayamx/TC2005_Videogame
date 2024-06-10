@@ -170,7 +170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &9448941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnergyBar: {fileID: 60608515}
+  energy: 3
   boostManagerRed: {fileID: 1992720638}
   boostManagerBlue: {fileID: 1506728306}
   hideCardsBlue: {fileID: 738334811}
@@ -193,11 +194,6 @@ MonoBehaviour:
   cardOneElection: {fileID: 1832770425}
   cardTwoElection: {fileID: 419583017}
   cardThreeElection: {fileID: 254439088}
-  energyImage: {fileID: 2049294052}
-  energyImage_3: {fileID: 21300000, guid: 5db05cd49f7ed51e3820318e633a32a2, type: 3}
-  energyImage_2: {fileID: 21300000, guid: fe5dcd161e7779963ac2a74c0e684817, type: 3}
-  energyImage_1: {fileID: 21300000, guid: 5eb8cb7b644aaa7988a8517b27457716, type: 3}
-  energyImage_0: {fileID: 21300000, guid: 7d5f34229e76ae55db894d218e15a060, type: 3}
   cardPrefab: {fileID: 7040936946260886752, guid: e197b962a55c264fc965b8615c2106b2, type: 3}
   handPosition: {fileID: 753024851}
   object1: {fileID: 1900321746}
@@ -211,7 +207,6 @@ MonoBehaviour:
   - {fileID: 1444137950}
   attackProjectilePrefab: {fileID: 3929533521105195589, guid: 5cfbbe413b58941b6b0b311e46fc1b3a, type: 3}
   direction: r
-  energy: 3
   energyText: {fileID: 1529863045}
 --- !u!4 &9448942
 Transform:
@@ -1695,7 +1690,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 465967313}
-  - component: {fileID: 465967312}
+  - component: {fileID: 465967315}
   - component: {fileID: 465967314}
   m_Layer: 0
   m_Name: turn_manager
@@ -1704,39 +1699,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &465967312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465967311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1715c00388b32ef7e85d674f214e429a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blue_controller: {fileID: 1176090204}
-  red_controller: {fileID: 9448940}
-  blue_slot: {fileID: 950309866}
-  red_slot: {fileID: 767801545}
-  sprite_inicio: {fileID: 1277893502}
-  sprite_azul: {fileID: 1272176643}
-  sprite_rojo: {fileID: 1561419813}
-  blue_turn: 1
-  turnCount: 0
-  blue_cards:
-  - {fileID: 1127119746}
-  - {fileID: 158520538}
-  - {fileID: 1838883378}
-  - {fileID: 1024161997}
-  - {fileID: 1817499742}
-  red_cards:
-  - {fileID: 82482515}
-  - {fileID: 1847063354}
-  - {fileID: 1517474382}
-  - {fileID: 1649991118}
-  - {fileID: 1680983255}
 --- !u!4 &465967313
 Transform:
   m_ObjectHideFlags: 0
@@ -1764,6 +1726,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb64b4e3ca29f800a8285e053453f399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &465967315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465967311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6c113fb03444e52b186dcb2a7a76fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blue_controller: {fileID: 1176090204}
+  red_controller: {fileID: 1002892708}
+  blue_slot: {fileID: 950309866}
+  red_slot: {fileID: 767801545}
+  sprite_inicio: {fileID: 1277893502}
+  sprite_azul: {fileID: 1272176643}
+  sprite_rojo: {fileID: 1561419813}
+  blue_turn: 0
+  turnCount: 0
+  blue_cards:
+  - {fileID: 1127119746}
+  - {fileID: 158520538}
+  - {fileID: 1838883378}
+  - {fileID: 1024161997}
+  - {fileID: 1817499742}
+  red_cards:
+  - {fileID: 82482515}
+  - {fileID: 1847063354}
+  - {fileID: 1517474382}
+  - {fileID: 1649991118}
+  - {fileID: 1680983255}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2573,15 +2568,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardSlots:
-  - {fileID: 2105591138}
-  - {fileID: 374216471}
   - {fileID: 1659803468}
-  - {fileID: 2003495791}
-  - {fileID: 315571548}
   - {fileID: 1150683209}
-  - {fileID: 1422404412}
-  - {fileID: 2145600617}
   - {fileID: 131742372}
+  - {fileID: 374216471}
+  - {fileID: 315571548}
+  - {fileID: 2145600617}
+  - {fileID: 2105591138}
+  - {fileID: 2003495791}
+  - {fileID: 1422404412}
   xOffset: 3
 --- !u!1 &775046238
 GameObject:
@@ -3482,6 +3477,76 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997539144}
   m_CullTransparentMesh: 1
+--- !u!1 &1002892708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1002892710}
+  - component: {fileID: 1002892709}
+  m_Layer: 0
+  m_Name: AI_Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1002892709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002892708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de57ed50af9504fc59cc8650bab54590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnergyBar: {fileID: 60608515}
+  energy: 5
+  boostManagerRed: {fileID: 1992720638}
+  boostManagerBlue: {fileID: 1506728306}
+  hideCardsBlue: {fileID: 738334811}
+  hideCardsRed: {fileID: 1831256387}
+  panelRoulette: {fileID: 1814070969}
+  active: 0
+  cardPrefab: {fileID: 7040936946260886752, guid: e197b962a55c264fc965b8615c2106b2, type: 3}
+  handPosition: {fileID: 753024851}
+  object1: {fileID: 1900321746}
+  object2: {fileID: 793133576}
+  object3: {fileID: 2061934065}
+  spawnPositions:
+  - {fileID: 1659803468}
+  - {fileID: 1150683209}
+  - {fileID: 131742372}
+  - {fileID: 374216471}
+  - {fileID: 315571548}
+  - {fileID: 2145600617}
+  - {fileID: 2105591138}
+  - {fileID: 2003495791}
+  - {fileID: 1422404412}
+  attackProjectilePrefab: {fileID: 3929533521105195589, guid: 5cfbbe413b58941b6b0b311e46fc1b3a, type: 3}
+  direction: r
+  energyText: {fileID: 1529863045}
+--- !u!4 &1002892710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002892708}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1007718182
 GameObject:
   m_ObjectHideFlags: 0
@@ -4437,6 +4502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnergyBar: {fileID: 1860619592}
+  energy: 5
   boostManagerRed: {fileID: 1992720638}
   boostManagerBlue: {fileID: 1506728306}
   hideCardsBlue: {fileID: 738334811}
@@ -4446,11 +4512,6 @@ MonoBehaviour:
   cardOneElection: {fileID: 1832770425}
   cardTwoElection: {fileID: 419583017}
   cardThreeElection: {fileID: 254439088}
-  energyImage: {fileID: 1176321199}
-  energyImage_3: {fileID: 21300000, guid: 5db05cd49f7ed51e3820318e633a32a2, type: 3}
-  energyImage_2: {fileID: 21300000, guid: fe5dcd161e7779963ac2a74c0e684817, type: 3}
-  energyImage_1: {fileID: 21300000, guid: 5eb8cb7b644aaa7988a8517b27457716, type: 3}
-  energyImage_0: {fileID: 21300000, guid: 7d5f34229e76ae55db894d218e15a060, type: 3}
   cardPrefab: {fileID: 7040936946260886752, guid: e197b962a55c264fc965b8615c2106b2, type: 3}
   handPosition: {fileID: 326953228}
   object1: {fileID: 1900321746}
@@ -4464,7 +4525,6 @@ MonoBehaviour:
   - {fileID: 1900270479}
   attackProjectilePrefab: {fileID: 3929533521105195589, guid: 5cfbbe413b58941b6b0b311e46fc1b3a, type: 3}
   direction: b
-  energy: 3
   energyText: {fileID: 1014167705}
 --- !u!4 &1176090206
 Transform:
@@ -8074,6 +8134,7 @@ SceneRoots:
   - {fileID: 868861107}
   - {fileID: 1176090206}
   - {fileID: 9448942}
+  - {fileID: 1002892710}
   - {fileID: 326953228}
   - {fileID: 753024851}
   - {fileID: 192092382}

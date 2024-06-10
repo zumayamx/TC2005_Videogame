@@ -10,7 +10,7 @@ public class AI_Controller : MonoBehaviour
     public Image EnergyBar;
 
     /* Energy value */
-    public int energy = 10;
+    public int energy = 5;
 
     /* Objects that contains the script to boost a card */
     public GameObject boostManagerRed;
@@ -173,6 +173,8 @@ public class AI_Controller : MonoBehaviour
                     attackScript.prefabToSpawn = attackProjectilePrefab;
                     attackScript.direction = direction;
                     attackScript.numberOfShots = cardData.valor; // Assign the valor to numberOfShots
+                    attackScript.startShooting = true;
+                    Debug.Log("Attack Card onOff set to true");
                 }
                 else
                 {
@@ -190,25 +192,31 @@ public class AI_Controller : MonoBehaviour
                     case 25:
                         var bootcampScript25 = newCard.AddComponent<BootcampCard_25>();
                         bootcampScript25.roulettePanel = panelRoulette;
+                        bootcampScript25.activePanelRoulette = true;
                         break;
                     case 6:
                         var bootcampScript6 = newCard.AddComponent<BootcampCard_06>();
+                        bootcampScript6.activateHealth = true;
                         break;
                     case 29:
                         var bootcampScript29 = newCard.AddComponent<BootcampCard_29>();
                         bootcampScript29.HideCardsBlue = hideCardsBlue;
                         bootcampScript29.HideCardsRed = hideCardsRed;
+                        bootcampScript29.activateHide = true;
                         break;
                     case 22:
                         var bootcampScript22 = newCard.AddComponent<BootcampCard_22>();
+                        bootcampScript22.desactivateHide = true;
                         break;
                     case 3:
                         var bootcampScript3 = newCard.AddComponent<BootcampCard_03>();
                         bootcampScript3.boostManagerRed = boostManagerRed;
                         bootcampScript3.boostManagerBlue = boostManagerBlue;
+                        bootcampScript3.activateBoost = true;
                         break;
                     case 31:
                         var bootcampScript31 = newCard.AddComponent<BootcampCard_31>();
+                        bootcampScript31.newTurn = true;
                         break;
                 }
                 break;
@@ -255,7 +263,7 @@ public class AI_Controller : MonoBehaviour
     {
         if (EnergyBar != null)
         {
-            EnergyBar.fillAmount = (float)energy / 10;
+            EnergyBar.fillAmount = (float)energy / 5;
             energyText.text = "Energy" + energy.ToString();
         }
     }
@@ -278,34 +286,37 @@ public class AI_Controller : MonoBehaviour
 
     public void AI()
     {
-        // Prioritize placing defense cards in the first three slots
-        for (int i = 0; i < 3; i++)
+        if (energy > 0)
         {
-            if (spawnPositions[i].childCount == 0 || spawnPositions[i].GetComponentInChildren<DefenseCard>() == null)
+            // Prioritize placing defense cards in the first three slots
+            for (int i = 0; i < 3; i++)
             {
-                int randomDefenseId = GetRandomCardId(cibersecurityIds);
-                string defenseImagePath = $"Assets/Sprites/cartas/cibersecurity/{randomDefenseId}.png";
-                SpawnCard(cardPrefab, spawnPositions[i], defenseImagePath, randomDefenseId, "defense");
-                transform.Rotate(0, 0, 90);
-                energy -= 1;
-                UpdateEnergyBar();
-                return; // End the turn after spawning a defense card
+                if (spawnPositions[i].childCount == 0 || spawnPositions[i].GetComponentInChildren<DefenseCard>() == null && energy >= 1)
+                {
+                    int randomDefenseId = GetRandomCardId(cibersecurityIds);
+                    string defenseImagePath = $"Assets/Sprites/cartas/cibersecurity/{randomDefenseId}.png";
+                    SpawnCard(cardPrefab, spawnPositions[i], defenseImagePath, randomDefenseId, "defense");
+                    transform.Rotate(0, 0, 90);
+                    energy -= 1;
+                    UpdateEnergyBar();
+                    return; // End the turn after spawning a defense card
+                }
             }
-        }
 
-        // If the first three slots have defense cards, try to place attack cards
-        for (int i = 0; i < 3; i++)
-        {
-            if (spawnPositions[i].childCount != 0 && energy >= 3)
+            // If the first three slots have defense cards, try to place attack cards
+            for (int i = 0; i < 3; i++)
             {
-                int random_id = UnityEngine.Random.Range(1, 3);
-                int randomAttackId = GetRandomCardId(ciberattackIds);
-                string attackImagePath = $"Assets/Sprites/cartas/ciberattack/{randomAttackId}.png";
-                SpawnCard(cardPrefab, spawnPositions[random_id], attackImagePath, randomAttackId, "attack");
-                energy -= 3;
-                // newCard.transform.Rotate(0, 0, 90);
-                UpdateEnergyBar();
-                return; // End the turn after spawning an attack card
+                if (spawnPositions[i].childCount != 0 && energy >= 3)
+                {
+                    int random_id = UnityEngine.Random.Range(1, 3);
+                    Debug.Log(random_id);
+                    int randomAttackId = GetRandomCardId(ciberattackIds);
+                    string attackImagePath = $"Assets/Sprites/cartas/ciberattack/{randomAttackId}.png";
+                    SpawnCard(cardPrefab, spawnPositions[random_id], attackImagePath, randomAttackId, "attack");
+                    energy -= 3;
+                    UpdateEnergyBar();
+                    return; // End the turn after spawning an attack card
+                }
             }
         }
     }

@@ -6,7 +6,7 @@ public class AI_turn_manager : MonoBehaviour
 {
     // Public variables for hand controls
     public GameObject blue_controller;
-    public GameObject AI_controller;
+    public GameObject red_controller;
 
     // Public variables for slot controls
     public GameObject blue_slot;
@@ -44,10 +44,8 @@ public class AI_turn_manager : MonoBehaviour
             }
             else
             {
-                
                 blue_turn = true;
                 SetTurnActive(blue_turn);
-
                 turnCount++;
                 Debug.Log("Total Turns Passed: " + turnCount);
             }
@@ -62,7 +60,7 @@ public class AI_turn_manager : MonoBehaviour
         sprite_rojo.enabled = !isBlueTurn;
         blue_controller.SetActive(isBlueTurn);
         blue_slot.SetActive(isBlueTurn);
-        AI_controller.SetActive(!isBlueTurn);
+        red_controller.SetActive(!isBlueTurn);
         red_slot.SetActive(!isBlueTurn);
 
         // Reset energy for each side's CardSpawner script
@@ -72,17 +70,23 @@ public class AI_turn_manager : MonoBehaviour
         }
         else
         {
-            ResetEnergy(AI_controller);
+            ResetEnergy(red_controller);
         }
     }
 
     void ResetEnergy(GameObject controller)
     {
         CardSpawner spawner = controller.GetComponent<CardSpawner>();
+        AI_Controller spawnerAI = controller.GetComponent<AI_Controller>();
         if (spawner != null)
         {
-            spawner.energy = 3;
+            spawner.energy = 5;
             spawner.UpdateEnergyBar();
+        }
+        if (spawnerAI != null)
+        {
+            spawnerAI.energy = 5;
+            spawnerAI.UpdateEnergyBar();
         }
     }
 
@@ -92,10 +96,8 @@ public class AI_turn_manager : MonoBehaviour
         sprite_rojo.enabled = !blue_turn;
         blue_controller.SetActive(blue_turn);
         blue_slot.SetActive(blue_turn);
-        AI_controller.SetActive(!blue_turn);
+        red_controller.SetActive(!blue_turn);
         red_slot.SetActive(!blue_turn);
-        var turn = AI_controller.GetComponent<AI_Controller>();
-        turn.active = blue_turn;
     }
 
     public void UpdateCardsVisibility()
@@ -129,35 +131,44 @@ public class AI_turn_manager : MonoBehaviour
         }
     }
 
-    public void ShowCardsDependsPlayerTurn(bool isBlueTurn) {
+    public void ShowCardsDependsPlayerTurn(bool isBlueTurn)
+    {
         // If is blue turn, show me red cards
-        if (isBlueTurn) {
-            foreach (GameObject card in red_cards) {
+        if (isBlueTurn)
+        {
+            foreach (GameObject card in red_cards)
+            {
                 SpriteRenderer sr = card.GetComponent<SpriteRenderer>();
                 Collider collider = card.GetComponent<Collider>();
-                
-                if (sr != null) {
+
+                if (sr != null)
+                {
                     sr.enabled = !blue_turn;
-                    }
-                if (collider != null) {
+                }
+                if (collider != null)
+                {
                     // This is a collider of hide card prefab, not card behind it
                     collider.enabled = !blue_turn;
-                    }
+                }
             }
         }
         // If is red turn, show me blue cards
-        else {
-            foreach (GameObject card in blue_cards) {
+        else
+        {
+            foreach (GameObject card in blue_cards)
+            {
                 SpriteRenderer sr = card.GetComponent<SpriteRenderer>();
                 Collider collider = card.GetComponent<Collider>();
-                
-                if (sr != null) {
+
+                if (sr != null)
+                {
                     sr.enabled = blue_turn;
-                    }
-                if (collider != null) {
+                }
+                if (collider != null)
+                {
                     // This is a collider of hide card prefab, not card behind it
                     collider.enabled = blue_turn;
-                    }
+                }
             }
         }
     }
