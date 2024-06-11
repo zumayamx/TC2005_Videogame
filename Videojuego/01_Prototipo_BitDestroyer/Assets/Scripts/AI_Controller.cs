@@ -160,6 +160,7 @@ public class AI_Controller : MonoBehaviour
                 if (defenseScript != null)
                 {
                     defenseScript.collisionCount = cardData.valor; // Assign the valor to collisionCount
+                    newCard.transform.rotation = Quaternion.Euler(0, 0, 270);
                 }
                 else
                 {
@@ -175,6 +176,7 @@ public class AI_Controller : MonoBehaviour
                     attackScript.numberOfShots = cardData.valor; // Assign the valor to numberOfShots
                     attackScript.startShooting = true;
                     Debug.Log("Attack Card onOff set to true");
+                    newCard.transform.rotation = Quaternion.Euler(0, 0, 270);
                 }
                 else
                 {
