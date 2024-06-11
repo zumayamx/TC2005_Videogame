@@ -8,7 +8,7 @@ Bit Destroyer es un emocionante juego que combina elementos de hacking y juegos 
 
 A continuación se presentan las mecanicas detalladas del juego, desde la creación de una cuenta hasta el final de una partida.
 
-![Mecánicas del juego](Assets/mecanicasPoster.jpeg "Logo de mi Juego")
+![Mecánicas del juego](Assets/mecanicasPoster.png "Logo de mi Juego")
 
 
 ### Creación de una cuenta de jugador
