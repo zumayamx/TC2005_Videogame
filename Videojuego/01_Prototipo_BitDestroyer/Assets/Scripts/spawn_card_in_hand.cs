@@ -10,7 +10,9 @@ public class CardSpawner : MonoBehaviour
     public Image EnergyBar;
     
     /* Energy value */
-    public int energy = 10;
+    public int energy = 5;
+
+    private int maxEnergy = 5;
 
     /* Objects that contains the script to boost a card */
     public GameObject boostManagerRed;
@@ -128,13 +130,14 @@ public class CardSpawner : MonoBehaviour
     }
     private void ShowPanelElectionCards(string category, List<int> ids, string cardType, int energyCost)
     {   
-        panelElectionCards.SetActive(true);
-
+        // Check if there is enough energy to spawn the card
         if (energy < energyCost)
         {
             Debug.Log("Not enough energy to spawn card.");
             return;
         }
+
+         panelElectionCards.SetActive(true);
 
         // Generate a random card index from the list
         int[] randomIndexes = GetRandomIndices(ids.Count);
@@ -339,7 +342,7 @@ public class CardSpawner : MonoBehaviour
     {
         if (EnergyBar != null)
         {
-            EnergyBar.fillAmount = (float)energy / 10;
+            EnergyBar.fillAmount = (float)energy / maxEnergy;
             energyText.text = "Energy" + energy.ToString();
         }
     }

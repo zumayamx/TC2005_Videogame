@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class turn_manager : MonoBehaviour
 {
@@ -23,6 +26,16 @@ public class turn_manager : MonoBehaviour
     public List<GameObject> blue_cards;
     public List<GameObject> red_cards;
 
+    // Bool variables to indicate if a player is dead
+    public bool isBlueDead = false;
+    public bool isRedDead = false;
+
+    // Buttons and text to panel of end game
+    public GameObject panelEndGame;
+    public Button buttonRestart;
+    public Button buttonExit;
+    public TMP_Text textEndGame;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +43,15 @@ public class turn_manager : MonoBehaviour
         blue_turn = true;
         UpdateTurnDisplay();
         UpdateCardsVisibility();
+
+        //Set the buttons chancge scenes
+        buttonExit.onClick.AddListener(() => {
+            ToModeElection(); 
+        });
+
+        buttonRestart.onClick.AddListener(() => {
+            SceneManager.LoadScene("Game");
+        });
     }
 
     // Update is called once per frame
@@ -51,6 +73,23 @@ public class turn_manager : MonoBehaviour
             }
 
             UpdateCardsVisibility();
+        }
+
+        isRedDead = PlayerPrefs.GetInt("playerRedHealth") == 0 ? true : false;
+        isBlueDead = PlayerPrefs.GetInt("playerBlueHealth") == 0 ? true : false;
+
+        if (isBlueDead) {
+            panelEndGame.SetActive(true);
+            string nameBlue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
+            string nameRed = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
+            textEndGame.text = "Player " + nameBlue + "defeated!" + "\n" + "Player " + nameRed + " wins!";
+        }
+
+        if (isRedDead) {
+            panelEndGame.SetActive(true);
+            string nameBlue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
+            string nameRed = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
+            textEndGame.text = "Player " + nameRed + "defeated!" + "\n" + "Player " + nameBlue + " wins!";
         }
     }
 
@@ -79,7 +118,7 @@ public class turn_manager : MonoBehaviour
         CardSpawner spawner = controller.GetComponent<CardSpawner>();
         if (spawner != null)
         {
-            spawner.energy = 10;
+            spawner.energy = 5;
             spawner.UpdateEnergyBar();
         }
     }
@@ -156,5 +195,12 @@ public class turn_manager : MonoBehaviour
                     }
             }
         }
+    }
+
+    private void ToModeElection()
+    {
+        // Clear the players list
+        GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players.Clear();
+        SceneManager.LoadScene("ModeElection");
     }
 }
