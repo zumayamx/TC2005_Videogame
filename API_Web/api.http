@@ -36,3 +36,18 @@ GET http://localhost:3000/api/jugadores
 
 ###MOSTRAR LA PÀGINA
 GET http://localhost:3000/api/web
+
+### REGISTRAR UNA NUEVA PARTIDA
+POST http://localhost:3000/api/partida
+Content-Type: application/json
+
+{
+    "id_player_blue" : 58,
+    "id_player_red" : 21,
+    "time_match" : "00:04:37",
+    "id_player_winner" : 21,
+    "id_player_defeated" : 58,
+    "match_wins_winner" : 136,
+    "match_played_defeated" : 37,
+    "match_played_winner" : 190
+}
