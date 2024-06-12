@@ -266,7 +266,7 @@ public class AI_Controller : MonoBehaviour
         if (EnergyBar != null)
         {
             EnergyBar.fillAmount = (float)energy / 5;
-            energyText.text = "Energy" + energy.ToString();
+            energyText.text = energy.ToString();
         }
     }
 

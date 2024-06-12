@@ -44,12 +44,25 @@ public class SceneChangerLogin : MonoBehaviour
 
     public Sprite registerButton_red;
 
+    private LoginManager loginManager;
+
     void Start()
     {
+        // Get the login manager
+        loginManager = GameObject.Find("Scripter").GetComponent<LoginManager>();
         /* Add listeners to the buttons */
         loginButton.onClick.AddListener(() => ToNextLogin());
         back.onClick.AddListener(() => ToModeElection());
-        gameButton.onClick.AddListener(() => ToGame());
+
+        if (PlayerPrefs.GetInt("gameMode") == 0)
+        {
+             gameButton.onClick.AddListener(() => ToGameIA());
+        }
+
+        if (PlayerPrefs.GetInt("gameMode") == 1)
+        {
+            gameButton.onClick.AddListener(() => ToGame());
+        }
 
         /* If the game mode is one player or two players, hide the game button to the game */
         if (PlayerPrefs.GetInt("gameMode") == 1 || PlayerPrefs.GetInt("gameMode") == 0)
@@ -94,6 +107,15 @@ public class SceneChangerLogin : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+
+    /* Change to the game IA scene if the next button is pressed */
+    private void ToGameIA() {
+        StartCoroutine(LoginAndLoadScene());
+        }
+    private IEnumerator LoginAndLoadScene() {
+        yield return StartCoroutine(loginManager.OnSubmitLogin("http://localhost:3000", "IA", "IA123"));
+        SceneManager.LoadScene("AI_Game");
+        }
 
     /* Change the color of the buttons and input fields to red */
     public void ChangeButtonImagesRed() {

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AI_turn_manager : MonoBehaviour
 {
-    // Public variables for hand controls
     public GameObject blue_controller;
     public GameObject red_controller;
 
@@ -23,6 +25,20 @@ public class AI_turn_manager : MonoBehaviour
     public List<GameObject> blue_cards;
     public List<GameObject> red_cards;
 
+    // Additional attributes from turn_normal
+    // Bool variables to indicate if a player is dead
+    public bool isBlueDead = false;
+    public bool isRedDead = false;
+
+    // Buttons and text to panel of end game
+    public GameObject panelEndGame;
+    public Button buttonRestart;
+    public Button buttonExit;
+    public TMP_Text textEndGame;
+
+    // Object to send data to data base
+    public GameOverManager gameOverManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +46,14 @@ public class AI_turn_manager : MonoBehaviour
         blue_turn = true;
         UpdateTurnDisplay();
         UpdateCardsVisibility();
+
+        buttonExit.onClick.AddListener(() => {
+            ToModeElection(); 
+        });
+
+        buttonRestart.onClick.AddListener(() => {
+            SceneManager.LoadScene("AI_Game");
+        });
     }
 
     // Update is called once per frame
@@ -51,6 +75,35 @@ public class AI_turn_manager : MonoBehaviour
             }
 
             UpdateCardsVisibility();
+        }
+
+        isRedDead = PlayerPrefs.GetInt("playerRedHealth") == 0 ? true : false;
+        isBlueDead = PlayerPrefs.GetInt("playerBlueHealth") == 0 ? true : false;
+
+        if (isBlueDead) {
+            panelEndGame.SetActive(true);
+            string nameBlue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
+            string nameRed = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
+            textEndGame.text = "Player " + nameBlue + "defeated!" + "\n" + nameRed + " wins!";
+            gameOverManager = GameObject.Find("turn_manager").GetComponent<GameOverManager>();
+            gameOverManager.playerWinner = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1];
+            gameOverManager.playerDefeated = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0];
+            gameOverManager.playerWinnerIsBlue = false;
+            gameOverManager.sendData = true;
+            gameOverManager.enabled = true;
+        }
+
+        if (isRedDead) {
+            panelEndGame.SetActive(true);
+            string nameBlue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
+            string nameRed = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
+            textEndGame.text = nameRed + "defeated!" + "\n" + "Player " + nameBlue + " wins!";
+            gameOverManager = GameObject.Find("turn_manager").GetComponent<GameOverManager>();
+            gameOverManager.playerWinner = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0];
+            gameOverManager.playerDefeated = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1];
+            gameOverManager.playerWinnerIsBlue = true;
+            gameOverManager.sendData = true;
+            gameOverManager.enabled = true;
         }
     }
 
@@ -171,5 +224,12 @@ public class AI_turn_manager : MonoBehaviour
                 }
             }
         }
+    }
+
+     private void ToModeElection()
+    {
+        // Clear the players list
+        GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players.Clear();
+        SceneManager.LoadScene("ModeElection");
     }
 }

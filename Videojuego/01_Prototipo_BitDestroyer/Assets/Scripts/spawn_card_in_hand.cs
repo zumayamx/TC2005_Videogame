@@ -225,8 +225,20 @@ public class CardSpawner : MonoBehaviour
         }
 
         Card cardData = apiConnection.cards.cards.Find(card => card.id == cardId);
-        Debug.Log(cardData);
-        bool IsBlueTurn = GameObject.Find("turn_manager").GetComponent<turn_manager>().blue_turn;
+
+         if (cardData == null)
+        {
+            Debug.LogError("Card data not found for card ID: " + cardId);
+            return;
+        }
+
+        bool IsBlueTurn;
+        if (GameObject.Find("turn_manager").GetComponent<turn_manager>() != null) {
+            IsBlueTurn = GameObject.Find("turn_manager").GetComponent<turn_manager>().blue_turn;
+        } else {
+            IsBlueTurn = GameObject.Find("turn_manager").GetComponent<AI_turn_manager>().blue_turn;
+        }
+        
         Debug.Log(IsBlueTurn);
 
         if (IsBlueTurn) {
@@ -247,12 +259,6 @@ public class CardSpawner : MonoBehaviour
         if (!IsBlueTurn) {
             int id_player_red = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].id;
             cardSendManager.GetComponent<CardSendManager>().addCard(cardData, id_player_red);
-        }
-
-        if (cardData == null)
-        {
-            Debug.LogError("Card data not found for card ID: " + cardId);
-            return;
         }
 
         // Assign the card value to the card's script
@@ -362,7 +368,7 @@ public class CardSpawner : MonoBehaviour
         if (EnergyBar != null)
         {
             EnergyBar.fillAmount = (float)energy / maxEnergy;
-            energyText.text = "Energy" + energy.ToString();
+            energyText.text = energy.ToString();
         }
     }
 
