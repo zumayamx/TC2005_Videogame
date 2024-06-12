@@ -25,10 +25,11 @@ public class RouletteManager : MonoBehaviour
     public float initialRotationSpeed = 1000f; // Velocidad de rotación inicial
     private float currentRotationSpeed; // Velocidad de rotación actual
     private bool isSpinning = false;    // State of the roulette
-    private float spinDuration = 3.0f;  // Duración del giro
+    private float spinDuration;  // Duración del giro
 
     void Start()
     {
+        spinDuration = Random.Range(1f, 6f);
         Debug.Log("Roulette Manager START!");
         roulettePanel = GameObject.Find("RoulettePanel");
 
@@ -129,11 +130,11 @@ public class RouletteManager : MonoBehaviour
     // Method to update the health display player red
     void UpdateHealthTextRed()
     {
-        healthTextRed.text = "HP: " + playerHealthBoth;
+        healthTextRed.text =  playerHealthBoth.ToString();
     }
     // Method to update the health display player blue
     void UpdateHealthTextBlue()
     {
-        healthTextBlue.text = "HP: " + playerHealthBoth;
+        healthTextBlue.text = playerHealthBoth.ToString();
     }
 }
