@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class SoundManagerMatch : MonoBehaviour
 {
-    public AudioClip introClip;
-    public AudioClip loopClip;
-    public AudioClip buttonClickClip; // AudioClip para el sonido del botón
+    private AudioClip introClip;
+    private AudioClip loopClip;
+    private AudioClip buttonClickClip; // AudioClip para el sonido del botón
 
-    public AudioClip selectCardClip; // AudioClip para el sonido de seleccionar una carta
+    private AudioClip selectCardClip; // AudioClip para el sonido de seleccionar una carta
 
-    public AudioClip rouletteClip; // AudioClip para el sonido de la ruleta
+    private AudioClip rouletteClip; // AudioClip para el sonido de la ruleta
 
-    public AudioClip hitClip; // AudioClip para el sonido de golpe 
+    private AudioClip hitClip; // AudioClip para el sonido de golpe 
 
     private float loopVolume = 0.08f;
 
@@ -18,6 +18,13 @@ public class SoundManagerMatch : MonoBehaviour
 
     void Start()
     {
+        introClip = Resources.Load<AudioClip>("Soundtracks/BeginMatchSound");
+        loopClip = Resources.Load<AudioClip>("Soundtracks/OnLoopIntro");
+        buttonClickClip = Resources.Load<AudioClip>("Soundtracks/OnClickSound");
+        selectCardClip = Resources.Load<AudioClip>("Soundtracks/SoundSelectedCard");
+        rouletteClip = Resources.Load<AudioClip>("Soundtracks/RouletteSound");
+        hitClip = Resources.Load<AudioClip>("Soundtracks/hitSound");
+
         audioSource = gameObject.AddComponent<AudioSource>();
 
         if (introClip != null && loopClip != null)

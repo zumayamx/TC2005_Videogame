@@ -61,3 +61,9 @@ Content-Type: application/json
     "id_jugador" : 1,
     "id_carta" : 3
 }
+
+### OBTENER LA INFORMACION DE CARTAS
+GET http://localhost:3000/api/cartas_info
+
+### OBTENER LA INFORMACION DE ESTADISTICAS
+GET http://localhost:3000/api/estadisticas_jugadores
