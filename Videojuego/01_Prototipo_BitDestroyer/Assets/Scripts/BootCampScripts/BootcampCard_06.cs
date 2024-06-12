@@ -59,14 +59,14 @@ public class BootcampCard_06 : MonoBehaviour
     private void healthToPlayerRed(int currentHealthRed) {
         currentHealthRed += 3;
         PlayerPrefs.SetInt("playerRedHealth", currentHealthRed);
-        healthTextRed.text = "HP: " + currentHealthRed.ToString();
+        healthTextRed.text = currentHealthRed.ToString();
         healthBarRed.fillAmount = (float)currentHealthRed / 20;
     }
 
     private void healthToPlayerBlue(int currentHealthBlue) {
         currentHealthBlue += 3;
         PlayerPrefs.SetInt("playerBlueHealth", currentHealthBlue);
-        healthTextBlue.text = "HP: " + currentHealthBlue.ToString();
+        healthTextBlue.text = currentHealthBlue.ToString();
         healthBarBlue.fillAmount = (float)currentHealthBlue / 20;
     }
 

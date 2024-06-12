@@ -541,8 +541,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.0000038146973}
-  m_SizeDelta: {x: 207.7, y: 303.0585}
+  m_AnchoredPosition: {x: 0, y: -0}
+  m_SizeDelta: {x: 250, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &76443046
 MonoBehaviour:
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a2682724665c93b1a89636510dea6183, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e09a95d266ba040da95a85c38a934c5a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -722,7 +722,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: 120}
+  m_AnchoredPosition: {x: 115, y: 100}
   m_SizeDelta: {x: 430, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &126498631
@@ -5917,7 +5917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostPanelBlue: {fileID: 1144993340}
-  boostButtonPrefab: {fileID: 6887522418701062552, guid: 66bc7fcd8e9df430a924cc32882e612b, type: 3}
+  boostButtonPrefab: {fileID: 1064251743083689141, guid: 10cb77b5148fa468c8c72bac2ceff5fb, type: 3}
   blue_positions:
   - {fileID: 326953227}
   - {fileID: 192092381}
@@ -6582,7 +6582,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 76443045}
   - {fileID: 1524091744}
   - {fileID: 674715744}
   - {fileID: 415407375}
@@ -6607,6 +6606,7 @@ RectTransform:
   - {fileID: 74021762}
   - {fileID: 1325175804}
   - {fileID: 1715692429}
+  - {fileID: 76443045}
   - {fileID: 1814070970}
   - {fileID: 1876859930}
   - {fileID: 899478209}
@@ -8319,7 +8319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostPanelRed: {fileID: 899478208}
-  boostButtonPrefab: {fileID: 6887522418701062552, guid: 66bc7fcd8e9df430a924cc32882e612b, type: 3}
+  boostButtonPrefab: {fileID: 1064251743083689141, guid: 10cb77b5148fa468c8c72bac2ceff5fb, type: 3}
   red_positions:
   - {fileID: 753024850}
   - {fileID: 1692880176}

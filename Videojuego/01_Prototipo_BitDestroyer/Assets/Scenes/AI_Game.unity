@@ -3628,7 +3628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: 120}
+  m_AnchoredPosition: {x: 115, y: 100}
   m_SizeDelta: {x: 430, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &952292843
@@ -5945,7 +5945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostPanelBlue: {fileID: 1144993340}
-  boostButtonPrefab: {fileID: 6887522418701062552, guid: 66bc7fcd8e9df430a924cc32882e612b, type: 3}
+  boostButtonPrefab: {fileID: 1064251743083689141, guid: 10cb77b5148fa468c8c72bac2ceff5fb, type: 3}
   blue_positions:
   - {fileID: 326953227}
   - {fileID: 192092381}
@@ -8336,7 +8336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostPanelRed: {fileID: 899478208}
-  boostButtonPrefab: {fileID: 6887522418701062552, guid: 66bc7fcd8e9df430a924cc32882e612b, type: 3}
+  boostButtonPrefab: {fileID: 1064251743083689141, guid: 10cb77b5148fa468c8c72bac2ceff5fb, type: 3}
   red_positions:
   - {fileID: 753024850}
   - {fileID: 1692880176}

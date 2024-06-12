@@ -85,26 +85,30 @@ public class turn_manager : MonoBehaviour
             panelEndGame.SetActive(true);
             string nameBlue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
             string nameRed = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
-            textEndGame.text = "Player " + nameBlue + "defeated!" + "\n" + "Player " + nameRed + " wins!";
+            textEndGame.text = "Player " + nameBlue + " defeated!" + "\n" + "Player " + nameRed + " wins!";
             gameOverManager = GameObject.Find("turn_manager").GetComponent<GameOverManager>();
             gameOverManager.playerWinner = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1];
             gameOverManager.playerDefeated = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0];
             gameOverManager.playerWinnerIsBlue = false;
             gameOverManager.sendData = true;
             gameOverManager.enabled = true;
+            // To evoid multiple calls to this function
+            isBlueDead = false;
         }
 
         if (isRedDead) {
             panelEndGame.SetActive(true);
             string nameBlue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
             string nameRed = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
-            textEndGame.text = "Player " + nameRed + "defeated!" + "\n" + "Player " + nameBlue + " wins!";
+            textEndGame.text = "Player " + nameRed + " defeated!" + "\n" + "Player " + nameBlue + " wins!";
             gameOverManager = GameObject.Find("turn_manager").GetComponent<GameOverManager>();
             gameOverManager.playerWinner = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0];
             gameOverManager.playerDefeated = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1];
             gameOverManager.playerWinnerIsBlue = true;
             gameOverManager.sendData = true;
             gameOverManager.enabled = true;
+            // To evoid multiple calls to this function
+            isRedDead = false;
         }
     }
 
@@ -215,7 +219,9 @@ public class turn_manager : MonoBehaviour
     private void ToModeElection()
     {
         // Clear the players list
-        GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players.Clear();
+        GameObject PlayerManager = GameObject.Find("playersManager");
+        Destroy(PlayerManager);
+        Debug.Log("Players list cleared");
         SceneManager.LoadScene("ModeElection");
     }
 }
