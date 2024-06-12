@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioClip introClip;
-    public AudioClip loopClip;
-    public AudioClip buttonClickClip; // AudioClip para el sonido del botón
+    private AudioClip introClip;
+    private AudioClip loopClip;
+    private AudioClip buttonClickClip; // AudioClip para el sonido del botón
 
     private float loopVolume = 0.3f;
 
@@ -12,6 +12,11 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
+
+        introClip = Resources.Load<AudioClip>("Soundtracks/Begin");
+        loopClip = Resources.Load<AudioClip>("Soundtracks/OnLoopIntro");
+        buttonClickClip = Resources.Load<AudioClip>("Soundtracks/OnClickSound");
+
         audioSource = gameObject.AddComponent<AudioSource>();
 
         if (introClip != null && loopClip != null)

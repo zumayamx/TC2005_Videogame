@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SoundManagerInLogin : MonoBehaviour
 {
-    public AudioClip loopClip;
-    public AudioClip buttonClickClip; // AudioClip para el sonido del botón
+    private AudioClip loopClip;
+    private AudioClip buttonClickClip; // AudioClip para el sonido del botón
 
     private AudioSource audioSource;
     
@@ -11,6 +11,9 @@ public class SoundManagerInLogin : MonoBehaviour
 
     void Start()
     {
+        loopClip = Resources.Load<AudioClip>("Soundtracks/OnLoopIntro");
+        buttonClickClip = Resources.Load<AudioClip>("Soundtracks/OnClickSound");
+
         audioSource = gameObject.AddComponent<AudioSource>();
         Invoke("PlayLoopAudio", 1f);
     }
