@@ -1,5 +1,4 @@
-# Nombre del Juego
-BitDestroyer
+# BitDestroyer
 
 ## Descripción del Juego
 El objetivo de Bit Destroyer es dejar sin puntos de vida al enemigo mientras se ponen en práctica conocimientos básicos de hacking, con un énfasis en los conceptos generales. Los jugadores deben utilizar y combinar estratégicamente diferentes cartas para proteger sus propios canales de comunicación (radio, cable y wifi) y atacar los del enemigo a través de cartas defensivas y ofensivas.
