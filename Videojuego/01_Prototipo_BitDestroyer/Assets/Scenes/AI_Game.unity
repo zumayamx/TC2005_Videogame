@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a76c291cec5d67b49a3dc88d8b30857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManagerMatch: {fileID: 0}
   EnergyBar: {fileID: 60608515}
   energy: 3
   boostManagerRed: {fileID: 1992720638}
@@ -846,6 +847,56 @@ MonoBehaviour:
   cardEndpoint: /api/cards
   cards:
     cards: []
+--- !u!1 &302412276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 302412278}
+  - component: {fileID: 302412277}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &302412277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302412276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84629556acdab4f11a37e3f547e749c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introClip: {fileID: 8300000, guid: 0bcbfcdc209f74c9b8c0e74b4272ce3b, type: 3}
+  loopClip: {fileID: 8300000, guid: b35f66d633dc548aead3caea9bd11083, type: 3}
+  buttonClickClip: {fileID: 8300000, guid: c31c05db736d34befa99668fa077892b, type: 3}
+  selectCardClip: {fileID: 8300000, guid: 3980b08faae7242c6bbb7dc32fd238be, type: 3}
+  rouletteClip: {fileID: 8300000, guid: 831fe6e83bfd2400c91e3b33b7a22131, type: 3}
+  hitClip: {fileID: 8300000, guid: cfb5911aee2874448878588e6f65e514, type: 3}
+--- !u!4 &302412278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302412276}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 490.60788, y: 202.97414, z: -0.12175132}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &315571547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,6 +1851,7 @@ MonoBehaviour:
     clave: 
   playerWinnerIsBlue: 0
   id_partida: 0
+  timeMatchGlobal: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3207,6 +3259,7 @@ MonoBehaviour:
   healthTextBlue: {fileID: 1957625364}
   activePanelRoulette: 0
   initialRotationSpeed: 1000
+  soundManagerMatch: {fileID: 0}
 --- !u!1 &867069328
 GameObject:
   m_ObjectHideFlags: 0
@@ -4655,6 +4708,7 @@ MonoBehaviour:
   gameOverText: {fileID: 415407376}
   gameOverImage: {fileID: 1339728203}
   playerType: b
+  soundManagerMatch: {fileID: 0}
 --- !u!1 &1126417918
 GameObject:
   m_ObjectHideFlags: 0
@@ -5037,6 +5091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a76c291cec5d67b49a3dc88d8b30857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManagerMatch: {fileID: 0}
   EnergyBar: {fileID: 1860619592}
   energy: 5
   boostManagerRed: {fileID: 1992720638}
@@ -8572,6 +8627,7 @@ MonoBehaviour:
   gameOverText: {fileID: 415407376}
   gameOverImage: {fileID: 1339728203}
   playerType: r
+  soundManagerMatch: {fileID: 0}
 --- !u!1 &2028229797
 GameObject:
   m_ObjectHideFlags: 0
@@ -9189,3 +9245,4 @@ SceneRoots:
   - {fileID: 738334812}
   - {fileID: 1992720639}
   - {fileID: 1506728307}
+  - {fileID: 302412278}
