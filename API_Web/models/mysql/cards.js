@@ -280,7 +280,7 @@ app.get('/api/cartas_info', async (req, res) => {
     try {
         connection = await connectToDB();
 
-        const query = 'SELECT * FROM CartasInfo';
+        const query = 'SELECT * FROM MostPlayedCards';
         const [cartasInfo] = await connection.query(query);
 
         res.status(200).json({ cartas: cartasInfo });
