@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.IO;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
@@ -32,9 +31,7 @@ public class CardSpawner : MonoBehaviour
 
     /* Card buttons to choose one from any group */
     public Button cardOneElection;
-
     public Button cardTwoElection;
-
     public Button cardThreeElection;
 
     /* Object to send card data */
@@ -98,6 +95,7 @@ public class CardSpawner : MonoBehaviour
                 // Spawn a card based on the object hit
                 if (hit.collider.gameObject == object1)
                 {
+                    
                     soundManagerMatch.GetComponent<SoundManagerMatch>().PlayButtonClickSound();
                     ShowPanelElectionCards("cibersecurity", cibersecurityIds, "defense", 1);
 
@@ -119,18 +117,16 @@ public class CardSpawner : MonoBehaviour
         }
     }  
 
-        // Método para cargar una nueva imagen como sprite
-    private Sprite LoadNewSprite(string filePath)
+    private Sprite LoadNewSprite(string resourcePath)
     {
-        if (File.Exists(filePath))
+        Sprite sprite = Resources.Load<Sprite>(resourcePath);
+        if (sprite == null)
         {
-            byte[] fileData = File.ReadAllBytes(filePath);
-            Texture2D texture = new Texture2D(2, 2);
-            texture.LoadImage(fileData);
-            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            Debug.LogError("Sprite not found at path: " + resourcePath);
         }
-        return null;
+        return sprite;
     }
+
     private void ShowPanelElectionCards(string category, List<int> ids, string cardType, int energyCost)
     {   
         // Check if there is enough energy to spawn the card
@@ -149,9 +145,9 @@ public class CardSpawner : MonoBehaviour
         int randomIdTwo = ids[randomIndexes[1]];
         int randomIdThree = ids[randomIndexes[2]];
 
-        string imagePathOne = $"Assets/Sprites/cartas/{category}/{randomIdOne}.png";
-        string imagePathTwo = $"Assets/Sprites/cartas/{category}/{randomIdTwo}.png";
-        string imagePathThree = $"Assets/Sprites/cartas/{category}/{randomIdThree}.png";
+        string imagePathOne = $"Sprites/cartas/{category}/{randomIdOne}";
+        string imagePathTwo = $"Sprites/cartas/{category}/{randomIdTwo}";
+        string imagePathThree = $"Sprites/cartas/{category}/{randomIdThree}";
 
         // Apply the image to the buttons
         cardOneElection.GetComponent<Image>().sprite = LoadNewSprite(imagePathOne);
@@ -341,18 +337,18 @@ public class CardSpawner : MonoBehaviour
         cardCount++;
     }
 
-    private void ApplyTextureToPrefab(GameObject prefab, string imagePath)
+    private void ApplyTextureToPrefab(GameObject prefab, string resourcePath)
     {
-        // Load the image file data
-        byte[] imageData = File.ReadAllBytes(imagePath);
-
-        // Create a new Texture2D
-        Texture2D texture = new Texture2D(2, 2);
-        texture.LoadImage(imageData);
+        Sprite sprite = Resources.Load<Sprite>(resourcePath);
+        if (sprite == null)
+        {
+            Debug.LogError("Sprite not found at path: " + resourcePath);
+            return;
+        }
 
         // Create a new material with the Standard shader
         Material newMaterial = new Material(Shader.Find("Standard"));
-        newMaterial.mainTexture = texture;
+        newMaterial.mainTexture = sprite.texture;
 
         // Apply the new material to the prefab
         Renderer prefabRenderer = prefab.GetComponent<Renderer>();
@@ -380,7 +376,7 @@ public class CardSpawner : MonoBehaviour
         }
     }
 
-     private int[] GetRandomIndices(int upperRange)
+    private int[] GetRandomIndices(int upperRange)
     {
         List<int> indices = new List<int>();
 
