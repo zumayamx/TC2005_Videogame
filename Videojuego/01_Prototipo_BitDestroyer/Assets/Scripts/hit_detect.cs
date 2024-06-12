@@ -76,7 +76,7 @@ public class HealthManager : MonoBehaviour
     // Method to update the health display
     void UpdateHealthText()
     {
-        healthText.text = "HP: " + playerHealth;
+        healthText.text = playerHealth.ToString();
     }
 
     // Method to display game over message

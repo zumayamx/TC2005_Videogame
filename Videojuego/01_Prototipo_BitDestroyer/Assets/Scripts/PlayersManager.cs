@@ -41,6 +41,7 @@ public class PlayersManager : MonoBehaviour
         /* If the list is empty, add the player it means first player */
         if (playersList.players.Count == 0) {
             PlayerPrefs.SetInt("loginOne", 1);
+            PlayerPrefs.SetInt("loginTwo", 0);
             playersList.players.Add(player);
             return true;
         } 
@@ -59,3 +60,6 @@ public class PlayersManager : MonoBehaviour
         }
     }
 }
+
+
+//'$2b$10$iEdgYaKGtENcP.3PY5Iwv.qjOQpSBayIHvKdRqRREDE6Wsh.u3pUW'

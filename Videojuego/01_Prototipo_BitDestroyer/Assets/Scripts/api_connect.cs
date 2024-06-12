@@ -12,15 +12,6 @@ public class APIConnection : MonoBehaviour
     // The following variables are used to connect to the API
     [SerializeField] string apiURL = "http://ec2-3-101-36-23.us-west-1.compute.amazonaws.com:3000";
     [SerializeField] string cardEndpoint = "/api/cards";
-    [SerializeField] string id;
-
-    // The following variables are used to display the card data, they are referenced in the Unity Editor
-    [SerializeField] TMP_Text nombre;
-    [SerializeField] TMP_Text descripcion;
-    [SerializeField] TMP_Text tipoCarta;
-    [SerializeField] Image costoEnergia;
-    [SerializeField] TMP_Text efecto;
-    [SerializeField] TMP_Text valor;
 
     // This class is used to store the card data
     public Cards cards;

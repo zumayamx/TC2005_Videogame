@@ -44,7 +44,7 @@ app.get('/api/cards', async (req, res) => {
         res.status(500);
         res.json(error);
         console.log(error);
-        /* throw new Error ('Error al obtener las cartas') */
+
     } finally {
 
         if (connection !== null) {
@@ -74,7 +74,7 @@ app.get('/api/estadisticas_jugadores', async (req, res) => {
         res.status(500);
         res.json(error);
         console.log(error);
-        /* throw new Error ('Error al obtener las cartas') */
+
     } finally {
 
         if (connection !== null) {
@@ -178,71 +178,43 @@ app.get('/api/jugadores', async (req, res) => {
         }
     }
 });
-/* CON UNA SOLA PETICION A PARTIR DEL NOMBRE DE USUARIO UNICO ? , PREGUNAR DEL WARNING SLQ, QUE VALE LA PENA QUE SEA VAR -> PROC*/
+
 app.post('/api/partida', async (req, res) => {
-    const {jugadorRojo, jugadorAzul} = req.body;
+    const {id_player_red, id_player_blue, id_player_winner, id_player_defeated, time_match, match_wins_winner, match_played_winner, match_played_defeated} = req.body;
+    console.log(id_player_red, id_player_blue, id_player_winner, id_player_defeated, time_match, match_wins_winner, match_played_winner, match_played_defeated);
 
     let connection = null;
 
     try {
         connection = await connectToDB();
 
-        const queryRojo = 'SELECT id FROM Jugador WHERE nombre = ?';
-        // const idRojo = await connection.query(queryRojo, [jugadorRojo]);
-        // console.log(idRojo);
+        const queryPartida = 'INSERT INTO Partida(jugadorRojo, jugadorAzul, duracion, ganador) VALUES (?, ?, ?, ?)';
+        const [resultPartida] = await connection.query(queryPartida, [id_player_red, id_player_blue, time_match, id_player_winner]);
+        const idPartida = resultPartida.insertId;
+        console.log('Partida registrada correctamente, ID:', idPartida);
 
-        //const idRojo = - 1;
-        
-        const queryAzul  = 'SELECT id FROM Jugador WHERE nombre = ?';
-        // const idAzul = await connection.query(queryAzul, [jugadorAzul]);
-        // console.log(idAzul);
+        const querySetDefeated = 'UPDATE Jugador SET juegos_jugados = ? WHERE id = ?';
+        await connection.query(querySetDefeated, [match_played_defeated, id_player_defeated]);
+        console.log('Jugador derrotado actualizado correctamente');
 
-        //const idAzul = -1;
+        const querySetWins = 'UPDATE Jugador SET juegos_ganados = ?, juegos_jugados = ? WHERE id = ?;';
+        await connection.query(querySetWins, [match_wins_winner, match_played_winner, id_player_winner]);
+        console.log('Jugador ganador actualizado correctamente');
 
-        const [resultsRojo] = await connection.query(queryRojo, [jugadorRojo]);
-
-        console.log(resultsRojo);
-
-        const idRojo = resultsRojo[0].id;
-
-        const [resultsAzul] = await connection.query(queryAzul, [jugadorAzul], (err, results) => {
-            if (err instanceof Error) {
-                res.status(500).send('Error al obtener credenciales jugador azul');
-                return;
-            }
-        })
-        
-        const idAzul = resultsAzul[0].id;
-
-        // console.log(resultsAzul);
-        // console.log(resultsRojo);
-        // console.log(resultsAzul[0].id);
-        // console.log(resultsRojo[0].id);
-        // console.log(idAzul);
-        // console.log(idRojo);
-
-        const queryPartida = 'INSERT INTO Partida(jugadorRojo, jugadorAzul, duracion) VALUES (?, ?, "00:30:01")';
-        connection.query(queryPartida, [idRojo, idAzul], (err, results) => {
-            if (err instanceof Error) {
-                res.status(500).send('Error al iniciar partida');
-                return;
-            }
-        })
-
-        res.status(200).send('Partida iniciada correctamente');
+        res.status(200).json({ code: 'Partida registrada exitosamente', id_match : idPartida});
 
     } catch (error) {
-        res.status(500).send('Error al conectarse a la base de datos');
+        console.log(error);
+        res.status(500).json({ code: 'Error al registrar partida' });
     } finally {
+
         if (connection !== null) {
             connection.end();
             console.log('Conexión cerrada exitosamente');
         }
+
     }
 });
-
-/* VERIFICAR EL ULTIMO INSERTADO Y COMO OBTENER ESA ID, ADEMÁS SI UNA ID SE INSERTA JUSTO DESPUES */
-/* COMO VERIFICAR QUE ESE JUGADOR ESTUVO EN ESA PARTIDA REALMENTE */
 
 app.post('/api/partida/ganador', async (req, res) => {
     
@@ -261,7 +233,7 @@ app.post('/api/partida/ganador', async (req, res) => {
             }
         });
 
-        res.status(200).send('Ganador de la partida registrado correctamente'); /* Poder regresar el nombre del ganador */
+        res.status(200).send('Ganador de la partida registrado correctamente');
 
     } catch (error) {
         console.log('Error al registrar el jugador ganador');
@@ -275,6 +247,33 @@ app.post('/api/partida/ganador', async (req, res) => {
     }
 });
 
+app.post('/api/carta/jugada', async (req, res) => {
+    
+    let connection = null;
+    const {id_carta, id_jugador, id_partida} = req.body;
+
+    try {
+        connection = await connectToDB();
+
+        const query = 'INSERT INTO CartaJugada (id_carta, id_jugador, id_partida) VALUES (?, ?, ?)';
+        await connection.query(query, [id_carta, id_jugador, id_partida]);
+        console.log('Carta jugada registrada correctamente');
+        res.status(200).json({ code: 'Carta jugada registrada exitosamente' });
+
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json({ code: 'Error al registrar carta jugada' });
+
+    } finally {
+
+        if (connection !== null) {
+            connection.end();
+            console.log('Conexión cerrada exitosamente');
+        }
+    
+    }
+});
 
 app.get('/api/cartas_info', async (req, res) => {
     let connection = null;
@@ -296,7 +295,6 @@ app.get('/api/cartas_info', async (req, res) => {
         }
     }
 });
-
 
 const PORT = process.env.port ?? 3000;
 app.listen(PORT, () => {

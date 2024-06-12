@@ -88,7 +88,7 @@ public class LoginManager : MonoBehaviour
         Returns:
         - IEnumerator
       */
-    private IEnumerator OnSubmitLogin(string uri, string name, string password) {
+    public IEnumerator OnSubmitLogin(string uri, string name, string password) {
         /* Create the request */
         UnityWebRequest webRequest = UnityWebRequest.Get(uri + "/api/jugador/inicio_sesion/" + name + "/" + password);
 
