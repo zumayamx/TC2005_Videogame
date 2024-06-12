@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class CardSpawner : MonoBehaviour
 {
+    // SoundManagerMatch object
+    public GameObject soundManagerMatch;
     /* Image to display the energy bar */
     public Image EnergyBar;
     
@@ -75,6 +77,9 @@ public class CardSpawner : MonoBehaviour
         /* Get the componet to send card info */
         cardSendManager = GameObject.Find("turn_manager");
 
+        /* Get the sound manager */
+        soundManagerMatch = GameObject.Find("SoundManager");
+
         UpdateEnergyBar();
     }
 
@@ -93,23 +98,26 @@ public class CardSpawner : MonoBehaviour
                 // Spawn a card based on the object hit
                 if (hit.collider.gameObject == object1)
                 {
+                    soundManagerMatch.GetComponent<SoundManagerMatch>().PlayButtonClickSound();
                     ShowPanelElectionCards("cibersecurity", cibersecurityIds, "defense", 1);
 
                     //TrySpawnCard("cibersecurity", cibersecurityIds, "defense", 1); // Defense card
                 }
                 else if (hit.collider.gameObject == object2)
                 {
+                    soundManagerMatch.GetComponent<SoundManagerMatch>().PlayButtonClickSound();
                     ShowPanelElectionCards("bootcamp", bootcampIds, "none", 2);
                     //TrySpawnCard("bootcamp", bootcampIds, "none", 2); // Bootcamp card
                 }
                 else if (hit.collider.gameObject == object3)
                 {
+                    soundManagerMatch.GetComponent<SoundManagerMatch>().PlayButtonClickSound();
                     ShowPanelElectionCards("ciberattack", ciberattackIds, "attack", 3);
                     //TrySpawnCard("ciberattack", ciberattackIds, "attack", 3); // Attack card
                 }
             }
         }
-    }
+    }  
 
         // Método para cargar una nueva imagen como sprite
     private Sprite LoadNewSprite(string filePath)

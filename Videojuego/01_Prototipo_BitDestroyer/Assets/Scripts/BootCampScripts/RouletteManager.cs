@@ -27,8 +27,11 @@ public class RouletteManager : MonoBehaviour
     private bool isSpinning = false;    // State of the roulette
     private float spinDuration;  // Duración del giro
 
+    public GameObject soundManagerMatch; // GameObject to get the SoundManagerMatch script
+
     void Start()
     {
+        soundManagerMatch = GameObject.Find("SoundManager");
         spinDuration = Random.Range(1f, 6f);
         Debug.Log("Roulette Manager START!");
         roulettePanel = GameObject.Find("RoulettePanel");
@@ -45,6 +48,8 @@ public class RouletteManager : MonoBehaviour
     /* Function to start the spin of the roulette */
     public void StartSpin()
     {
+        soundManagerMatch.GetComponent<SoundManagerMatch>().SoundRoulette(spinDuration);
+        
         if (!isSpinning)
         {
             isSpinning = true;

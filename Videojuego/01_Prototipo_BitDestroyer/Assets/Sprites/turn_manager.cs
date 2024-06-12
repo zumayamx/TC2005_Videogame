@@ -43,9 +43,13 @@ public class turn_manager : MonoBehaviour
     // Variable to store the start time of the match
     private DateTime startTime;
 
+    public GameObject sceneManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        sceneManager = GameObject.Find("SceneManager");
+
         turnCount = 0;
         blue_turn = true;
         UpdateTurnDisplay();
@@ -241,6 +245,14 @@ public class turn_manager : MonoBehaviour
         GameObject PlayerManager = GameObject.Find("playersManager");
         Destroy(PlayerManager);
         Debug.Log("Players list cleared");
-        SceneManager.LoadScene("ModeElection");
+
+        if (sceneManager != null)
+        {
+            sceneManager.GetComponent<SceneTransition>().LoadScene("ModeElection");
+        }
+        else
+        {
+            SceneManager.LoadScene("ModeElection");
+        }
     }
 }

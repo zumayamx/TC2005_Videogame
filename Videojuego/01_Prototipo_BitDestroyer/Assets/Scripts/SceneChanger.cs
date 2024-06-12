@@ -1,5 +1,4 @@
-
-/* 
+/*
 - José Manuel García Zumaya A01784238
 - 02/06/2024
 
@@ -12,9 +11,7 @@
 */
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -26,11 +23,15 @@ public class SceneChanger : MonoBehaviour
     /* Button to select multiplayer mode */
     public Button button_multiplayers;
 
+    public SceneTransition sceneTransition; // Referencia al SceneTransition
+
+    public float waitTime = 1f;
+
     void Start()
     {
         /* Add listeners to the buttons */
-        button_one_player.onClick.AddListener(() => ChangeSceneByName("Login", 1));
-        button_multiplayers.onClick.AddListener(() => ChangeSceneByName("Login", 2));
+        button_one_player.onClick.AddListener(() => StartCoroutine(ChangeSceneByName("Login", 1)));
+        button_multiplayers.onClick.AddListener(() => StartCoroutine(ChangeSceneByName("Login", 2)));
     }
 
     /* Change to the scene by name 
@@ -38,13 +39,23 @@ public class SceneChanger : MonoBehaviour
         - sceneName: Name of the scene
         - modoJuego: Game mode
     */
-    private void ChangeSceneByName(string sceneName, int modoJuego)
+    private IEnumerator ChangeSceneByName(string sceneName, int modoJuego)
     {
         /* Set the game mode */
         PlayerPrefs.SetInt("gameMode", modoJuego - 1);
 
+        /* Wait for the specified time */
+        yield return new WaitForSeconds(waitTime);
+
         /* Change the scene */
-        SceneManager.LoadScene(sceneName);
+        if (sceneTransition != null)
+        {
+            sceneTransition.LoadScene(sceneName);
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 
     /* Change to the scene by index 
@@ -52,10 +63,13 @@ public class SceneChanger : MonoBehaviour
         - sceneIndex: Index of the scene
         - modoJuego: Game mode
     */
-    private void ChangeSceneByIndex(int sceneIndex, int modoJuego)
+    private IEnumerator ChangeSceneByIndex(int sceneIndex, int modoJuego)
     {
         /* Set the game mode */
         PlayerPrefs.SetInt("gameMode", modoJuego);
+
+        /* Wait for the specified time */
+        yield return new WaitForSeconds(waitTime);
 
         /* Change the scene */
         SceneManager.LoadScene(sceneIndex);
