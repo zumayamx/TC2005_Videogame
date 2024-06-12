@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,9 @@ public class turn_manager : MonoBehaviour
     // Object to send data to data base
     public GameOverManager gameOverManager;
 
+    // Variable to store the start time of the match
+    private DateTime startTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +59,9 @@ public class turn_manager : MonoBehaviour
         buttonRestart.onClick.AddListener(() => {
             SceneManager.LoadScene("Game");
         });
+
+        // Set the start time
+        startTime = DateTime.Now;
     }
 
     // Update is called once per frame
@@ -92,6 +99,12 @@ public class turn_manager : MonoBehaviour
             gameOverManager.playerWinnerIsBlue = false;
             gameOverManager.sendData = true;
             gameOverManager.enabled = true;
+            TimeSpan elapsedTime = DateTime.Now - startTime;
+            string timeMatch = string.Format("{0:D2}:{1:D2}:{2:D2}", 
+                                             elapsedTime.Hours, 
+                                             elapsedTime.Minutes, 
+                                             elapsedTime.Seconds);
+            gameOverManager.timeMatchGlobal = timeMatch;
             // To evoid multiple calls to this function
             isBlueDead = false;
         }
@@ -107,6 +120,12 @@ public class turn_manager : MonoBehaviour
             gameOverManager.playerWinnerIsBlue = true;
             gameOverManager.sendData = true;
             gameOverManager.enabled = true;
+            TimeSpan elapsedTime = DateTime.Now - startTime;
+            string timeMatch = string.Format("{0:D2}:{1:D2}:{2:D2}", 
+                                             elapsedTime.Hours, 
+                                             elapsedTime.Minutes, 
+                                             elapsedTime.Seconds);
+            gameOverManager.timeMatchGlobal = timeMatch;
             // To evoid multiple calls to this function
             isRedDead = false;
         }
