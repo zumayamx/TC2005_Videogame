@@ -46,6 +46,8 @@ public class SceneChangerLogin : MonoBehaviour
 
     private LoginManager loginManager;
 
+    public SceneTransition sceneTransition; // Referencia al SceneTransition
+
     void Start()
     {
         // Get the login manager
@@ -56,12 +58,12 @@ public class SceneChangerLogin : MonoBehaviour
 
         if (PlayerPrefs.GetInt("gameMode") == 0)
         {
-             gameButton.onClick.AddListener(() => ToGameIA());
+             gameButton.onClick.AddListener(() => StartCoroutine(ToGameIA()));
         }
 
         if (PlayerPrefs.GetInt("gameMode") == 1)
         {
-            gameButton.onClick.AddListener(() => ToGame());
+            gameButton.onClick.AddListener(() => StartCoroutine(ToGame()));
         }
 
         /* If the game mode is one player or two players, hide the game button to the game */
@@ -99,23 +101,46 @@ public class SceneChangerLogin : MonoBehaviour
     /* Change to election mode scene if the back button is pressed */
     private void ToModeElection()
     {
-        SceneManager.LoadScene("ModeElection");
+        if (sceneTransition != null)
+        {
+            sceneTransition.LoadScene("ModeElection");
+        }
+        else
+        {
+            SceneManager.LoadScene("ModeElection");
+        }
     }
 
     /* Change to the game scene if the next button is pressed */
-    private void ToGame()
+    private IEnumerator ToGame()
     {
-        SceneManager.LoadScene("Game");
+        yield return new WaitForSeconds(1);
+        if (sceneTransition != null)
+        {
+            sceneTransition.LoadScene("Game");
+        }
+        else
+        {
+            SceneManager.LoadScene("Game");
+        }
     }
 
     /* Change to the game IA scene if the next button is pressed */
-    private void ToGameIA() {
+    private IEnumerator ToGameIA() {
+         yield return new WaitForSeconds(1);
         StartCoroutine(LoginAndLoadScene());
         }
     private IEnumerator LoginAndLoadScene() {
         yield return StartCoroutine(loginManager.OnSubmitLogin("http://localhost:3000", "IA", "IA123"));
-        SceneManager.LoadScene("AI_Game");
+        if (sceneTransition != null)
+        {
+            sceneTransition.LoadScene("AI_Game");
         }
+        else
+        {
+            SceneManager.LoadScene("AI_Game");
+        }
+    }
 
     /* Change the color of the buttons and input fields to red */
     public void ChangeButtonImagesRed() {

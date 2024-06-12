@@ -20,7 +20,7 @@ async function connectToDB() {
 
 
 app.get('/api/web', (req, res) => {
-    const file = fs.readFileSync("/Users/leonblanga/Desktop/github/TC2005_Videojuego/API_Web/web/public/html/index.html", "utf-8"); 
+    const file = fs.readFileSync("/Users/josezumayamx/Desktop/mainVideojuego/TC2005_Videojuego/API_Web/web/public/html/index.html", "utf-8"); 
     res.status(200).send(file);
 }) 
 

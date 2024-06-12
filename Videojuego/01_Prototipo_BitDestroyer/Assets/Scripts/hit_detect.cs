@@ -11,8 +11,11 @@ public class HealthManager : MonoBehaviour
     public Image gameOverImage; // Canvas Image to display game over screen
     public string playerType; // "b" for player one, "r" for player two
 
+    public GameObject soundManagerMatch; // GameObject to get the SoundManagerMatch script
+
     void Start()
     {
+        soundManagerMatch = GameObject.Find("SoundManager");
         if (playerType == "b")
         {
             PlayerPrefs.SetInt("playerBlueHealth", playerHealth);
@@ -59,6 +62,9 @@ public class HealthManager : MonoBehaviour
         //playerHealth -= damage;
         UpdateHealthBar();
         UpdateHealthText();
+        // Play the sound of the player being hit
+        soundManagerMatch.GetComponent<SoundManagerMatch>().PlayHitSound();
+
 
         // Check if the player is out of health
         // if ( <= 0)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,9 +40,16 @@ public class turn_manager : MonoBehaviour
     // Object to send data to data base
     public GameOverManager gameOverManager;
 
+    // Variable to store the start time of the match
+    private DateTime startTime;
+
+    public GameObject sceneManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        sceneManager = GameObject.Find("SceneManager");
+
         turnCount = 0;
         blue_turn = true;
         UpdateTurnDisplay();
@@ -55,6 +63,9 @@ public class turn_manager : MonoBehaviour
         buttonRestart.onClick.AddListener(() => {
             SceneManager.LoadScene("Game");
         });
+
+        // Set the start time
+        startTime = DateTime.Now;
     }
 
     // Update is called once per frame
@@ -85,26 +96,42 @@ public class turn_manager : MonoBehaviour
             panelEndGame.SetActive(true);
             string nameBlue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
             string nameRed = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
-            textEndGame.text = "Player " + nameBlue + "defeated!" + "\n" + "Player " + nameRed + " wins!";
+            textEndGame.text = "Player " + nameBlue + " defeated!" + "\n" + "Player " + nameRed + " wins!";
             gameOverManager = GameObject.Find("turn_manager").GetComponent<GameOverManager>();
             gameOverManager.playerWinner = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1];
             gameOverManager.playerDefeated = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0];
             gameOverManager.playerWinnerIsBlue = false;
             gameOverManager.sendData = true;
             gameOverManager.enabled = true;
+            TimeSpan elapsedTime = DateTime.Now - startTime;
+            string timeMatch = string.Format("{0:D2}:{1:D2}:{2:D2}", 
+                                             elapsedTime.Hours, 
+                                             elapsedTime.Minutes, 
+                                             elapsedTime.Seconds);
+            gameOverManager.timeMatchGlobal = timeMatch;
+            // To evoid multiple calls to this function
+            isBlueDead = false;
         }
 
         if (isRedDead) {
             panelEndGame.SetActive(true);
             string nameBlue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
             string nameRed = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
-            textEndGame.text = "Player " + nameRed + "defeated!" + "\n" + "Player " + nameBlue + " wins!";
+            textEndGame.text = "Player " + nameRed + " defeated!" + "\n" + "Player " + nameBlue + " wins!";
             gameOverManager = GameObject.Find("turn_manager").GetComponent<GameOverManager>();
             gameOverManager.playerWinner = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0];
             gameOverManager.playerDefeated = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1];
             gameOverManager.playerWinnerIsBlue = true;
             gameOverManager.sendData = true;
             gameOverManager.enabled = true;
+            TimeSpan elapsedTime = DateTime.Now - startTime;
+            string timeMatch = string.Format("{0:D2}:{1:D2}:{2:D2}", 
+                                             elapsedTime.Hours, 
+                                             elapsedTime.Minutes, 
+                                             elapsedTime.Seconds);
+            gameOverManager.timeMatchGlobal = timeMatch;
+            // To evoid multiple calls to this function
+            isRedDead = false;
         }
     }
 
@@ -215,7 +242,17 @@ public class turn_manager : MonoBehaviour
     private void ToModeElection()
     {
         // Clear the players list
-        GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players.Clear();
-        SceneManager.LoadScene("ModeElection");
+        GameObject PlayerManager = GameObject.Find("playersManager");
+        Destroy(PlayerManager);
+        Debug.Log("Players list cleared");
+
+        if (sceneManager != null)
+        {
+            sceneManager.GetComponent<SceneTransition>().LoadScene("ModeElection");
+        }
+        else
+        {
+            SceneManager.LoadScene("ModeElection");
+        }
     }
 }

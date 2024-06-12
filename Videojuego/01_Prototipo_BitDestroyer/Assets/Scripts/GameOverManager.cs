@@ -31,6 +31,8 @@ public class GameOverManager : MonoBehaviour
 
     private GameObject cardSendManager;
 
+    public string timeMatchGlobal;
+
     ResultMatch result;
     
     // Start is called before the first frame update
@@ -43,7 +45,7 @@ public class GameOverManager : MonoBehaviour
             int idPlayerRed = playerDefeated.id;
             int idPlayerWinner = playerWinner.id;
             int idPlayerDefeated = playerDefeated.id;
-            string timeMatch = "00:30:02";
+            string timeMatch = timeMatchGlobal;
             int matchWinsWinner = playerWinner.juegos_ganados + 1;
             int mathcPlayedDefeated = playerDefeated.juegos_jugados + 1;
             int matchPlayedWinner = playerWinner.juegos_jugados + 1;   
@@ -56,7 +58,7 @@ public class GameOverManager : MonoBehaviour
             int idPlayerRed = playerWinner.id;
             int idPlayerWinner = playerWinner.id;
             int idPlayerDefeated = playerDefeated.id;
-            string timeMatch = "00:30:02";
+            string timeMatch = timeMatchGlobal;
             int matchWinsWinner = playerWinner.juegos_ganados + 1;
             int mathcPlayedDefeated = playerDefeated.juegos_jugados + 1;
             int matchPlayedWinner = playerWinner.juegos_jugados + 1;
