@@ -17,12 +17,12 @@ public class Projectile : MonoBehaviour
         if (direction)
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
-            Debug.Log("going right");
+            //Debug.Log("going right");
         }
         else
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
-            Debug.Log("going left");
+            //Debug.Log("going left");
         }
         // Move the projectile based on its direction
     }

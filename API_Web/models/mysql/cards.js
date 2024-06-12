@@ -3,7 +3,6 @@ import mysql from 'mysql2/promise';
 import express from 'express';
 import fs from 'fs';
 import  bcrypt from 'bcrypt';
-import { Console } from 'console';
 const saltRounds = 10;
 const app = express();
 app.use(express.json());
@@ -190,8 +189,9 @@ app.post('/api/partida', async (req, res) => {
         connection = await connectToDB();
 
         const queryPartida = 'INSERT INTO Partida(jugadorRojo, jugadorAzul, duracion, ganador) VALUES (?, ?, ?, ?)';
-        await connection.query(queryPartida, [id_player_red, id_player_blue, time_match, id_player_winner]);
-        console.log('Partida registrada correctamente');
+        const [resultPartida] = await connection.query(queryPartida, [id_player_red, id_player_blue, time_match, id_player_winner]);
+        const idPartida = resultPartida.insertId;
+        console.log('Partida registrada correctamente, ID:', idPartida);
 
         const querySetDefeated = 'UPDATE Jugador SET juegos_jugados = ? WHERE id = ?';
         await connection.query(querySetDefeated, [match_played_defeated, id_player_defeated]);
@@ -201,11 +201,11 @@ app.post('/api/partida', async (req, res) => {
         await connection.query(querySetWins, [match_wins_winner, match_played_winner, id_player_winner]);
         console.log('Jugador ganador actualizado correctamente');
 
-        res.status(200).send('Partida registrada correctamente');
+        res.status(200).json({ code: 'Partida registrada exitosamente', id_match : idPartida});
 
     } catch (error) {
         console.log(error);
-        res.status(500).send('Error al conectarse a la base de datos');
+        res.status(500).json({ code: 'Error al registrar partida' });
     } finally {
 
         if (connection !== null) {
@@ -247,6 +247,33 @@ app.post('/api/partida/ganador', async (req, res) => {
     }
 });
 
+app.post('/api/carta/jugada', async (req, res) => {
+    
+    let connection = null;
+    const {id_carta, id_jugador, id_partida} = req.body;
+
+    try {
+        connection = await connectToDB();
+
+        const query = 'INSERT INTO CartaJugada (id_carta, id_jugador, id_partida) VALUES (?, ?, ?)';
+        await connection.query(query, [id_carta, id_jugador, id_partida]);
+        console.log('Carta jugada registrada correctamente');
+        res.status(200).json({ code: 'Carta jugada registrada exitosamente' });
+
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json({ code: 'Error al registrar carta jugada' });
+
+    } finally {
+
+        if (connection !== null) {
+            connection.end();
+            console.log('Conexión cerrada exitosamente');
+        }
+    
+    }
+});
 
 app.get('/api/cartas_info', async (req, res) => {
     let connection = null;

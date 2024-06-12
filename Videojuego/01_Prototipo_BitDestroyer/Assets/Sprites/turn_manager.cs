@@ -36,6 +36,9 @@ public class turn_manager : MonoBehaviour
     public Button buttonExit;
     public TMP_Text textEndGame;
 
+    // Object to send data to data base
+    public GameOverManager gameOverManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +86,12 @@ public class turn_manager : MonoBehaviour
             string nameBlue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
             string nameRed = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
             textEndGame.text = "Player " + nameBlue + "defeated!" + "\n" + "Player " + nameRed + " wins!";
+            gameOverManager = GameObject.Find("turn_manager").GetComponent<GameOverManager>();
+            gameOverManager.playerWinner = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1];
+            gameOverManager.playerDefeated = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0];
+            gameOverManager.playerWinnerIsBlue = false;
+            gameOverManager.sendData = true;
+            gameOverManager.enabled = true;
         }
 
         if (isRedDead) {
@@ -90,6 +99,12 @@ public class turn_manager : MonoBehaviour
             string nameBlue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
             string nameRed = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
             textEndGame.text = "Player " + nameRed + "defeated!" + "\n" + "Player " + nameBlue + " wins!";
+            gameOverManager = GameObject.Find("turn_manager").GetComponent<GameOverManager>();
+            gameOverManager.playerWinner = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0];
+            gameOverManager.playerDefeated = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1];
+            gameOverManager.playerWinnerIsBlue = true;
+            gameOverManager.sendData = true;
+            gameOverManager.enabled = true;
         }
     }
 

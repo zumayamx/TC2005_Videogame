@@ -35,16 +35,8 @@ public class CardSpawner : MonoBehaviour
 
     public Button cardThreeElection;
 
-    /* Update de image of energy */
-   // public Image energyImage;
-
-    //public Sprite energyImage_3;
-
-    //public Sprite energyImage_2;
-
-    //public Sprite energyImage_1;
-
-    //public Sprite energyImage_0;
+    /* Object to send card data */
+    private GameObject cardSendManager;
     [SerializeField] private GameObject cardPrefab; // The same prefab for all decks
     [SerializeField] private Transform handPosition;
 
@@ -79,6 +71,9 @@ public class CardSpawner : MonoBehaviour
         /* Desactivate the boost cards objects */
         boostManagerRed.SetActive(false);
         boostManagerBlue.SetActive(false);
+
+        /* Get the componet to send card info */
+        cardSendManager = GameObject.Find("turn_manager");
 
         UpdateEnergyBar();
     }
@@ -230,6 +225,30 @@ public class CardSpawner : MonoBehaviour
         }
 
         Card cardData = apiConnection.cards.cards.Find(card => card.id == cardId);
+        Debug.Log(cardData);
+        bool IsBlueTurn = GameObject.Find("turn_manager").GetComponent<turn_manager>().blue_turn;
+        Debug.Log(IsBlueTurn);
+
+        if (IsBlueTurn) {
+            int id_player_blue = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].id;
+            Debug.Log(id_player_blue);
+
+            if (cardSendManager == null) {
+                cardSendManager = GameObject.Find("turn_manager");
+                Debug.Log(cardSendManager);
+                Debug.Log("CardSendManager encontrado");
+            }
+            
+            cardSendManager.GetComponent<CardSendManager>().addCard(cardData, id_player_blue);
+           
+            Debug.Log("Carta añadida");
+        }
+
+        if (!IsBlueTurn) {
+            int id_player_red = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].id;
+            cardSendManager.GetComponent<CardSendManager>().addCard(cardData, id_player_red);
+        }
+
         if (cardData == null)
         {
             Debug.LogError("Card data not found for card ID: " + cardId);

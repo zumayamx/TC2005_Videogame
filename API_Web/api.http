@@ -51,3 +51,13 @@ Content-Type: application/json
     "match_played_defeated" : 37,
     "match_played_winner" : 190
 }
+
+### REGISTRAR UNA CARTA
+POST http://localhost:3000/api/carta/jugada
+Content-Type: application/json
+
+{
+    "id_partida" : 1,
+    "id_jugador" : 1,
+    "id_carta" : 3
+}
