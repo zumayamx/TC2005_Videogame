@@ -1,7 +1,6 @@
 
 /* 
-- José Manuel García Zumaya A01784238
-- 02/06/2024
+
 
 - Description:
     This script is used to manage the players through the game, it uses the Players object (PlayersList) to store the players

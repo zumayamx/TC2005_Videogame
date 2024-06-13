@@ -1,6 +1,6 @@
 
 /* 
-- José Manuel García Zumaya A01784238 
+- 
 - 02/06/2024
 
 - Description:
@@ -30,7 +30,7 @@ public class LoginManager : MonoBehaviour
     public Button button_player_register;
 
     /* URL of the API */
-    [SerializeField] string apiURL = "http://localhost:3000";
+    [SerializeField] string apiURL = "http://ec2-3-101-36-23.us-west-1.compute.amazonaws.com";
 
     /* Result of the query */
     public Result result;

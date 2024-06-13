@@ -1,4 +1,4 @@
-/* José Manuel García Zumaya
+/*
 - 11/06/2024
 
 - Description:
@@ -13,7 +13,7 @@ using UnityEngine.Networking;
 public class CardSendManager : MonoBehaviour
 {
     /* URL of the API */
-    [SerializeField] string apiURL = "http://localhost:3000";
+    [SerializeField] string apiURL = "http://ec2-3-101-36-23.us-west-1.compute.amazonaws.com:3000";
 
     public List<(Card, int)> cardsPlayed = new List<(Card, int)>();
 

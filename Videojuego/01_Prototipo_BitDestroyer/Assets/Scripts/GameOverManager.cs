@@ -15,7 +15,7 @@ using UnityEngine.Networking;
 public class GameOverManager : MonoBehaviour
 {
     // URL of the API
-    [SerializeField] string apiURL = "http://localhost:3000";
+    [SerializeField] string apiURL = "http://ec2-3-101-36-23.us-west-1.compute.amazonaws.com:3000";
 
     // Variable to send data
     public bool sendData = false;
