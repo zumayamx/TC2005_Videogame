@@ -125,6 +125,8 @@ async function fetchAndRenderPieChart() {
     try {
         const response = await fetch('http://localhost:3000/api/cartas_info', { method: 'GET' });
 
+        console.log('Fetching data from /api/cartas_info')
+
         if (response.ok) {
             const data = await response.json();
             const cartas = data.cartas;
