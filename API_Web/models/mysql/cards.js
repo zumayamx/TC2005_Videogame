@@ -3,8 +3,12 @@ import mysql from 'mysql2/promise';
 import express from 'express';
 import fs from 'fs';
 import  bcrypt from 'bcrypt';
+import cors from 'cors'; // Importar cors
+
 const saltRounds = 10;
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 app.use(express.static('web/public'))
 
