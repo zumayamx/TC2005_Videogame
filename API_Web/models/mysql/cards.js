@@ -300,6 +300,27 @@ app.get('/api/cartas_info', async (req, res) => {
     }
 });
 
+app.get('/api/duracion_partidas', async (req, res) => {
+    let connection = null;
+    try {
+        connection = await connectToDB();
+
+        const query = 'SELECT * FROM GameDurationStats';
+        const [duracionPartidas] = await connection.query(query);
+
+        res.status(200).json({ duracion_partidas: duracionPartidas });
+
+    } catch (error) {
+        res.status(500).json(error);
+        console.log(error);
+    } finally {
+        if (connection !== null) {
+            connection.end();
+            console.log('Conexión cerrada exitosamente');
+        }
+    }
+});
+
 const PORT = process.env.port ?? 3000;
 app.listen(PORT, () => {
     console.log(`Running on port ${PORT}`)
