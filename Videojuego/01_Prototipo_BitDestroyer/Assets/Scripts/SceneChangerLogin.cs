@@ -1,7 +1,6 @@
 
 /* 
- - José Manuel García Zumaya A01784238
- - 02/06/2024
+
 
  - Description:
     This script is used to manage the login of one or two players in the game,

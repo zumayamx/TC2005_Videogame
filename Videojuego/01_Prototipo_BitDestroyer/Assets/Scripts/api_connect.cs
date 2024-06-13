@@ -36,6 +36,7 @@ public class APIConnection : MonoBehaviour
             string data = www.downloadHandler.text;
 
             cards = JsonUtility.FromJson<Cards>(data);
+            Debug.Log("connected");
         }
     }
 }

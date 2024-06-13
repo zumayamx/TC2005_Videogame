@@ -1,6 +1,5 @@
 /*
-- José Manuel García Zumaya A01784238
-- 02/06/2024
+
 
 - Description:
     This script is used to change the scene to login and set the game mode, 

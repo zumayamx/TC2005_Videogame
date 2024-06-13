@@ -1,6 +1,5 @@
 /* 
-- José Manuel García Zumaya A01784238
-- 02/06/2024
+
 
 - Description:
    This script is used to show the players in the game scene, in addition the players
@@ -23,6 +22,6 @@ public class ShowPlayers : MonoBehaviour
     void Start()
     {
         playerOne_Name.text = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[0].nombre;
-        playerTwo_Name.text = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
+       playerTwo_Name.text = GameObject.Find("playersManager").GetComponent<PlayersManager>().playersList.players[1].nombre;
     }
 }

@@ -1,13 +1,3 @@
-
-/* 
-- 
-- 02/06/2024
-
-- Description:
-    This script is used to manage the login and register of the players in the game,
-    it uses the library Networking to send the query data to the server and get the response.
- */
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +20,7 @@ public class LoginManager : MonoBehaviour
     public Button button_player_register;
 
     /* URL of the API */
-    [SerializeField] string apiURL = "http://ec2-3-101-36-23.us-west-1.compute.amazonaws.com";
+    [SerializeField] string apiURL = "http://ec2-3-101-36-23.us-west-1.compute.amazonaws.com:3000";
 
     /* Result of the query */
     public Result result;
@@ -43,9 +33,16 @@ public class LoginManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Start() called");
         /* Add listeners to the buttons */
-        button_player_register.onClick.AddListener(() => StartCoroutine(OnSubmitRegister(apiURL, name_player.text, password_player.text)));
-        button_player_login.onClick.AddListener(() => StartCoroutine(OnSubmitLogin(apiURL, name_player.text, password_player.text)));
+        button_player_register.onClick.AddListener(() => {
+            Debug.Log("Register button clicked");
+            StartCoroutine(OnSubmitRegister(apiURL, name_player.text, password_player.text));
+        });
+        button_player_login.onClick.AddListener(() => {
+            Debug.Log("Login button clicked");
+            StartCoroutine(OnSubmitLogin(apiURL, name_player.text, password_player.text));
+        });
     }
 
     /* Coroutine to send the register query 
@@ -57,9 +54,13 @@ public class LoginManager : MonoBehaviour
         - IEnumerator
       */
     private IEnumerator OnSubmitRegister(string uri, string name, string password) {
+        Debug.Log("OnSubmitRegister() called with uri: " + uri + ", name: " + name + ", password: " + password);
         /* Create the request */
         UnityWebRequest webRequest = UnityWebRequest.Post(uri + "/api/jugador/registro", "{\"nombre\":\"" + name + 
         "\",\"clave\":\"" + password + "\"}", "application/json");
+
+        Debug.Log("Register URL: " + uri + "/api/jugador/registro");
+        Debug.Log("Register Payload: " + "{\"nombre\":\"" + name + "\",\"clave\":\"" + password + "\"}");
 
         /* Send the request */
         yield return webRequest.SendWebRequest();
@@ -67,17 +68,19 @@ public class LoginManager : MonoBehaviour
         /* Check if the request was successful */
         if (webRequest.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError(webRequest.error);
+            Debug.Log("Register URL: " + uri + "/api/jugador/registro");
+            Debug.LogError("Register Error: " + webRequest.error);
         }
         else
         {
             /* Get the data from the response */
             string data = webRequest.downloadHandler.text;
+            Debug.Log("Register Response: " + data);
             result = JsonUtility.FromJson<Result>(data);
         }
         
         /* Show the message of the response */
-        Debug.Log(result.message);
+        Debug.Log("Register Result Message: " + result.message);
     }
 
     /* Coroutine to send the login query 
@@ -89,8 +92,11 @@ public class LoginManager : MonoBehaviour
         - IEnumerator
       */
     public IEnumerator OnSubmitLogin(string uri, string name, string password) {
+        Debug.Log("OnSubmitLogin() called with uri: " + uri + ", name: " + name + ", password: " + password);
         /* Create the request */
         UnityWebRequest webRequest = UnityWebRequest.Get(uri + "/api/jugador/inicio_sesion/" + name + "/" + password);
+
+       
 
         /* Send the request */
         yield return webRequest.SendWebRequest();
@@ -101,13 +107,15 @@ public class LoginManager : MonoBehaviour
         /* Check if the request was successful */
         if (webRequest.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError(webRequest.error);
+            Debug.Log("Login URL: " + uri + "/api/jugador/inicio_sesion/" + name + "/" + password);
+            Debug.LogError("Login Error: " + webRequest.error);
             result = false;
         }
         else
         {
             /* Get the data from the response */
             string data = webRequest.downloadHandler.text;
+            Debug.Log("Login Response: " + data);
 
             /* Process the data */
             result = ProcessResult(data);
@@ -129,14 +137,17 @@ public class LoginManager : MonoBehaviour
       */
     private bool ProcessResult(string data)
     {
+        Debug.Log("ProcessResult() called with data: " + data);
         /* Deserialize the data to format Result */
         result = JsonUtility.FromJson<Result>(data);
 
         /* If the result.code is SUCCESS do: */
         if (result.code == "SUCCESS")
         {
+            Debug.Log("Result code SUCCESS");
             /* Deserialize the data to format Players */
             players = JsonUtility.FromJson<Players>(data);
+            Debug.Log("Players deserialized, count: " + players.players.Count);
 
             /* Add the player to the PlayersManager */
             return playersManager.AddPlayer(players.players[0]);
@@ -144,7 +155,7 @@ public class LoginManager : MonoBehaviour
         else
         {
             /* Show the error message of the response and NOT deserialize the to players format */
-            Debug.LogError(result.message);
+            Debug.LogError("Error message: " + result.message);
             return false;
         }
     }
@@ -156,5 +167,4 @@ public class Result
 {
     public string code;
     public string message;
-
 }

@@ -1888,7 +1888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1300801507
@@ -2763,7 +2763,7 @@ MonoBehaviour:
   password_player: {fileID: 102625196}
   button_player_login: {fileID: 1839815674}
   button_player_register: {fileID: 1571965045}
-  apiURL: http://localhost:3000
+  apiURL: http://ec2-3-101-36-23.us-west-1.compute.amazonaws.com:3000
   result:
     code: 
     message: 
@@ -2783,8 +2783,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f90b526dc57d4974b4e0aebcf30ca85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopClip: {fileID: 8300000, guid: b35f66d633dc548aead3caea9bd11083, type: 3}
-  buttonClickClip: {fileID: 8300000, guid: c31c05db736d34befa99668fa077892b, type: 3}
 --- !u!114 &2142047895
 MonoBehaviour:
   m_ObjectHideFlags: 0
