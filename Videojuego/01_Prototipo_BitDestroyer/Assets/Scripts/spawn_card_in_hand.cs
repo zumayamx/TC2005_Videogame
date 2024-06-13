@@ -59,19 +59,19 @@ public class CardSpawner : MonoBehaviour
 
     private void Start()
     {
-        /* Desactivate the panel at the beggining of scene */
+        /* Deactivate the panel at the beginning of scene */
         panelElectionCards.SetActive(false);
         panelRoulette.SetActive(false);
 
-        /* Desactivate the hide defense cards objects */
+        /* Deactivate the hide defense cards objects */
         hideCardsBlue.SetActive(false);
         hideCardsRed.SetActive(false);
 
-        /* Desactivate the boost cards objects */
+        /* Deactivate the boost cards objects */
         boostManagerRed.SetActive(false);
         boostManagerBlue.SetActive(false);
 
-        /* Get the componet to send card info */
+        /* Get the component to send card info */
         cardSendManager = GameObject.Find("turn_manager");
 
         /* Get the sound manager */
@@ -306,6 +306,8 @@ public class CardSpawner : MonoBehaviour
                 if (defenseScript != null)
                 {
                     defenseScript.collisionCount = cardData.valor; // Assign the valor to collisionCount
+                    defenseScript.ID = cardId; // Assign the card ID
+                    
                 }
                 else
                 {
@@ -318,7 +320,8 @@ public class CardSpawner : MonoBehaviour
                 {
                     attackScript.prefabToSpawn = attackProjectilePrefab;
                     attackScript.direction = direction;
-                    attackScript.numberOfShots = cardData.valor; // Assign the valor to numberOfShots
+                    attackScript.numberOfShots = cardData.valor; // Assign the valor to numberOfShots // Start shooting
+                    attackScript.ID = cardId;
                 }
                 else
                 {
@@ -427,3 +430,5 @@ public class CardInfo : MonoBehaviour
 {
     public int cardValue; // The value assigned to the card
 }
+
+// Example DefenseCard script

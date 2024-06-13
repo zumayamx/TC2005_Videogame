@@ -7,6 +7,7 @@ public class AttackCard : MonoBehaviour
 
     // Offset for spawning (X axis only)
     public float spawnOffset = 3.0f;
+    public int ID;
 
     // Number of times to shoot
     public int numberOfShots = 5;
@@ -26,8 +27,18 @@ public class AttackCard : MonoBehaviour
     // Timer to track shooting intervals
     private float shootTimer = 0.0f;
 
+    // Lists of IDs for each lane type
+    private int[] fisicoIds = { 1, 14, 6, 27, 13 };
+    private int[] wifiIds = { 11, 24, 7, 8 };
+    private int[] radioIds = { 17, 18, 5, 16 };
+
+    private bool shotsDeducted = false;
+
     void Update()
     {
+        // Continuously check the lane
+        CheckLane();
+
         if (startShooting)
         {
             shootTimer += Time.deltaTime;
@@ -69,6 +80,81 @@ public class AttackCard : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    void CheckLane()
+    {
+        float yPos = transform.position.y;
+
+        if (!shotsDeducted)
+        {
+            if (IsFisicoID(ID))
+            {
+                if (yPos > 9 || yPos < 12)
+                {
+                    DeductShots();
+                }
+            }
+            else if (IsWifiID(ID))
+            {
+                if (yPos > 6|| yPos < 9)
+                {
+                    DeductShots();
+                }
+            }
+            else if (IsRadioID(ID))
+            {
+                if (yPos > 3 || yPos < 6)
+                {
+                    DeductShots();
+                }
+            }
+        }
+    }
+
+    bool IsFisicoID(int id)
+    {
+        foreach (int fisicoId in fisicoIds)
+        {
+            if (fisicoId == id)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool IsWifiID(int id)
+    {
+        foreach (int wifiId in wifiIds)
+        {
+            if (wifiId == id)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool IsRadioID(int id)
+    {
+        foreach (int radioId in radioIds)
+        {
+            if (radioId == id)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void DeductShots()
+    {
+        if (numberOfShots > 2)
+        {
+            numberOfShots -= 2;
+            shotsDeducted = true; // Ensure shots are only deducted once
         }
     }
 
