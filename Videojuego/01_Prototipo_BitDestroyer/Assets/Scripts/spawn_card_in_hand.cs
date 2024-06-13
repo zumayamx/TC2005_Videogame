@@ -52,26 +52,26 @@ public class CardSpawner : MonoBehaviour
     public TMP_Text energyText; // TMP_Text to display the energy value
 
     private List<int> cibersecurityIds = new List<int> { 1, 4, 9, 10, 12, 15, 23, 26, 28 };
-    private List<int> bootcampIds = new List<int> { 3, 6, 22, 25, 29, 30, 31 };
+    private List<int> bootcampIds = new List<int> { 3, 6, 22, 25, 29, 31 };
     private List<int> ciberattackIds = new List<int> { 2, 5, 7, 8, 11, 13, 14, 16, 17, 18, 24, 27 };
 
     public static List<CardInfo> spawnedCards = new List<CardInfo>(); // Global list to store spawned cards with their associated values
 
     private void Start()
     {
-        /* Desactivate the panel at the beggining of scene */
+        /* Deactivate the panel at the beginning of scene */
         panelElectionCards.SetActive(false);
         panelRoulette.SetActive(false);
 
-        /* Desactivate the hide defense cards objects */
+        /* Deactivate the hide defense cards objects */
         hideCardsBlue.SetActive(false);
         hideCardsRed.SetActive(false);
 
-        /* Desactivate the boost cards objects */
+        /* Deactivate the boost cards objects */
         boostManagerRed.SetActive(false);
         boostManagerBlue.SetActive(false);
 
-        /* Get the componet to send card info */
+        /* Get the component to send card info */
         cardSendManager = GameObject.Find("turn_manager");
 
         /* Get the sound manager */
@@ -82,6 +82,9 @@ public class CardSpawner : MonoBehaviour
 
     private void Update()
     {
+        // Periodically check if the spawn positions are occupied
+        CheckSpawnPositions();
+
         // Check for mouse click
         if (Input.GetMouseButtonDown(0))
         {
@@ -95,7 +98,6 @@ public class CardSpawner : MonoBehaviour
                 // Spawn a card based on the object hit
                 if (hit.collider.gameObject == object1)
                 {
-                    
                     soundManagerMatch.GetComponent<SoundManagerMatch>().PlayButtonClickSound();
                     ShowPanelElectionCards("cibersecurity", cibersecurityIds, "defense", 1);
 
@@ -168,8 +170,8 @@ public class CardSpawner : MonoBehaviour
 
     private void TrySpawnCard(string imagePath, int randomId, string cardType, int energyCost) {
 
-        // Check if hand position is occupied /*-------------------*/
-        if (handPosition.childCount == 0)
+        // Check if hand position is occupied
+        if (!IsPositionOccupied(handPosition))
         {
             SpawnCard(cardPrefab, handPosition, imagePath, randomId, cardType);
             energy -= energyCost; // Deduct energy
@@ -192,7 +194,7 @@ public class CardSpawner : MonoBehaviour
         else
         {
             Debug.Log("Hand position is occupied and max cards are spawned. Cannot spawn card.");
-        } /* -------------------*/
+        }
 
         panelElectionCards.SetActive(false);
     }
@@ -201,12 +203,39 @@ public class CardSpawner : MonoBehaviour
     {
         for (int i = 0; i < spawnPositions.Length; i++)
         {
-            if (spawnPositions[i].childCount == 0)
+            if (!IsPositionOccupied(spawnPositions[i]))
             {
                 return i;
             }
         }
         return -1;
+    }
+
+    private bool IsPositionOccupied(Transform position)
+    {
+        float searchRadius = 0.5f; // Increase the search radius
+        Collider[] hitColliders = Physics.OverlapSphere(position.position, searchRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Card") && Mathf.Abs(hitCollider.transform.position.z - position.position.z) < 0.1f)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void CheckSpawnPositions()
+    {
+        for (int i = 0; i < spawnPositions.Length; i++)
+        {
+            if (!IsPositionOccupied(spawnPositions[i]))
+            {
+                // Handle the case when a card leaves the spawn position
+                // Decrease cardCount when a card leaves the spawn area
+                cardCount--;
+            }
+        }
     }
 
     private void SpawnCard(GameObject cardPrefab, Transform spawnPosition, string imagePath, int cardId, string cardType)
@@ -277,6 +306,8 @@ public class CardSpawner : MonoBehaviour
                 if (defenseScript != null)
                 {
                     defenseScript.collisionCount = cardData.valor; // Assign the valor to collisionCount
+                    defenseScript.ID = cardId; // Assign the card ID
+                    
                 }
                 else
                 {
@@ -289,7 +320,8 @@ public class CardSpawner : MonoBehaviour
                 {
                     attackScript.prefabToSpawn = attackProjectilePrefab;
                     attackScript.direction = direction;
-                    attackScript.numberOfShots = cardData.valor; // Assign the valor to numberOfShots
+                    attackScript.numberOfShots = cardData.valor; // Assign the valor to numberOfShots // Start shooting
+                    attackScript.ID = cardId;
                 }
                 else
                 {
@@ -398,3 +430,5 @@ public class CardInfo : MonoBehaviour
 {
     public int cardValue; // The value assigned to the card
 }
+
+// Example DefenseCard script
