@@ -2356,7 +2356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526b28fd949cc4dcbbc1d3dd4b8742da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  apiURL: http://ec2-3-101-36-23.us-west-1.compute.amazonaws.com/
+  apiURL: http://ec2-3-101-36-23.us-west-1.compute.amazonaws.com:3000
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
