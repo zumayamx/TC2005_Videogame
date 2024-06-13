@@ -9,119 +9,125 @@
     <title>Videojuego de Unity</title>
 </head>
 
-    <header>
-        <h3>BIT-DESTROYER</h3>
-        <nav>
-            <a href= "#contenido">Contenido</a>
-            <a id="nav2" href= "#mecanica">¿Cómo jugar?</a>
-            <a href= "#estadisticas">Estadísticas</a>
-        </nav>
-    </header>
+<header>
+    <h3>BIT-DESTROYER</h3>
+    <nav>
+        <a href="#contenido">Contenido</a>
+        <a id="nav2" href="#mecanica">¿Cómo jugar?</a>
+        <a href="#estadisticas">Estadísticas</a>
+    </nav>
+</header>
 
-    <body>
-        <section id="jugar">
-            <div class="espacio-vg">
-                <h1>Espacio para videojuego Unity</h1>
-            </div>
-        </section>
+<body>
+    <section id="jugar">
+        <div class="espacio-vg">
+            <h1>Espacio para videojuego Unity</h1>
+        </div>
+    </section>
 
-        <section id="contenido">
-            <h1>CONTENIDO</h1>
-            <div class="tablero">
-                <h2>TABLERO</h2><br>
-                <img src="../imagenes/Azul Activo.png" width="100%"><br><br>
-                <ul>
-                    <li>Cada jugador cuenta con <b>3 canales</b> donde podrá <span class="color_rojo">atacar</span> el servidor del contrincante y mismos en los que deberá <span class="color_verde">defender</span> el suyo.</li>
-                    <li>Cada canal podrá acumular un máximo de <span class="color_verde">3 cartas de Ciberseguridad</span> </li>
-                    <li>En la parte superior centro del tablero se colocan bocabajo los <b>3 mazos</b> de tipos de cartas que el jugador podrá “jalar”.</li>
-                </ul>
-            </div>
-            <div class="cartas_completo">
-                <div id="cartas">
-                    <h2>CARTAS</h2>
-                    <div class="flex_contenido">
-                        <div id="ciberataque">
-                            <img src="../imagenes/Back Ciberataque.svg" width="100%">
-                            <h5><span class="color_rojo">CIBERATAQUE</span></h5>
-                        </div>
-                        <div id="bootcamp">
-                            <img src="../imagenes/Back Bootcamp.svg" width="100%">
-                            <h5><span class="color_morado">BOOTCAMP</span></h5>
-                        </div>
-                        <div id="ciberseguridad">
-                            <img src="../imagenes/Back Ciberseguridad.svg" width="100%">
-                            <h5><span class="color_verde">CIBERSEGURIDAD</span></h5>
-                        </div>
+    <section id="contenido">
+        <h1>CONTENIDO</h1>
+        <div class="tablero">
+            <h2>TABLERO</h2><br>
+            <img src="../imagenes/Azul Activo.png" width="100%"><br><br>
+            <ul>
+                <li>Cada jugador cuenta con <b>3 canales</b> donde podrá <span class="color_rojo">atacar</span> el servidor del contrincante y mismos en los que deberá <span class="color_verde">defender</span> el suyo.</li>
+                <li>Cada canal podrá acumular un máximo de <span class="color_verde">3 cartas de Ciberseguridad</span></li>
+                <li>En la parte superior centro del tablero se colocan bocabajo los <b>3 mazos</b> de tipos de cartas que el jugador podrá “jalar”.</li>
+            </ul>
+        </div>
+        <div class="cartas_completo">
+            <div id="cartas">
+                <h2>CARTAS</h2>
+                <div class="flex_contenido">
+                    <div id="ciberataque">
+                        <img src="../imagenes/Back Ciberataque.svg" width="100%">
+                        <h5><span class="color_rojo">CIBERATAQUE</span></h5>
                     </div>
-                </div>
-                <div id="canales">
-                    <h2>CANALES</h2>
-                    <div class="flex_contenido">
-                        <div id="hardware">
-                            <img src="../imagenes/iconoHardware.png" width="100%">
-                            <h5><span class="color_naranja">HARDWARE</span></h5>
-                        </div>
-                        <div id="redes">
-                            <img src="../imagenes/iconoRedes.png" width="100%">
-                            <h5><span class="color_azul">REDES</span></h5>
-                        </div>
-                        <div id="radio">
-                            <img src="../imagenes/iconoRadio.png" width="100%">
-                            <h5><span class="color_verde_claro">RADIO</span></h5>
-                        </div>
+                    <div id="bootcamp">
+                        <img src="../imagenes/Back Bootcamp.svg" width="100%">
+                        <h5><span class="color_morado">BOOTCAMP</span></h5>
+                    </div>
+                    <div id="ciberseguridad">
+                        <img src="../imagenes/Back Ciberseguridad.svg" width="100%">
+                        <h5><span class="color_verde">CIBERSEGURIDAD</span></h5>
                     </div>
                 </div>
             </div>
-        </section>
+            <div id="canales">
+                <h2>CANALES</h2>
+                <div class="flex_contenido">
+                    <div id="hardware">
+                        <img src="../imagenes/iconoHardware.png" width="100%">
+                        <h5><span class="color_naranja">HARDWARE</span></h5>
+                    </div>
+                    <div id="redes">
+                        <img src="../imagenes/iconoRedes.png" width="100%">
+                        <h5><span class="color_azul">REDES</span></h5>
+                    </div>
+                    <div id="radio">
+                        <img src="../imagenes/iconoRadio.png" width="100%">
+                        <h5><span class="color_verde_claro">RADIO</span></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section id="mecanica">
-            <h1>MECÁNICA DE JUEGO</h1>
-            <div class="objetivo_completo">
-                <div id="objetivo">
-                    <h2>OBJETIVO</h2>
-                    <p>El objetivo del juego es destruir la defensa del otro hacker utilizando cartas de <span class="color_rojo">ciberataque</span> para finalmente llegar a su servidor y destruir sus <b>20 puntos de salud.</b></p>
-                </div>
-                <div id="inicio">
-                    <h2>INICIO</h2>
-                    <p>Cada jugador inicia con <b>10 puntos de defensa</b> sobre cada canal, podrá aumentarlos jugando cartas de <span class="color_verde">ciberseguridad</span> sobre uno de los 3 espacios disponibles por canal.</p>
-                </div>
+    <section id="mecanica">
+        <h1>MECÁNICA DE JUEGO</h1>
+        <div class="objetivo_completo">
+            <div id="objetivo">
+                <h2>OBJETIVO</h2>
+                <p>El objetivo del juego es destruir la defensa del otro hacker utilizando cartas de <span class="color_rojo">ciberataque</span> para finalmente llegar a su servidor y destruir sus <b>20 puntos de salud.</b></p>
             </div>
-            <div class="turno">
-                <h2>TURNO</h2>
-                <p>En cada turno podrás hacer solamente <b>una</b> de las siguientes <b>2 acciones posibles:</b></p><br>
-                <h4>1. Jalar cartas del centro</h4>
+            <div id="inicio">
+                <h2>INICIO</h2>
+                <p>Cada jugador inicia con <b>10 puntos de defensa</b> sobre cada canal, podrá aumentarlos jugando cartas de <span class="color_verde">ciberseguridad</span> sobre uno de los 3 espacios disponibles por canal.</p>
+            </div>
+        </div>
+        <div class="turno">
+            <h2>TURNO</h2>
+            <p>En cada turno podrás hacer solamente <b>una</b> de las siguientes <b>2 acciones posibles:</b></p><br>
+            <h4>1. Jalar cartas del centro</h4>
+            <ul>
+                <li>Cada tipo de carta tiene un costo de energía específico:</li>
                 <ul>
-                    <li>Cada tipo de carta tiene un costo de energía específico:</li>
-                    <ul>
-                        <li><b><span class="color_rojo">Ciberataque:</span> 3 energías</b></li>
-                        <li><b><span class="color_morado">Bootcamp:</span> 2 energías</b></li>
-                        <li><b><span class="color_verde">Ciberataque:</span> 1 energía</b></li>
-                    </ul>
-                    <li>Cuando eligas el tipo de carta a jalar te aparecerán 3 opciones y podrás elegir <b>una de ellas.</b></li>
+                    <li><b><span class="color_rojo">Ciberataque:</span> 3 energías</b></li>
+                    <li><b><span class="color_morado">Bootcamp:</span> 2 energías</b></li>
+                    <li><b><span class="color_verde">Ciberataque:</span> 1 energía</b></li>
                 </ul>
-                
-                <p>Solamente podrás jalar un total de 3 energías por turno.</p>
-                <p><small><span class="color_azul">*La energía no es acumulable.</span></small></p><br>
-                <h4>2. Jugar cartas</h4>
-                <p>Solamente podrás jugar <b>2 de las cartas</b> que ya tienes en tu mano; existen algunas (<span class="color_morado">bootcamp</span>) que se pueden jugar en conjunto potenciando el efecto logrado en el turno.</p>
-                <p>En caso de jugar una carta en un canal que no corresponde al que pertenece, su efecto disminuirá a la mitad. </p>
-                <p><small><span class="color_rosa">*Cartas con valor 3 se disminuyen a 1.</span></small></p>
-            </div>
-        </section>
-    
-        <section id="estadisticas">
-            <h1>Estadísticas</h1>
-            <div class="contenedor_graficas">
-                <canvas id="apiChart1" width="600" height="600"></canvas>
-                <canvas id="apiChart2" width="600" height="600"></canvas>
-                <canvas id="apiChart3" width="600" height="600"></canvas>
-            </div>
-            <div class="contenedor_graficas">
-                <canvas id="pieChart" width="1800"></canvas>
-            </div>
-        </section>
-    </body>
-    <footer>
-        <p><b>Desarrollado por:</b> Leon Blanga, Jose Manuel Zumaya y Omar Sanchez <br><span class="color_azul">BIT-DESTROYER® 2024</span></p>
-    </footer>
+                <li>Cuando eligas el tipo de carta a jalar te aparecerán 3 opciones y podrás elegir <b>una de ellas.</b></li>
+            </ul>
+            
+            <p>Solamente podrás jalar un total de 3 energías por turno.</p>
+            <p><small><span class="color_azul">*La energía no es acumulable.</span></small></p><br>
+            <h4>2. Jugar cartas</h4>
+            <p>Solamente podrás jugar <b>2 de las cartas</b> que ya tienes en tu mano; existen algunas (<span class="color_morado">bootcamp</span>) que se pueden jugar en conjunto potenciando el efecto logrado en el turno.</p>
+            <p>En caso de jugar una carta en un canal que no corresponde al que pertenece, su efecto disminuirá a la mitad.</p>
+            <p><small><span class="color_rosa">*Cartas con valor 3 se disminuyen a 1.</span></small></p>
+        </div>
+    </section>
+
+    <section id="estadisticas">
+        <h1>Estadísticas</h1>
+        <div class="contenedor_graficas">
+            <canvas id="apiChart1" width="600" height="600"></canvas>
+            <canvas id="apiChart2" width="600" height="600"></canvas>
+            <canvas id="apiChart3" width="600" height="600"></canvas>
+        </div>
+        <div class="contenedor_graficas">
+            <canvas id="pieChart" width="1800"></canvas>
+        </div>
+        <div id="duracionPartidas" class="contenedor_graficas">
+            <h2>Duración de Partidas</h2>
+            <p><b>Duración Promedio:</b> <span id="avgDuration"></span> minutos</p>
+            <p><b>Duración Mínima:</b> <span id="minDuration"></span> minutos</p>
+            <p><b>Duración Máxima:</b> <span id="maxDuration"></span> minutos</p>
+        </div>
+    </section>
+</body>
+<footer>
+    <p><b>Desarrollado por:</b> Leon Blanga, Jose Manuel Zumaya y Omar Sanchez <br><span class="color_azul">BIT-DESTROYER® 2024</span></p>
+</footer>
 </html>

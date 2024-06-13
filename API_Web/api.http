@@ -67,3 +67,7 @@ GET http://localhost:3000/api/cartas_info
 
 ### OBTENER LA INFORMACION DE ESTADISTICAS
 GET http://localhost:3000/api/estadisticas_jugadores
+
+### OBTENER LA INFORMACION DE LA DURACION DE PARTIDAS
+GET http://localhost:3000/api/duracion_partidas
+
